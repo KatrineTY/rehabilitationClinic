@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- Database details -->
-    <bean id="dbBean"
+    <bean id="dataSource"
           class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost:5432/rehabilitationclinic"/>
@@ -14,9 +14,11 @@
 
     <!-- Hibernate session factory -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" depends-on="flyway">
-        <property name="dataSource" ref="dbBean"/>
+        <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <array>
+                <value>com.javaschool.dao.objects.Patient</value>
+                <value>com.javaschool.dao.objects.Employee</value>
             </array>
         </property>
         <property name="hibernateProperties">
@@ -28,10 +30,14 @@
         </property>
     </bean>
 
+    <!-- Automatic Wildfly migration on startup -->
     <bean id="flyway" class="com.googlecode.flyway.core.Flyway" init-method="migrate">
-        <property name="dataSource" ref="dbBean"/>
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <!--    <bean id="patientDaoPostgres" class="com.javaschool.dao.impls.PatientDaoPostgres">-->
+    <!--        <constructor-arg ref="sessionFactory"/>-->
+    <!--    </bean>-->
 
 
 </beans>
