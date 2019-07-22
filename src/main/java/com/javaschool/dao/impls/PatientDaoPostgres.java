@@ -3,6 +3,7 @@ package com.javaschool.dao.impls;
 import com.javaschool.dao.interfaces.PatientDao;
 import com.javaschool.dao.objects.Patient;
 import lombok.NoArgsConstructor;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -39,8 +40,11 @@ public class PatientDaoPostgres implements PatientDao {
     @Override
     public Patient getPatientByName(String name) {
         Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Patient where name = :name");
+        query.setParameter("name", name);
+        Patient patient = (Patient) query.uniqueResult();
         session.close();
-        return null;
+        return patient;
     }
 
 }

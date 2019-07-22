@@ -16,7 +16,7 @@
                             <form:form method="post" modelAttribute="employee" action="check-user">
                                 <div class="form-group">
                                     <form:label path="login" for="login">Login</form:label>
-                                    <form:input path="login" class="form-control" id="login"
+                                    <form:input path="login" type="text" class="form-control" id="login"
                                                 placeholder="login"/>
                                 </div>
                                 <div class="form-group">

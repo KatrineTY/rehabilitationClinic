@@ -12,18 +12,16 @@
             <div class="card bg-custom mb-5">
                 <h3 class="card-header">${employee.name}</h3>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12 ml-auto mr-auto">
-                            <a href="addPatient" class="btn btn-primary">Add patient</a>
-                        </div>
-                        <div class="col-md-12 ml-auto mr-auto mt-2">
-                            <a href="searchPatient" class="btn btn-primary">Search patient</a>
-                        </div>
-                    </div>
+                    <ul class="list-group">
+                        <a href="new-patient" class="list-group-item list-group-item-action">Add patient</a>
+                        <a href="search-patient" class="list-group-item list-group-item-action">Search patient</a>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>
+

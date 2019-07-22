@@ -22,7 +22,6 @@ public class Patient {
     private String status;
     @OneToOne
     @JoinColumn(name = "attending_doctor")
-//    @Column(name = "attending_doctor")
     private Employee attendingDoctor;
     @Column
     private String building;

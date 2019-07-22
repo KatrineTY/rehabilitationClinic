@@ -16,12 +16,12 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    @RequestMapping(value = "/addPatient", method = RequestMethod.GET)
-    public ModelAndView addPatient() {
+    @RequestMapping(value = "/new-patient", method = RequestMethod.GET)
+    public ModelAndView newPatient() {
         return new ModelAndView("addPatient", "patient", new Patient());
     }
 
-    @RequestMapping(value = "/searchPatient", method = RequestMethod.GET)
+    @RequestMapping(value = "/search-patient", method = RequestMethod.GET)
     public ModelAndView searchPatient() {
         return new ModelAndView("searchPatient", "patients", accountService.getPatients());
     }

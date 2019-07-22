@@ -2,14 +2,14 @@ package com.javaschool.services.impls;
 
 import com.javaschool.dao.interfaces.EmployeeDao;
 import com.javaschool.dao.objects.Employee;
-import com.javaschool.services.interfaces.LoginService;
+import com.javaschool.services.interfaces.EmployeeService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 @NoArgsConstructor
-public class LoginServicePostgres implements LoginService {
+public class EmployeeServicePostgres implements EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
 

@@ -26,4 +26,14 @@ public class EmployeeDaoPostgres implements EmployeeDao {
         return employee;
     }
 
+    @Override
+    public Employee getEmployeeByName(String name) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Employee where name = :name");
+        query.setParameter("name", name);
+        Employee employee = (Employee) query.uniqueResult();
+        session.close();
+        return employee;
+    }
+
 }
