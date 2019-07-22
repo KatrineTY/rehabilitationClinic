@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./resources/static/css/pageTemplate.css">
+    <script src="./resources/static/js/searchPatient.js"></script>
 </head>
 <body>
 
@@ -11,16 +12,16 @@
     <div class="row">
         <div class="col-md-6 ml-auto mr-auto">
             <div class="card bg-custom mb-5">
-                <input class="card-header form-control" type="text" placeholder="Search"
-                       aria-label="Search">
-                <table id="bookTable" class="table table-hover">
-                    <thead>
+                <input class=" form-control" type="text" placeholder="Search"
+                       aria-label="Search" onkeyup="searchPatient()" id="searchPatient">
+                <table id="patientTable" class="table table-hover">
+                    <thead class="card-header">
                     <tr>
-                        <td>Patient name</td>
-                        <td>Insurance</td>
-                        <td>Status</td>
-                        <td>Building</td>
-                        <td>Ward</td>
+                        <td><b>Patient name</b></td>
+                        <td><b>Diagnosis</b></td>
+                        <td><b>Status</b></td>
+                        <td><b>Building</b></td>
+                        <td><b>Ward</b></td>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,5 +42,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
