@@ -1,6 +1,6 @@
 package com.javaschool.services.interfaces;
 
-import com.javaschool.dao.objects.Employee;
+import com.javaschool.entities.Employee;
 
 public interface EmployeeService {
 

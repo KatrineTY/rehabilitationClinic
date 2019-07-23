@@ -17,8 +17,8 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <array>
-                <value>com.javaschool.dao.objects.Patient</value>
-                <value>com.javaschool.dao.objects.Employee</value>
+                <value>com.javaschool.entities.Patient</value>
+                <value>com.javaschool.entities.Employee</value>
             </array>
         </property>
         <property name="hibernateProperties">

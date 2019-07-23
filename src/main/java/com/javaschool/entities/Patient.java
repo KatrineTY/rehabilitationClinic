@@ -1,4 +1,4 @@
-package com.javaschool.dao.objects;
+package com.javaschool.entities;
 
 import lombok.Data;
 
@@ -20,7 +20,7 @@ public class Patient {
     private int insurance;
     @Column
     private String status;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "attending_doctor")
     private Employee attendingDoctor;
     @Column

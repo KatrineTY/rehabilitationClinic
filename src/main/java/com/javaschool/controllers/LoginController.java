@@ -1,6 +1,6 @@
 package com.javaschool.controllers;
 
-import com.javaschool.dao.objects.Employee;
+import com.javaschool.entities.Employee;
 import com.javaschool.services.interfaces.EmployeeService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

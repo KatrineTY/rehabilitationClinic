@@ -1,4 +1,4 @@
-package com.javaschool.dao.objects;
+package com.javaschool.entities;
 
 import lombok.Data;
 

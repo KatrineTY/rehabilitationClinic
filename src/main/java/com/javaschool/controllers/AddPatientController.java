@@ -1,6 +1,6 @@
 package com.javaschool.controllers;
 
-import com.javaschool.dao.objects.Patient;
+import com.javaschool.entities.Patient;
 import com.javaschool.services.interfaces.PatientService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

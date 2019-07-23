@@ -1,7 +1,7 @@
 package com.javaschool.dao.impls;
 
 import com.javaschool.dao.interfaces.EmployeeDao;
-import com.javaschool.dao.objects.Employee;
+import com.javaschool.entities.Employee;
 import lombok.NoArgsConstructor;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @NoArgsConstructor
-public class EmployeeDaoPostgres implements EmployeeDao {
+public class EmployeeDaoImpl implements EmployeeDao {
 
     @Autowired
     private SessionFactory sessionFactory;

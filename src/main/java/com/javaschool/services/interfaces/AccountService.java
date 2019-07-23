@@ -1,6 +1,6 @@
 package com.javaschool.services.interfaces;
 
-import com.javaschool.dao.objects.Patient;
+import com.javaschool.entities.Patient;
 
 import java.util.List;
 

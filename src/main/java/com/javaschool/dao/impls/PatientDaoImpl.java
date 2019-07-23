@@ -1,7 +1,7 @@
 package com.javaschool.dao.impls;
 
 import com.javaschool.dao.interfaces.PatientDao;
-import com.javaschool.dao.objects.Patient;
+import com.javaschool.entities.Patient;
 import lombok.NoArgsConstructor;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Component
 @NoArgsConstructor
-public class PatientDaoPostgres implements PatientDao {
+public class PatientDaoImpl implements PatientDao {
 
     @Autowired
     private SessionFactory sessionFactory;
