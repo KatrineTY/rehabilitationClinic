@@ -19,7 +19,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public void addPatient(Patient patient) {
-        patient.setAttendingDoctor(employeeDao.getEmployeeByName(patient.getAttendingDoctor().getName()));
+//        patient.setAttendingDoctor(employeeDao.getEmployeeByName(patient.getAttendingDoctor().getName()));
         patientDao.addPatient(patient);
     }
 

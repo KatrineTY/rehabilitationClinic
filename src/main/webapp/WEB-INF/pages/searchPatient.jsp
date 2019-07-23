@@ -18,10 +18,10 @@
                     <thead class="card-header">
                     <tr>
                         <td><b>Patient name</b></td>
-                        <td><b>Diagnosis</b></td>
-                        <td><b>Status</b></td>
-                        <td><b>Building</b></td>
-                        <td><b>Ward</b></td>
+                        <%--                        <td><b>Diagnosis</b></td>--%>
+                        <%--                        <td><b>Status</b></td>--%>
+                        <%--                        <td><b>Building</b></td>--%>
+                        <%--                        <td><b>Ward</b></td>--%>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,10 +29,10 @@
                         <c:forEach var="patient" items="${patients}">
                             <tr>
                                 <td>${patient.name}</td>
-                                <td>${patient.diagnosis}</td>
-                                <td>${patient.status}</td>
-                                <td>${patient.building}</td>
-                                <td>${patient.ward}</td>
+                                    <%--                                <td>${patient.diagnosis}</td>--%>
+                                    <%--                                <td>${patient.status}</td>--%>
+                                    <%--                                <td>${patient.building}</td>--%>
+                                    <%--                                <td>${patient.ward}</td>--%>
                             </tr>
                         </c:forEach>
                     </c:if>

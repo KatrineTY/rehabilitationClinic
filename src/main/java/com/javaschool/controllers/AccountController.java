@@ -1,6 +1,6 @@
 package com.javaschool.controllers;
 
-import com.javaschool.entities.Patient;
+import com.javaschool.dto.PatientInfo;
 import com.javaschool.services.interfaces.AccountService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class AccountController {
 
     @RequestMapping(value = "/new-patient", method = RequestMethod.GET)
     public ModelAndView newPatient() {
-        return new ModelAndView("addPatient", "patient", new Patient());
+        return new ModelAndView("addPatient", "patientInfo", new PatientInfo());
     }
 
     @RequestMapping(value = "/search-patient", method = RequestMethod.GET)

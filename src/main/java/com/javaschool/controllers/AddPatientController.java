@@ -1,6 +1,6 @@
 package com.javaschool.controllers;
 
-import com.javaschool.entities.Patient;
+import com.javaschool.dto.PatientInfo;
 import com.javaschool.services.interfaces.PatientService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,8 @@ public class AddPatientController {
     private PatientService patientService;
 
     @RequestMapping(value = "/add-patient", method = RequestMethod.POST)
-    public String addPatient(@ModelAttribute Patient patient) {
-        patientService.addPatient(patient);
+    public String addPatient(@ModelAttribute PatientInfo patientInfo) {
+        patientService.addPatient(patientInfo.getPatient());
         return "account";
     }
 

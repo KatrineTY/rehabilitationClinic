@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table
+@Table(name = "patients")
 public class Patient {
     @Id
     @Column(name = "patient_id")
@@ -15,17 +15,5 @@ public class Patient {
     @Column
     private String name;
     @Column
-    private String diagnosis;
-    @Column
     private int insurance;
-    @Column
-    private String status;
-    @ManyToOne
-    @JoinColumn(name = "attending_doctor")
-    private Employee attendingDoctor;
-    @Column
-    private String building;
-    @Column
-    private int ward;
-
 }
