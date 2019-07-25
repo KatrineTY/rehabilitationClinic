@@ -5,6 +5,8 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./resources/static/css/pageTemplate.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./resources/static/js/diagnoses.js"></script>
 </head>
 <body>
 <div class="container mt-5">
@@ -16,43 +18,57 @@
                     <div class="row">
                         <div class="col-md-8 ml-auto mr-auto">
                             <form:form method="post" modelAttribute="patientInfo" action="add-patient">
-                                <div class="form-group">
-                                    <form:label path="patient.name" for="name">Name</form:label>
-                                    <form:input path="patient.name" type="text" class="form-control" id="name"
-                                                placeholder="name"/>
-                                </div>
-                                <div class="form-group">
-                                    <form:label path="patient.insurance" for="insurance">Insurance</form:label>
-                                    <form:input path="patient.insurance" type="text" class="form-control" id="insurance"
-                                                placeholder="insurance"/>
-                                </div>
-                                <%--                                <div class="form-group">--%>
-                                <%--                                    <form:label path="diagnoses.name" for="diagnosis">Diagnosis</form:label>--%>
-                                <%--                                    <form:input path="diagnoses.name" type="text" class="form-control" id="diagnosis"--%>
-                                <%--                                                placeholder="diagnosis"/>--%>
-                                <%--                                </div>--%>
-                                <div class="form-group">
-                                    <form:label path="patientCard.status" for="status">Status</form:label>
-                                    <form:input path="patientCard.status" type="text" class="form-control" id="status"
-                                                placeholder="status"/>
-                                </div>
-                                <div class="form-group">
-                                    <form:label path="patientCard.attendingDoctor.name"
-                                                for="attendingDoctor">Attending Doctor</form:label>
-                                    <form:input path="patientCard.attendingDoctor.name" type="text" class="form-control"
-                                                id="attendingDoctor"
-                                                placeholder="attending doctor"/>
-                                </div>
-                                <div class="form-group">
-                                    <form:label path="patientCard.building" for="building">Building</form:label>
-                                    <form:input path="patientCard.building" type="text" class="form-control"
-                                                id="building"
-                                                placeholder="building"/>
-                                </div>
-                                <div class="form-group">
-                                    <form:label path="patientCard.ward" for="ward">Ward</form:label>
-                                    <form:input path="patientCard.ward" type="text" class="form-control" id="ward"
-                                                placeholder="ward"/>
+                                <div class="fields">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input name="patient.name" type="text" class="form-control" id="name"
+                                               placeholder="name"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="insurance">Insurance</label>
+                                        <input name="patient.insurance" type="text" class="form-control"
+                                               id="insurance"
+                                               placeholder="insurance"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <input name="patientCard.status" type="text" class="form-control"
+                                               id="status"
+                                               placeholder="status"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="attendingDoctor">Attending Doctor</label>
+                                        <input name="patientCard.attendingDoctor.name" type="text"
+                                               class="form-control"
+                                               id="attendingDoctor"
+                                               placeholder="attending doctor"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="building">Building</label>
+                                        <input name="patientCard.building" type="text" class="form-control"
+                                               id="building"
+                                               placeholder="building"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ward">Ward</label>
+                                        <input name="patientCard.ward" type="text" class="form-control" id="ward"
+                                               placeholder="ward"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="diagnosis0">Diagnoses:</label>
+                                        <div class="input-group">
+                                            <input name="diagnoses[0].name" type="text" class="form-control"
+                                                   id="diagnosis0"
+                                                   placeholder="diagnosis"/>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button" onclick="addDiagnosis()">
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <textarea name="diagnoses[0].comment" class="form-control"
+                                                  rows="0.5" placeholder="comment"></textarea>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Add patient</button>
                             </form:form>
