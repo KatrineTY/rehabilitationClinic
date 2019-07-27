@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-8 ml-auto mr-auto">
-                            <form:form method="post" modelAttribute="employee" action="check-user">
+                            <form:form method="post" modelAttribute="employee" action="check-user" id="loginForm">
                                 <div class="form-group">
                                     <form:label path="login" for="login">Login</form:label>
                                     <form:input path="login" type="text" class="form-control" id="login"
@@ -38,5 +38,7 @@
         </div>
     </div>
 </div>
+<script src="./resources/static/js/validation.js"></script>
+
 </body>
 </html>
