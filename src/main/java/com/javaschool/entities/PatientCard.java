@@ -13,12 +13,12 @@ public class PatientCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @JoinColumn(name = "patient")
+    @JoinColumn(name = "patient", referencedColumnName = "patient_id")
     private Patient patient;
     @Column
     private String status;
     @ManyToOne
-    @JoinColumn(name = "attending_doctor")
+    @JoinColumn(name = "attending_doctor", referencedColumnName = "employee_id")
     private Employee attendingDoctor;
     @Column
     private String building;

@@ -1,6 +1,7 @@
+const LOGIN_PATTEN = /^[a-zA-Z]+(\.[a-zA-Z]+)*$/g;
+
 let form = document.getElementById('loginForm');
 let login = document.getElementById('login');
-
 let generateError = function (text) {
     let error = document.createElement('div');
     error.className = 'error';
@@ -19,7 +20,7 @@ let removeValidation = function () {
 let checkLogin = function (event) {
     let stopSubmit;
 
-    if (!login.value.match(/^[a-zA-Z]+(\.[a-zA-Z]+)*$/g)) {
+    if (!login.value.match(LOGIN_PATTEN)) {
         stopSubmit = true;
         console.log('invalid');
         let error = generateError('Login must consist of letters or "."');

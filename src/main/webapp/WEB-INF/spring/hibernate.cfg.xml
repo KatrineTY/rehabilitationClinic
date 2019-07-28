@@ -20,6 +20,12 @@
                 <value>com.javaschool.entities.Employee</value>
                 <value>com.javaschool.entities.PatientCard</value>
                 <value>com.javaschool.entities.Diagnosis</value>
+                <value>com.javaschool.entities.Event</value>
+                <value>com.javaschool.entities.Prescription</value>
+                <value>com.javaschool.entities.PrescriptionTime</value>
+                <value>com.javaschool.entities.ProcedureAndMedicament</value>
+                <value>com.javaschool.entities.Role</value>
+                <value>com.javaschool.entities.WorkingTime</value>
             </array>
         </property>
         <property name="hibernateProperties">

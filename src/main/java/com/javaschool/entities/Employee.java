@@ -25,9 +25,13 @@ public class Employee {
     private String phone;
     @Column
     private String email;
-    @Column(name = "working_time")
-    private String workingTime;
+    @ManyToOne
+    @JoinColumn(name = "working_time", referencedColumnName = "working_time_id")
+    private WorkingTime workingTime;
     @Column
     private boolean enabled;
+    @ManyToOne
+    @JoinColumn(name = "role", referencedColumnName = "role_id")
+    private Role role;
 
 }

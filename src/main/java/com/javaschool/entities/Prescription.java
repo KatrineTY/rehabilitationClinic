@@ -1,5 +1,6 @@
 package com.javaschool.entities;
 
+
 import com.javaschool.converters.LocalDateTimeAttributeConverter;
 import lombok.Data;
 
@@ -8,17 +9,19 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "diagnoses")
-public class Diagnosis {
+@Table(name = "prescriptions")
+public class Prescription {
+
     @Id
-    @Column(name = "diagnosis_id")
+    @Column(name = "prescription_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
-    private String name;
     @ManyToOne
-    @JoinColumn(name = "patient_card", referencedColumnName = "patient_card_id")
-    private PatientCard patientCard;
+    @JoinColumn(name = "patient", referencedColumnName = "patient_id")
+    private Patient patient;
+    @OneToOne
+    @JoinColumn(name = "type", referencedColumnName = "type_id")
+    private ProcedureAndMedicament type;
     @Column(name = "start_date")
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     private LocalDateTime startDate;
@@ -26,6 +29,11 @@ public class Diagnosis {
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     private LocalDateTime endDate;
     @Column
-    private String comment;
+    private String dose;
+    @Column
+    private int version;
+    @ManyToOne
+    @JoinColumn(name = "responsible_doctor", referencedColumnName = "employee_id")
+    private Employee responsibleDoctor;
 
 }
