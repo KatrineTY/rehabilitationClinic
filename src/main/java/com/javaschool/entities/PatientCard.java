@@ -16,7 +16,7 @@ public class PatientCard {
     @JoinColumn(name = "patient", referencedColumnName = "patient_id")
     private Patient patient;
     @Column
-    private String status;
+    private String status = "Treated";
     @ManyToOne
     @JoinColumn(name = "attending_doctor", referencedColumnName = "employee_id")
     private Employee attendingDoctor;

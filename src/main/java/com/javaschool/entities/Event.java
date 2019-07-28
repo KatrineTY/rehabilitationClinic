@@ -3,6 +3,7 @@ package com.javaschool.entities;
 
 import com.javaschool.converters.LocalDateTimeAttributeConverter;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,10 +20,11 @@ public class Event {
     @JoinColumn(name = "patient", referencedColumnName = "patient_id")
     private Patient patient;
     @Column(name = "date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     private LocalDateTime date;
     @Column
-    private String status;
+    private String status = "Planned";
     @ManyToOne
     @JoinColumn(name = "type", referencedColumnName = "type_id")
     private ProcedureAndMedicament type;

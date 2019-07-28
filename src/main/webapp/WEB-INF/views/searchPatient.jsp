@@ -18,21 +18,23 @@
                     <thead class="card-header">
                     <tr>
                         <td><b>Patient name</b></td>
-                        <%--                        <td><b>Diagnosis</b></td>--%>
-                        <%--                        <td><b>Status</b></td>--%>
-                        <%--                        <td><b>Building</b></td>--%>
-                        <%--                        <td><b>Ward</b></td>--%>
+                        <td><b>Status</b></td>
+                        <td><b>Building</b></td>
+                        <td><b>Ward</b></td>
+                        <td>Schedule</td>
+                        <td>Info</td>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:if test="${not empty patients}">
-                        <c:forEach var="patient" items="${patients}">
+                    <c:if test="${not empty patientCards}">
+                        <c:forEach var="card" items="${patientCards}">
                             <tr>
-                                <td>${patient.name}</td>
-                                    <%--                                <td>${patient.diagnosis}</td>--%>
-                                    <%--                                <td>${patient.status}</td>--%>
-                                    <%--                                <td>${patient.building}</td>--%>
-                                    <%--                                <td>${patient.ward}</td>--%>
+                                <td>${card.patient.name}</td>
+                                <td>${card.status}</td>
+                                <td>${card.building}</td>
+                                <td>${card.ward}</td>
+                                <td><a href="#">Show</a></td>
+                                <td><a href="edit-patient/${card.patient.id}">Edit</a></td>
                             </tr>
                         </c:forEach>
                     </c:if>

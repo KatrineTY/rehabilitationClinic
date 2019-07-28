@@ -17,7 +17,7 @@ public class AddPatientController {
 
     @RequestMapping(value = "/add-patient", method = RequestMethod.POST)
     public String addPatient(@ModelAttribute PatientInfo patientInfo) {
-        patientService.addPatient(patientInfo.getPatient());
+        patientService.addPatient(patientInfo);
         return "account";
     }
 

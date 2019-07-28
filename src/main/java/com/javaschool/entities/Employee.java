@@ -29,7 +29,7 @@ public class Employee {
     @JoinColumn(name = "working_time", referencedColumnName = "working_time_id")
     private WorkingTime workingTime;
     @Column
-    private boolean enabled;
+    private boolean enabled = true;
     @ManyToOne
     @JoinColumn(name = "role", referencedColumnName = "role_id")
     private Role role;

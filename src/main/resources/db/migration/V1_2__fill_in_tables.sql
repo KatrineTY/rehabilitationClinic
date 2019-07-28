@@ -106,26 +106,16 @@ VALUES ('Zahir Durham', 'attending doctor', 'zahir.durham', 'WSV45RCN0IU', '1-17
        ('Katrine F.', ' administrator', 'login', 'password', '1-554-148-3966', 'katrine@gmail.com', 1, 3);
 
 INSERT INTO "patient_cards" (patient, building, ward, attending_doctor)
-VALUES (3, 'A', 5, 2),
-       (4, 'B', 3, 1),
-       (5, 'C', 1, 1),
-       (8, 'A', 6, 2),
-       (3, 'B', 1, 2),
-       (9, 'C', 7, 1),
-       (1, 'A', 6, 1),
-       (3, 'B', 3, 2),
-       (10, 'C', 6, 2),
-       (7, 'A', 1, 1),
-       (5, 'B', 6, 2),
-       (3, 'C', 4, 1),
-       (8, 'A', 4, 2),
-       (8, 'B', 2, 2),
-       (6, 'C', 1, 2),
-       (2, 'A', 1, 1),
-       (1, 'B', 4, 1),
-       (10, 'C', 7, 1),
-       (3, 'A', 6, 1),
-       (8, 'B', 4, 1);
+VALUES (1, 'A', 5, 2),
+       (2, 'B', 3, 1),
+       (3, 'C', 1, 1),
+       (4, 'A', 6, 2),
+       (5, 'B', 1, 2),
+       (6, 'C', 7, 1),
+       (7, 'A', 6, 1),
+       (8, 'B', 3, 2),
+       (9, 'C', 6, 2),
+       (10, 'A', 1, 1);
 
 
 INSERT INTO proceds_and_medics (name, kind)

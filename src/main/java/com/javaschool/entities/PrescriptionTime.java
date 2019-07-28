@@ -2,6 +2,7 @@ package com.javaschool.entities;
 
 import com.javaschool.converters.LocalTimeAttributeConverter;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -19,6 +20,7 @@ public class PrescriptionTime {
     @JoinColumn(name = "prescription", referencedColumnName = "prescription_id")
     private Prescription prescription;
     @Column(name = "time")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @Convert(converter = LocalTimeAttributeConverter.class)
     private LocalTime time;
 

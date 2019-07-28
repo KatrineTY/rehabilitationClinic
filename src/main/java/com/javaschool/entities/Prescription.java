@@ -31,7 +31,7 @@ public class Prescription {
     @Column
     private String dose;
     @Column
-    private int version;
+    private int version = 1;
     @ManyToOne
     @JoinColumn(name = "responsible_doctor", referencedColumnName = "employee_id")
     private Employee responsibleDoctor;

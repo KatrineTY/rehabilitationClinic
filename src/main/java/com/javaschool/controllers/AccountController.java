@@ -20,6 +20,7 @@ public class AccountController {
     public String getAccount() {
         return "account";
     }
+
     @RequestMapping(value = "/new-patient", method = RequestMethod.GET)
     public ModelAndView newPatient() {
         return new ModelAndView("addPatient", "patientInfo", new PatientInfo());
@@ -27,7 +28,7 @@ public class AccountController {
 
     @RequestMapping(value = "/search-patient", method = RequestMethod.GET)
     public ModelAndView searchPatient() {
-        return new ModelAndView("searchPatient", "patients", accountService.getPatients());
+        return new ModelAndView("searchPatient", "patientCards", accountService.getPatientCards());
     }
 
 }

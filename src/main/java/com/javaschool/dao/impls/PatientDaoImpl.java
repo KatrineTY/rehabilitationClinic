@@ -19,8 +19,8 @@ public class PatientDaoImpl implements PatientDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @SuppressWarnings(value = "unchecked")
     @Override
+    @SuppressWarnings(value = "unchecked")
     public List<Patient> getPatients() {
         Session session = sessionFactory.openSession();
         List<Patient> patients = session.createCriteria(Patient.class).addOrder(Order.asc("id")).list();
@@ -31,9 +31,7 @@ public class PatientDaoImpl implements PatientDao {
     @Override
     public void addPatient(Patient patient) {
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
         session.save(patient);
-        session.getTransaction().commit();
         session.close();
     }
 
@@ -45,6 +43,23 @@ public class PatientDaoImpl implements PatientDao {
         Patient patient = (Patient) query.uniqueResult();
         session.close();
         return patient;
+    }
+
+    @Override
+    public Patient getPatientById(int id) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Patient where id = :id");
+        query.setParameter("id", id);
+        Patient patient = (Patient) query.uniqueResult();
+        session.close();
+        return patient;
+    }
+
+    @Override
+    public void updatePatient(Patient patient) {
+        Session session = sessionFactory.openSession();
+        session.update(patient);
+        session.close();
     }
 
 }
