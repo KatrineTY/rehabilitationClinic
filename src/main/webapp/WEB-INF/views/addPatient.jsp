@@ -31,12 +31,6 @@
                                                placeholder="insurance"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <input name="patientCard.status" type="text" class="form-control"
-                                               id="status"
-                                               placeholder="status"/>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="attendingDoctor">Attending Doctor</label>
                                         <input name="patientCard.attendingDoctor.name" type="text"
                                                class="form-control"

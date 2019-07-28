@@ -19,15 +19,13 @@ function addDiagnosis() {
     ).appendTo('.fields').submit();
 }
 
-function removeDiagnosis(element) {
-    $(element).closest(".form-group").nextAll().each(function (index, e) {
-        console.log(e);
-        Array.prototype.slice.call(e.childNodes)
-            .filter(child => child.hasAttribute("name"))
-            .forEach(function (index, e2) {
-                e2.name.replace(/(\d+)/, function () {
-                    return arguments[1] * 1 - 1;
-                });
-            });
+function removeDiagnosis(diagnosis) {
+    $(diagnosis).closest(".form-group").nextAll().each(function (index, sibl) {
+        Array.from(sibl.getElementsByTagName("*"))
+            .filter(e => e.hasAttribute("name"))
+            .forEach(e => e.name = e.name.replace(/(\d+)/, function () {
+                return arguments[1] * 1 - 1;
+            }));
     });
+    $(diagnosis).closest(".form-group").remove();
 }
