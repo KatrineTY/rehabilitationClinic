@@ -7,7 +7,8 @@ CREATE TABLE employee
     password     VARCHAR(30)  NOT NULL,
     phone        VARCHAR(15)  NOT NULL UNIQUE,
     email        VARCHAR(30)  NOT NULL,
-    working_time VARCHAR(20)  NOT NULL
+    working_time VARCHAR(20)  NOT NULL,
+    enabled      BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE patient

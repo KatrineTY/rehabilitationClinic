@@ -27,5 +27,7 @@ public class Employee {
     private String email;
     @Column(name = "working_time")
     private String workingTime;
+    @Column
+    private boolean enabled;
 
 }

@@ -1,8 +1,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./resources/static/css/pageTemplate.css">
+    <link rel="stylesheet" href="resources/static/css/pageTemplate.css">
 </head>
 <body>
 <div class="container mt-5">
@@ -13,24 +14,27 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-8 ml-auto mr-auto">
-                            <form:form method="post" modelAttribute="employee" action="check-user" id="loginForm">
+                            <form method="post" action="j_spring_security_check" id="loginForm">
+                                <c:if test="${not empty error}">
+                                    <div style="color:red; font-weight: bold; margin: 30px 0px;">${error}</div>
+                                </c:if>
                                 <div class="form-group">
-                                    <form:label path="login" for="login">Login</form:label>
-                                    <form:input path="login" type="text" class="form-control" id="login"
+                                    <label for="login">Login</label>
+                                    <input name="user_login" type="text" class="form-control" id="login"
                                                 placeholder="login"/>
                                 </div>
                                 <div class="form-group">
-                                    <form:label path="password" for="password">Password</form:label>
-                                    <form:input path="password" type="password" class="form-control" id="password"
+                                    <label for="password">Password</label>
+                                    <input name="password_login" type="password" class="form-control" id="password"
                                                 placeholder="password"/>
                                 </div>
-                                <%--                                This functionality is not working now--%>
                                 <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="remember">
+                                    <input name="_spring_security_remember_me" type="checkbox" class="form-check-input"
+                                           id="remember">
                                     <label class="form-check-label" for="remember">Remember me</label>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                            </form:form>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -38,7 +42,7 @@
         </div>
     </div>
 </div>
-<script src="./resources/static/js/validation.js"></script>
+<script src="resources/static/js/validation.js"></script>
 
 </body>
 </html>

@@ -33,4 +33,4 @@ CREATE TABLE events
     type     INTEGER REFERENCES proceds_and_medics (type_id),
     nurse    INTEGER REFERENCES employees (employee_id),
     comment  VARCHAR(50)
-)
+);

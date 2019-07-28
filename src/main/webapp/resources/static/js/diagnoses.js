@@ -20,11 +20,14 @@ function addDiagnosis() {
 }
 
 function removeDiagnosis(element) {
-    $(element).closest(".form-group").nextAll().each(function (index, element) {
-        element.find("*[name]").each(function (index, element) {
-            element.name = element.name.replace(/(\d+)/, function () {
-                return arguments[1] * 1 - 1;
+    $(element).closest(".form-group").nextAll().each(function (index, e) {
+        console.log(e);
+        Array.prototype.slice.call(e.childNodes)
+            .filter(child => child.hasAttribute("name"))
+            .forEach(function (index, e2) {
+                e2.name.replace(/(\d+)/, function () {
+                    return arguments[1] * 1 - 1;
+                });
             });
-        });
     });
 }

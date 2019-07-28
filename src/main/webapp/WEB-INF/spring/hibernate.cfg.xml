@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- Database details -->
     <bean id="dataSource"
           class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
@@ -12,8 +11,8 @@
         <property name="password" value="postgres"/>
     </bean>
 
-    <!-- Hibernate session factory -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" depends-on="flyway">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <!--        depends-on="flyway">-->
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <array>
@@ -32,14 +31,14 @@
         </property>
     </bean>
 
-    <!-- Automatic Wildfly migration on startup -->
-    <bean id="flyway" class="com.googlecode.flyway.core.Flyway" init-method="migrate">
-        <property name="dataSource" ref="dataSource"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <!--    <bean id="patientDaoPostgres" class="com.javaschool.dao.impls.PatientDaoPostgres">-->
-    <!--        <constructor-arg ref="sessionFactory"/>-->
+    <!--    <bean id="flyway" class="com.googlecode.flyway.core.Flyway" init-method="migrate">-->
+    <!--        <property name="dataSource" ref="dataSource"/>-->
     <!--    </bean>-->
-
 
 </beans>
