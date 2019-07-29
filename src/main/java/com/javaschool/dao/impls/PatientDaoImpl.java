@@ -59,6 +59,7 @@ public class PatientDaoImpl implements PatientDao {
     public void updatePatient(Patient patient) {
         Session session = sessionFactory.openSession();
         session.update(patient);
+        session.flush();
         session.close();
     }
 

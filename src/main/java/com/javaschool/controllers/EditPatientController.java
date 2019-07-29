@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @NoArgsConstructor
-public class SearchPatientController {
+public class EditPatientController {
 
     @Autowired
     private PatientService patientService;

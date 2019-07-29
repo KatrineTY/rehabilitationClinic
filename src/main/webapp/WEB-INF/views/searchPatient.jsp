@@ -33,7 +33,7 @@
                                 <td>${card.status}</td>
                                 <td>${card.building}</td>
                                 <td>${card.ward}</td>
-                                <td><a href="#">Show</a></td>
+                                <td><a href="patient-schedule/${card.patient.id}">Show</a></td>
                                 <td><a href="edit-patient/${card.patient.id}">Edit</a></td>
                             </tr>
                         </c:forEach>
