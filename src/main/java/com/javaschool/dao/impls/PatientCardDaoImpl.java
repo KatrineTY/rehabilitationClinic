@@ -21,36 +21,29 @@ public class PatientCardDaoImpl implements PatientCardDao {
 
     @Override
     public void addPatientCard(PatientCard patientCard) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.save(patientCard);
-        session.close();
     }
 
     @Override
     @SuppressWarnings(value = "unchecked")
     public List<PatientCard> getPatientCards() {
-        Session session = sessionFactory.openSession();
-        List<PatientCard> patientCards = session.createCriteria(PatientCard.class).addOrder(Order.asc("id")).list();
-        session.close();
-        return patientCards;
+        Session session = sessionFactory.getCurrentSession();
+        return (List<PatientCard>) session.createCriteria(PatientCard.class).addOrder(Order.asc("id")).list();
     }
 
     @Override
     public PatientCard getPatientCardByPatient(Patient patient) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from PatientCard where patient = :patient");
         query.setParameter("patient", patient);
-        PatientCard patientCard = (PatientCard) query.uniqueResult();
-        session.close();
-        return patientCard;
+        return (PatientCard) query.uniqueResult();
     }
 
     @Override
     public void updatePatientCard(PatientCard patientCard) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.update(patientCard);
-        session.flush();
-        session.close();
     }
 
 }

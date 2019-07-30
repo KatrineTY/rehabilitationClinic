@@ -20,4 +20,6 @@
     <mvc:resources mapping="/resources/**" location="/resources/"
                    cache-period="31556926"/>
 
+    <import resource="../hibernate.cfg.xml"/>
+
 </beans>

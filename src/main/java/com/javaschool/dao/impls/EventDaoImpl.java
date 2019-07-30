@@ -19,12 +19,10 @@ public class EventDaoImpl implements EventDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<Event> getEventsByPatient(Patient patient) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Event where patient = :patient");
         query.setParameter("patient", patient);
-        List<Event> events = query.list();
-        session.close();
-        return events;
+        return (List<Event>) query.list();
     }
 
 }

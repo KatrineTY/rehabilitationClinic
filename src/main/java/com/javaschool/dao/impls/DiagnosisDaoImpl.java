@@ -20,28 +20,23 @@ public class DiagnosisDaoImpl implements DiagnosisDao {
 
     @Override
     public void addDiagnosis(Diagnosis diagnosis) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.save(diagnosis);
-        session.close();
     }
 
     @Override
     @SuppressWarnings(value = "unchecked")
     public List<Diagnosis> getDiagnosesByCard(PatientCard patientCard) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Diagnosis where patient_card = :patientCard");
         query.setParameter("patientCard", patientCard);
-        List<Diagnosis> diagnoses = query.list();
-        session.close();
-        return diagnoses;
+        return (List<Diagnosis>) query.list();
     }
 
     @Override
     public void updateDiagnosis(Diagnosis diagnosis) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.update(diagnosis);
-        session.flush();
-        session.close();
     }
 
 }

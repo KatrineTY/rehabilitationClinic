@@ -18,22 +18,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeByLogin(String login) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Employee where login = :login");
         query.setParameter("login", login);
-        Employee employee = (Employee) query.uniqueResult();
-        session.close();
-        return employee;
+        return (Employee) query.uniqueResult();
     }
 
     @Override
     public Employee getEmployeeByName(String name) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Employee where name = :name");
         query.setParameter("name", name);
-        Employee employee = (Employee) query.uniqueResult();
-        session.close();
-        return employee;
+        return (Employee) query.uniqueResult();
     }
 
 }

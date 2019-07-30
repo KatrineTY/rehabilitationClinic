@@ -7,11 +7,13 @@ import com.javaschool.services.interfaces.ScheduleService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
 @NoArgsConstructor
+@Transactional
 public class ScheduleServiceImpl implements ScheduleService {
     @Autowired
     private EventDao eventDao;
