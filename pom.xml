@@ -93,33 +93,47 @@
             <version>1.6.1</version>
         </dependency>
 
-    </dependencies>
+        <dependency>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.2</version>
+        </dependency>
 
-<build>
-    <finalName>RehabilitationClinic</finalName>
-    <plugins>
-        <plugin>
-            <groupId>com.googlecode.flyway</groupId>
-            <artifactId>flyway-maven-plugin</artifactId>
-            <version>1.5</version>
-            <configuration>
-                <baseDir>db/migration</baseDir>
-                <driver>org.postgresql.Driver</driver>
-                <url>jdbc:postgresql://localhost:5432/rehabilitationclinic</url>
-                <user>postgres</user>
-                <password>postgres</password>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>8</source>
-                <target>8</target>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+
+    </dependencies>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+    <build>
+        <finalName>RehabilitationClinic</finalName>
+        <plugins>
+            <plugin>
+                <groupId>com.googlecode.flyway</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <baseDir>db/migration</baseDir>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://localhost:5432/rehabilitationclinic</url>
+                    <user>postgres</user>
+                    <password>postgres</password>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

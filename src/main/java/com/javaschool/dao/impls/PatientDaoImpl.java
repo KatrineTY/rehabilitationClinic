@@ -9,11 +9,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Component
 @NoArgsConstructor
 public class PatientDaoImpl implements PatientDao {
 

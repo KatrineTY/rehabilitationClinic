@@ -8,15 +8,13 @@ import com.javaschool.dto.PatientInfo;
 import com.javaschool.entities.PatientCard;
 import com.javaschool.services.interfaces.PatientService;
 import lombok.NoArgsConstructor;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Component
 @NoArgsConstructor
 @Transactional
 public class PatientServiceImpl implements PatientService {
