@@ -13,8 +13,9 @@
                 <h3 class="card-header">${username}</h3>
                 <div class="card-body">
                     <ul class="list-group">
-                        <a href="new-patient" class="list-group-item list-group-item-action">Add patient</a>
+                        <a href="add-patient" class="list-group-item list-group-item-action">Add patient</a>
                         <a href="search-patient" class="list-group-item list-group-item-action">Search patient</a>
+                        <a href="add-prescription" class="list-group-item list-group-item-action">Add prescription</a>
                     </ul>
                 </div>
             </div>

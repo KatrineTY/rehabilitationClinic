@@ -63,7 +63,8 @@ CREATE TABLE proceds_and_medics
 (
     type_id SERIAL PRIMARY KEY,
     name    VARCHAR(50) NOT NULL,
-    kind    VARCHAR(12) CHECK ( kind = 'Medicament' OR kind = 'Procedure' )
+    kind    VARCHAR(12) CHECK ( kind = 'Medicament' OR kind = 'Procedure' ),
+    UNIQUE (name, kind)
 );
 
 CREATE TABLE prescriptions
@@ -71,8 +72,8 @@ CREATE TABLE prescriptions
     prescription_id    SERIAL PRIMARY KEY,
     patient            INTEGER           NOT NULL REFERENCES patients (patient_id),
     type               INTEGER REFERENCES proceds_and_medics (type_id),
-    start_date         TIMESTAMP         NOT NULL,
-    end_date           TIMESTAMP         NOT NULL,
+    start_date         date              NOT NULL,
+    end_date           date              NOT NULL,
     dose               VARCHAR(50),
     version            INTEGER DEFAULT 1 NOT NULL,
     responsible_doctor INTEGER           NOT NULL REFERENCES employees (employee_id)

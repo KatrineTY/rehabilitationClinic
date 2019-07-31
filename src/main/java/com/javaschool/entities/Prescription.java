@@ -1,11 +1,12 @@
 package com.javaschool.entities;
 
 
-import com.javaschool.converters.LocalDateTimeAttributeConverter;
+import com.javaschool.converters.LocalDateAttributeConverter;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -23,11 +24,13 @@ public class Prescription {
     @JoinColumn(name = "type", referencedColumnName = "type_id")
     private ProcedureAndMedicament type;
     @Column(name = "start_date")
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime startDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Convert(converter = LocalDateAttributeConverter.class)
+    private LocalDate startDate;
     @Column(name = "end_date")
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime endDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Convert(converter = LocalDateAttributeConverter.class)
+    private LocalDate endDate;
     @Column
     private String dose;
     @Column

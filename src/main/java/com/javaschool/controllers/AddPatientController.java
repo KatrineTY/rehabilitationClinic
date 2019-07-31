@@ -8,12 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @NoArgsConstructor
 public class AddPatientController {
     @Autowired
     private PatientService patientService;
+
+    @RequestMapping(value = "/add-patient", method = RequestMethod.GET)
+    public ModelAndView addPatient() {
+        return new ModelAndView("addPatient", "patientInfo", new PatientInfo());
+    }
 
     @RequestMapping(value = "/add-patient", method = RequestMethod.POST)
     public String addPatient(@ModelAttribute PatientInfo patientInfo) {
