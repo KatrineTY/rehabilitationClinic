@@ -9,4 +9,5 @@ public interface EventDao {
 
     List<Event> getEventsByPatient(Patient patient);
 
+    void addEvent(Event event);
 }

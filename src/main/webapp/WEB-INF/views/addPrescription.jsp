@@ -25,12 +25,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="type.name">Procedure/Medicament</label>
-                                    <input name="prescription.type.name" type="text" class="form-control" id="type.name"
+                                    <input name="prescription.type.kind" type="text" class="form-control" id="type.name"
                                            placeholder="type"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="type.kind">Name</label>
-                                    <input name="prescription.type.kind" type="text" class="form-control" id="type.kind"
+                                    <input name="prescription.type.name" type="text" class="form-control" id="type.kind"
                                            placeholder="name"/>
                                 </div>
                                 <div class="form-group">

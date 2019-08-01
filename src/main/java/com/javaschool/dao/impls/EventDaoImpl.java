@@ -3,6 +3,7 @@ package com.javaschool.dao.impls;
 import com.javaschool.dao.interfaces.EventDao;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.Patient;
+import lombok.NoArgsConstructor;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@NoArgsConstructor
 public class EventDaoImpl implements EventDao {
     @Autowired
     private SessionFactory sessionFactory;
@@ -24,5 +26,12 @@ public class EventDaoImpl implements EventDao {
         query.setParameter("patient", patient);
         return (List<Event>) query.list();
     }
+
+    @Override
+    public void addEvent(Event event) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(event);
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.javaschool.services.impls;
 
 import com.javaschool.dao.interfaces.*;
 import com.javaschool.dto.PrescriptionInfo;
+import com.javaschool.services.interfaces.EventService;
 import com.javaschool.services.interfaces.PrescriptionService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private PatientDao patientDao;
     @Autowired
     private EmployeeDao employeeDao;
+    @Autowired
+    private EventService eventService;
 
     @Override
     public void addPrescription(PrescriptionInfo prescriptionInfo, String empName) {
@@ -35,6 +38,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescriptionInfo.getPrescriptionTimes().forEach(presTime -> presTime.setPrescription(prescriptionInfo.getPrescription()));
         prescriptionInfo.getPrescriptionTimes().forEach(presTime ->
                 prescriptionTimeDao.addPrescriptionTime(presTime));
+        eventService.addEventsForPrescription(prescriptionInfo);
     }
 
 }
