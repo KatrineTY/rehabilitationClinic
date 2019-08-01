@@ -1,9 +1,6 @@
 package com.javaschool.services.impls;
 
-import com.javaschool.dao.interfaces.PatientDao;
-import com.javaschool.dao.interfaces.PrescriptionDao;
-import com.javaschool.dao.interfaces.PrescriptionTimeDao;
-import com.javaschool.dao.interfaces.ProcedureAndMedicamentDao;
+import com.javaschool.dao.interfaces.*;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.services.interfaces.PrescriptionService;
 import lombok.NoArgsConstructor;
@@ -24,12 +21,14 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private ProcedureAndMedicamentDao procedureAndMedicamentDao;
     @Autowired
     private PatientDao patientDao;
-
+    @Autowired
+    private EmployeeDao employeeDao;
 
     @Override
-    public void addPrescription(PrescriptionInfo prescriptionInfo) {
+    public void addPrescription(PrescriptionInfo prescriptionInfo, String empName) {
         prescriptionInfo.getPrescription().setType(
                 procedureAndMedicamentDao.getElementWithId(prescriptionInfo.getPrescription().getType()));
+        prescriptionInfo.getPrescription().setResponsibleDoctor(employeeDao.getEmployeeByName(empName));
         prescriptionInfo.getPrescription().setPatient(
                 patientDao.getPatientByName(prescriptionInfo.getPrescription().getPatient().getName()));
         prescriptionDao.addPrescription(prescriptionInfo.getPrescription());

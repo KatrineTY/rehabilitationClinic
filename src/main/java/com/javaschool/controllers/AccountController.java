@@ -3,10 +3,14 @@ package com.javaschool.controllers;
 import com.javaschool.services.interfaces.AccountService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @NoArgsConstructor
@@ -16,7 +20,10 @@ public class AccountController {
     AccountService accountService;
 
     @RequestMapping(value = "/account")
-    public String getAccount() {
+    public String getAccount(String empName, HttpSession httpSession) {
+        UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String employeeName = accountService.getEmployeeNameByLogin(principal.getUsername());
+        httpSession.setAttribute("empName", employeeName);
         return "account";
     }
 

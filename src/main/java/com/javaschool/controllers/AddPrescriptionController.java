@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @NoArgsConstructor
 public class AddPrescriptionController {
@@ -25,8 +27,13 @@ public class AddPrescriptionController {
     }
 
     @RequestMapping(value = "/add-prescription", method = RequestMethod.POST)
-    public String addPrescription(@ModelAttribute PrescriptionInfo prescriptionInfo) {
-        prescriptionService.addPrescription(prescriptionInfo);
+    public String addPrescription(@ModelAttribute PrescriptionInfo prescriptionInfo, HttpSession httpSession) {
+        Object empName = httpSession.getAttribute("empName");
+        if (empName == null) {
+            return "error403";
+        } else {
+            prescriptionService.addPrescription(prescriptionInfo, (String) empName);
+        }
         return "account";
     }
 

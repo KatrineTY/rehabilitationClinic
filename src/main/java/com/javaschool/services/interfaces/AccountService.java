@@ -8,4 +8,6 @@ public interface AccountService {
 
     List<PatientCard> getPatientCards();
 
+    String getEmployeeNameByLogin(String login);
+
 }

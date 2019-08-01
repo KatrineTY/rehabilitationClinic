@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-6 ml-auto mr-auto">
             <div class="card bg-custom mb-5">
-                <h3 class="card-header">${username}</h3>
+                <h3 class="card-header">${empName}</h3>
                 <div class="card-body">
                     <ul class="list-group">
                         <a href="add-patient" class="list-group-item list-group-item-action">Add patient</a>
