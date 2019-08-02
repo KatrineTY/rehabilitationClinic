@@ -10,8 +10,9 @@
     <packaging>war</packaging>
 
     <properties>
-        <spring.version>4.0.3.RELEASE</spring.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
         <spring.security.version>3.2.5.RELEASE</spring.security.version>
+        <hibernate.version>5.4.2.Final</hibernate.version>
     </properties>
 
 
@@ -56,7 +57,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.5.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -103,6 +104,12 @@
             <groupId>net.sargue</groupId>
             <artifactId>java-time-jsptags</artifactId>
             <version>1.1.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
 
 
