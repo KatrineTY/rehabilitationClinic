@@ -18,7 +18,7 @@ public class PrescriptionTime {
     @Column(name = "prescription_time_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "prescription", referencedColumnName = "prescription_id")
     private Prescription prescription;
     @Column(name = "time")

@@ -13,4 +13,6 @@ public interface PrescriptionTimeDao {
 
     void updatePrescriptionTimes(List<PrescriptionTime> prescriptionTimes);
 
+    void deletePrescriptionTimesByPrescriptionId(int id);
+
 }

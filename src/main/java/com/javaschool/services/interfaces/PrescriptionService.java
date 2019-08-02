@@ -14,4 +14,6 @@ public interface PrescriptionService {
 
     void updatePrescriptionInfo(PrescriptionInfo prescriptionInfo, String empName);
 
+    void deletePrescriptionById(int id);
+
 }

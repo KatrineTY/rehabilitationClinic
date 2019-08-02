@@ -43,4 +43,10 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
         session.merge(prescription);
     }
 
+    @Override
+    public void deletePrescriptionById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(session.get(Prescription.class, id));
+    }
+
 }

@@ -39,4 +39,12 @@ public class PrescriptionTimeDaoImpl implements PrescriptionTimeDao {
         prescriptionTimes.forEach(session::merge);
     }
 
+    @Override
+    public void deletePrescriptionTimesByPrescriptionId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("delete PrescriptionTime where prescription.id = :id");
+        query.setParameter("id", id);
+        query.executeUpdate();
+    }
+
 }

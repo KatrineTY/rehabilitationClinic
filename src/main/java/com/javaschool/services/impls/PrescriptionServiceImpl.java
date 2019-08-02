@@ -93,4 +93,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescriptionInfo.getPrescriptionTimes().forEach(prescrTime -> prescrTime.setPrescription(prescription));
     }
 
+    @Override
+    public void deletePrescriptionById(int id) {
+        eventService.deleteEventsForPrescription(getPrescriptionById(id));
+        prescriptionTimeDao.deletePrescriptionTimesByPrescriptionId(id);
+        prescriptionDao.deletePrescriptionById(id);
+    }
+
 }

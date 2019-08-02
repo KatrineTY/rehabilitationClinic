@@ -39,4 +39,10 @@ public class EditPrescriptionController {
         return model;
     }
 
+    @RequestMapping(value = "/delete-prescription/{id}", method = RequestMethod.GET)
+    public ModelAndView deletePrescription(@PathVariable String id) {
+        prescriptionService.deletePrescriptionById(Integer.parseInt(id));
+        return new ModelAndView("prescriptionsList", "prescriptions", prescriptionService.getAllPrescriptions());
+    }
+
 }

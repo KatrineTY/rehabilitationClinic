@@ -24,6 +24,7 @@
                         <td><b>Start date</b></td>
                         <td><b>End date</b></td>
                         <td>Edit</td>
+                        <td>Delete</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,6 +38,7 @@
                                 <td>${prescriptionInfo.prescription.startDate}</td>
                                 <td>${prescriptionInfo.prescription.endDate}</td>
                                 <td><a href="edit-prescription/${prescriptionInfo.prescription.id}">Edit</a></td>
+                                <td><a href="delete-prescription/${prescriptionInfo.prescription.id}">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </c:if>

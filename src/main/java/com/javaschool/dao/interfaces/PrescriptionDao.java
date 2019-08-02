@@ -13,4 +13,6 @@ public interface PrescriptionDao {
     Prescription getPrescriptionById(int id);
 
     void updatePrescription(Prescription prescription);
+
+    void deletePrescriptionById(int id);
 }
