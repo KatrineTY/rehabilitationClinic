@@ -3,10 +3,9 @@ package com.javaschool.dao.impls;
 import com.javaschool.dao.interfaces.PatientDao;
 import com.javaschool.entities.Patient;
 import lombok.NoArgsConstructor;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +22,7 @@ public class PatientDaoImpl implements PatientDao {
     @SuppressWarnings(value = "unchecked")
     public List<Patient> getPatients() {
         Session session = sessionFactory.getCurrentSession();
-        return (List<Patient>) session.createCriteria(Patient.class).addOrder(Order.asc("id")).list();
+        return (List<Patient>) session.createQuery("from Patient").list();
     }
 
     @Override

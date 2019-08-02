@@ -20,7 +20,7 @@ public class AccountController {
     AccountService accountService;
 
     @RequestMapping(value = "/account")
-    public String getAccount(String empName, HttpSession httpSession) {
+    public String getAccount(HttpSession httpSession) {
         UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String employeeName = accountService.getEmployeeNameByLogin(principal.getUsername());
         httpSession.setAttribute("empName", employeeName);
@@ -30,6 +30,11 @@ public class AccountController {
     @RequestMapping(value = "/search-patient", method = RequestMethod.GET)
     public ModelAndView searchPatient() {
         return new ModelAndView("searchPatient", "patientCards", accountService.getPatientCards());
+    }
+
+    @RequestMapping(value = "/get-prescriptions-list", method = RequestMethod.GET)
+    public ModelAndView getPrescriptionsList() {
+        return new ModelAndView("prescriptionsList", "prescriptions", accountService.getPrescriptions());
     }
 
 }

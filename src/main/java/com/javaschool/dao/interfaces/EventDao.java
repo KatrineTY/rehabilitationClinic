@@ -10,4 +10,6 @@ public interface EventDao {
     List<Event> getEventsByPatient(Patient patient);
 
     void addEvent(Event event);
+
+    void deleteEventByEvent(Event event);
 }

@@ -2,7 +2,7 @@ function searchPatient() {
     var input, filter, table, tr, td, i;
     input = document.getElementById("searchPatient");
     filter = input.value.toUpperCase();
-    table = document.getElementById("patientTable");
+    table = document.getElementsByTagName("table")[0];
     tr = table.getElementsByTagName("tr");
     for (i = 1; i < tr.length; i++) {
         td = tr[i].getElementsByTagName("td")[0];

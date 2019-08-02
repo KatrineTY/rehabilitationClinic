@@ -48,7 +48,7 @@
                                                    id="prescriptionTimes0"/>
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary" type="button"
-                                                        onclick="addPrescription()">
+                                                        onclick="addPrescriptionTime()">
                                                     +
                                                 </button>
                                             </div>

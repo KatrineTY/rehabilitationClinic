@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,22 +26,40 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void addEventsForPrescription(PrescriptionInfo prescriptionInfo) {
-        List<LocalTime> times = prescriptionInfo.getPrescriptionTimes()
-                .stream()
-                .map(PrescriptionTime::getTime)
-                .collect(Collectors.toList());
+        List<LocalTime> times = getPrescriptionTimes(prescriptionInfo);
+        List<Event> events = collectEvents(prescriptionInfo, times);
+        events.forEach(event -> eventDao.addEvent(event));
+    }
+
+    @Override
+    public void deleteEventsForPrescription(PrescriptionInfo prescriptionInfo) {
+        List<LocalTime> times = getPrescriptionTimes(prescriptionInfo);
+        List<Event> events = collectEvents(prescriptionInfo, times);
+        events.forEach(event -> eventDao.deleteEventByEvent(event));
+    }
+
+    private List<Event> collectEvents(PrescriptionInfo prescriptionInfo, List<LocalTime> times) {
+        List<Event> events = new ArrayList<>();
         for (LocalTime time : times) {
-            Event event = new Event();
-            event.setPatient(prescriptionInfo.getPrescription().getPatient());
-            event.setType(prescriptionInfo.getPrescription().getType());
             for (LocalDate date = prescriptionInfo.getPrescription().getStartDate();
                  date.isBefore(prescriptionInfo.getPrescription().getEndDate());
                  date = date.plusDays(1)) {
+                Event event = new Event();
+                event.setPatient(prescriptionInfo.getPrescription().getPatient());
+                event.setType(prescriptionInfo.getPrescription().getType());
                 event.setDate(LocalDateTime.of(date, time));
-                eventDao.addEvent(event);
-
+                events.add(event);
             }
         }
+        return events;
     }
+
+    private List<LocalTime> getPrescriptionTimes(PrescriptionInfo prescriptionInfo) {
+        return prescriptionInfo.getPrescriptionTimes()
+                .stream()
+                .map(PrescriptionTime::getTime)
+                .collect(Collectors.toList());
+    }
+
 
 }

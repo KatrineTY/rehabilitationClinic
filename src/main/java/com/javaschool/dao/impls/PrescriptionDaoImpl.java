@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @NoArgsConstructor
 public class PrescriptionDaoImpl implements PrescriptionDao {
@@ -19,6 +21,26 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
     public void addPrescription(Prescription prescription) {
         Session session = sessionFactory.getCurrentSession();
         session.save(prescription);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Prescription> getAllPrescriptions() {
+        Session session = sessionFactory.getCurrentSession();
+        return (List<Prescription>) session.createQuery("from Prescription").list();
+
+    }
+
+    @Override
+    public Prescription getPrescriptionById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Prescription.class, id);
+    }
+
+    @Override
+    public void updatePrescription(Prescription prescription) {
+        Session session = sessionFactory.getCurrentSession();
+        session.merge(prescription);
     }
 
 }

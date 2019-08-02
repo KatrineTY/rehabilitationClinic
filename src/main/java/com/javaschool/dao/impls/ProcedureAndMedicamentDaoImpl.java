@@ -3,9 +3,9 @@ package com.javaschool.dao.impls;
 import com.javaschool.dao.interfaces.ProcedureAndMedicamentDao;
 import com.javaschool.entities.ProcedureAndMedicament;
 import lombok.NoArgsConstructor;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

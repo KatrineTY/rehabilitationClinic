@@ -4,10 +4,9 @@ import com.javaschool.dao.interfaces.PatientCardDao;
 import com.javaschool.entities.Patient;
 import com.javaschool.entities.PatientCard;
 import lombok.NoArgsConstructor;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +28,7 @@ public class PatientCardDaoImpl implements PatientCardDao {
     @SuppressWarnings(value = "unchecked")
     public List<PatientCard> getPatientCards() {
         Session session = sessionFactory.getCurrentSession();
-        return (List<PatientCard>) session.createCriteria(PatientCard.class).addOrder(Order.asc("id")).list();
+        return (List<PatientCard>) session.createQuery("from PatientCard").list();
     }
 
     @Override

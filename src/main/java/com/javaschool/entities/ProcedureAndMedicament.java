@@ -1,11 +1,13 @@
 package com.javaschool.entities;
 
 import lombok.Data;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@Audited
 @Table(name = "proceds_and_medics")
 public class ProcedureAndMedicament {
 

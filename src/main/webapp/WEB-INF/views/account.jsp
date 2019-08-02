@@ -16,6 +16,8 @@
                         <a href="add-patient" class="list-group-item list-group-item-action">Add patient</a>
                         <a href="search-patient" class="list-group-item list-group-item-action">Search patient</a>
                         <a href="add-prescription" class="list-group-item list-group-item-action">Add prescription</a>
+                        <a href="get-prescriptions-list" class="list-group-item list-group-item-action">Prescriptions
+                            list</a>
                     </ul>
                 </div>
             </div>

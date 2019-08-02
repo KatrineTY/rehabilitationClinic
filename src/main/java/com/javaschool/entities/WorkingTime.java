@@ -2,12 +2,14 @@ package com.javaschool.entities;
 
 import com.javaschool.converters.LocalTimeAttributeConverter;
 import lombok.Data;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.time.LocalTime;
 
 @Data
 @Entity
+@Audited
 @Table(name = "working_times")
 public class WorkingTime {
 
