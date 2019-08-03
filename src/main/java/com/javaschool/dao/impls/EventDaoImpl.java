@@ -35,12 +35,21 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void deleteEventByEvent(Event event) {
+    public void deleteEvent(Event event) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Event where patient = :patient and date = :date and type = :type");
         query.setParameter("patient", event.getPatient());
         query.setParameter("date", event.getDate());
         query.setParameter("type", event.getType());
+        query.list().forEach(session::delete);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void deleteEventsByPatientId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event where patient.id = :id");
+        query.setParameter("id", id);
         query.list().forEach(session::delete);
     }
 

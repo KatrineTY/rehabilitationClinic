@@ -45,4 +45,12 @@ public class PatientCardDaoImpl implements PatientCardDao {
         session.update(patientCard);
     }
 
+    @Override
+    public void dischargePatientByPatientId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        PatientCard patientCard = session.get(PatientCard.class, id);
+        patientCard.setStatus("Discharged");
+        session.update(patientCard);
+    }
+
 }

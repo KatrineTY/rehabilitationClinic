@@ -15,4 +15,6 @@ public interface PatientService {
 
     List<PatientCard> getPatientCards();
 
+    void dischargePatientById(int id);
+
 }

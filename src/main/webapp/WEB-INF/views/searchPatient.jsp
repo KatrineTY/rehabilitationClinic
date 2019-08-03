@@ -10,7 +10,7 @@
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-6 ml-auto mr-auto">
+        <div class="col-md-8 ml-auto mr-auto">
             <div class="card bg-custom mb-5">
                 <input class=" form-control" type="text" placeholder="Search"
                        aria-label="Search" onkeyup="searchPatient()" id="searchPatient">
@@ -23,6 +23,7 @@
                         <td><b>Ward</b></td>
                         <td>Schedule</td>
                         <td>Info</td>
+                        <td>Discharge</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,11 @@
                                 <td>${card.ward}</td>
                                 <td><a href="patient-schedule/${card.patient.id}">Show</a></td>
                                 <td><a href="edit-patient/${card.patient.id}">Edit</a></td>
+                                <td>
+                                    <button onclick="window.location.href = 'discharge-patient/${card.patient.id}'">
+                                        Discharge
+                                    </button>
+                                </td>
                             </tr>
                         </c:forEach>
                     </c:if>

@@ -14,4 +14,6 @@ public interface PatientCardDao {
 
     void updatePatientCard(PatientCard patientCard);
 
+    void dischargePatientByPatientId(int id);
+
 }

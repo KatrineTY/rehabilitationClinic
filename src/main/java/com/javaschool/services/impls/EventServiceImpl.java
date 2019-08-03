@@ -35,7 +35,12 @@ public class EventServiceImpl implements EventService {
     public void deleteEventsForPrescription(PrescriptionInfo prescriptionInfo) {
         List<LocalTime> times = getPrescriptionTimes(prescriptionInfo);
         List<Event> events = collectEvents(prescriptionInfo, times);
-        events.forEach(event -> eventDao.deleteEventByEvent(event));
+        events.forEach(event -> eventDao.deleteEvent(event));
+    }
+
+    @Override
+    public void deleteEventsByPatientId(int id) {
+        eventDao.deleteEventsByPatientId(id);
     }
 
     private List<Event> collectEvents(PrescriptionInfo prescriptionInfo, List<LocalTime> times) {

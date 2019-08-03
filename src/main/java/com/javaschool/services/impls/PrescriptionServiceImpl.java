@@ -100,4 +100,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescriptionDao.deletePrescriptionById(id);
     }
 
+    @Override
+    public void deletePrescriptionsByPatientId(int id) {
+        List<Integer> ids = prescriptionDao.getPrescriptionsIdByPatientId(id);
+        ids.forEach(prescriptionTimeDao::deletePrescriptionTimesByPrescriptionId);
+        prescriptionDao.deletePrescriptionsByPatientId(id);
+    }
+
 }

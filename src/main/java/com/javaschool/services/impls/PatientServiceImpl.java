@@ -1,12 +1,10 @@
 package com.javaschool.services.impls;
 
-import com.javaschool.dao.interfaces.DiagnosisDao;
-import com.javaschool.dao.interfaces.EmployeeDao;
-import com.javaschool.dao.interfaces.PatientCardDao;
-import com.javaschool.dao.interfaces.PatientDao;
+import com.javaschool.dao.interfaces.*;
 import com.javaschool.dto.PatientInfo;
 import com.javaschool.entities.PatientCard;
 import com.javaschool.services.interfaces.PatientService;
+import com.javaschool.services.interfaces.PrescriptionService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +24,10 @@ public class PatientServiceImpl implements PatientService {
     private DiagnosisDao diagnosisDao;
     @Autowired
     private PatientCardDao patientCardDao;
+    @Autowired
+    private EventDao eventDao;
+    @Autowired
+    private PrescriptionService prescriptionService;
 
     @Override
     @Transactional
@@ -62,6 +64,13 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public List<PatientCard> getPatientCards() {
         return patientCardDao.getPatientCards();
+    }
+
+    @Override
+    public void dischargePatientById(int id) {
+        patientCardDao.dischargePatientByPatientId(id);
+        eventDao.deleteEventsByPatientId(id);
+        prescriptionService.deletePrescriptionsByPatientId(id);
     }
 
 

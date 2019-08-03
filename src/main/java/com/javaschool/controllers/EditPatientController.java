@@ -30,4 +30,12 @@ public class EditPatientController {
 
     }
 
+    @RequestMapping(value = "/discharge-patient/{id}", method = RequestMethod.GET)
+    public ModelAndView dischargePatient(@PathVariable String id) {
+        patientService.dischargePatientById(Integer.parseInt(id));
+        return new ModelAndView("searchPatient", "patientCards", patientService.getPatientCards());
+
+    }
+
+
 }

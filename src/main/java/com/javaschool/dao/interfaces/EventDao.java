@@ -11,5 +11,9 @@ public interface EventDao {
 
     void addEvent(Event event);
 
-    void deleteEventByEvent(Event event);
+    void deleteEvent(Event event);
+
+    void deleteEventsByPatientId(int id);
+
+
 }

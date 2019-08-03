@@ -16,4 +16,5 @@ public interface PrescriptionService {
 
     void deletePrescriptionById(int id);
 
+    void deletePrescriptionsByPatientId(int id);
 }

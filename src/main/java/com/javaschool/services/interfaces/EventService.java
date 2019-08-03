@@ -7,4 +7,6 @@ public interface EventService {
     void addEventsForPrescription(PrescriptionInfo prescriptionInfo);
 
     void deleteEventsForPrescription(PrescriptionInfo prescriptionInfo);
+
+    void deleteEventsByPatientId(int id);
 }

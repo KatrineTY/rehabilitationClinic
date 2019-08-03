@@ -5,6 +5,7 @@ import com.javaschool.entities.Prescription;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -47,6 +48,24 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
     public void deletePrescriptionById(int id) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(session.get(Prescription.class, id));
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void deletePrescriptionsByPatientId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Prescription where patient.id = :id");
+        query.setParameter("id", id);
+        query.list().forEach(session::delete);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Integer> getPrescriptionsIdByPatientId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select prescr.id from Prescription prescr where patient.id = :id");
+        query.setParameter("id", id);
+        return query.list();
     }
 
 }
