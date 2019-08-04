@@ -1,6 +1,7 @@
 package com.javaschool.dao.impls;
 
 import com.javaschool.dao.interfaces.EventDao;
+import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.Patient;
 import lombok.NoArgsConstructor;
@@ -53,5 +54,35 @@ public class EventDaoImpl implements EventDao {
         query.list().forEach(session::delete);
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getEvents() {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event");
+        return query.list();
+    }
+
+    @Override
+    public void takeTask(int id, Employee nurse) {
+        Session session = sessionFactory.getCurrentSession();
+        Event event = getEventById(id, session);
+        event.setNurse(nurse);
+        event.setStatus("In progress");
+    }
+
+    @Override
+    public void rejectTask(int id, Employee nurse, String comment) {
+        Session session = sessionFactory.getCurrentSession();
+        Event event = getEventById(id, session);
+        event.setStatus("Rejected");
+        event.setNurse(nurse);
+        event.setComment(comment);
+    }
+
+    private Event getEventById(int id, Session session) {
+        Query query = session.createQuery("from Event where id = :id");
+        query.setParameter("id", id);
+        return (Event) query.uniqueResult();
+    }
 
 }

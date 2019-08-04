@@ -37,6 +37,9 @@
                                 <td><a href="patient-schedule/${card.patient.id}">Show</a></td>
                                 <td><a href="edit-patient/${card.patient.id}">Edit</a></td>
                                 <td>
+                                    <form>
+                                        <button></button>
+                                    </form>
                                     <button onclick="window.location.href = 'discharge-patient/${card.patient.id}'">
                                         Discharge
                                     </button>

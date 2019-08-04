@@ -4,6 +4,7 @@ import com.javaschool.dao.interfaces.EventDao;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.PrescriptionTime;
+import com.javaschool.services.interfaces.EmployeeService;
 import com.javaschool.services.interfaces.EventService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ import java.util.stream.Collectors;
 public class EventServiceImpl implements EventService {
     @Autowired
     private EventDao eventDao;
+    @Autowired
+    private EmployeeService employeeService;
 
     @Override
     public void addEventsForPrescription(PrescriptionInfo prescriptionInfo) {
@@ -41,6 +44,21 @@ public class EventServiceImpl implements EventService {
     @Override
     public void deleteEventsByPatientId(int id) {
         eventDao.deleteEventsByPatientId(id);
+    }
+
+    @Override
+    public List<Event> getEvents() {
+        return eventDao.getEvents();
+    }
+
+    @Override
+    public void takeTask(int id, String nurseName) {
+        eventDao.takeTask(id, employeeService.getEmployeeByName(nurseName));
+    }
+
+    @Override
+    public void rejectTask(int id, String nurseName, String comment) {
+        eventDao.rejectTask(id, employeeService.getEmployeeByName(nurseName), comment);
     }
 
     private List<Event> collectEvents(PrescriptionInfo prescriptionInfo, List<LocalTime> times) {

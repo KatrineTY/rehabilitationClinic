@@ -8,4 +8,6 @@ public interface EmployeeService {
 
     Employee getEmployeeByLogin(String login);
 
+    Employee getEmployeeByName(String name);
+
 }

@@ -1,5 +1,6 @@
 package com.javaschool.dao.interfaces;
 
+import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.Patient;
 
@@ -15,5 +16,10 @@ public interface EventDao {
 
     void deleteEventsByPatientId(int id);
 
+    List<Event> getEvents();
+
+    void takeTask(int id, Employee nurse);
+
+    void rejectTask(int id, Employee nurse, String comment);
 
 }
