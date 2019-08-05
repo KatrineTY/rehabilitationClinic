@@ -15,4 +15,5 @@ public interface AccountService {
     List<PrescriptionInfo> getPrescriptions();
 
     List<Event> getEvents();
+
 }

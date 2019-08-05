@@ -1,10 +1,9 @@
 package com.javaschool.services.impls;
 
-import com.javaschool.dao.interfaces.*;
+import com.javaschool.dao.interfaces.PrescriptionDao;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.entities.Prescription;
-import com.javaschool.services.interfaces.EventService;
-import com.javaschool.services.interfaces.PrescriptionService;
+import com.javaschool.services.interfaces.*;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,28 +16,27 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Transactional
 public class PrescriptionServiceImpl implements PrescriptionService {
-
     @Autowired
     private PrescriptionDao prescriptionDao;
     @Autowired
-    private PrescriptionTimeDao prescriptionTimeDao;
+    private PrescriptionTimeService prescriptionTimeService;
     @Autowired
-    private ProcedureAndMedicamentDao procedureAndMedicamentDao;
+    private ProcedureAndMedicamentService procedureAndMedicamentService;
     @Autowired
-    private PatientDao patientDao;
+    private PatientService patientService;
     @Autowired
-    private EmployeeDao employeeDao;
+    private EmployeeService employeeService;
     @Autowired
     private EventService eventService;
 
     @Override
-    public List<PrescriptionInfo> getAllPrescriptions() {
-        return prescriptionDao.getAllPrescriptions()
+    public List<PrescriptionInfo> getPrescriptions() {
+        return prescriptionDao.getPrescriptions()
                 .stream()
                 .map(prescr -> {
                     PrescriptionInfo prescriptionInfo = new PrescriptionInfo();
-                    prescriptionInfo.setPrescriptionTimes(prescriptionTimeDao
-                            .getPrescriptionTimesByPrescription(prescr));
+                    prescriptionInfo.setPrescriptionTimes(prescriptionTimeService
+                            .getPrescriptionTimes(prescr));
                     prescriptionInfo.setPrescription(prescr);
                     return prescriptionInfo;
                 })
@@ -46,11 +44,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public PrescriptionInfo getPrescriptionById(int id) {
+    public PrescriptionInfo getPrescription(int id) {
         PrescriptionInfo prescriptionInfo = new PrescriptionInfo();
-        Prescription prescription = prescriptionDao.getPrescriptionById(id);
+        Prescription prescription = prescriptionDao.getPrescription(id);
         prescriptionInfo.setPrescription(prescription);
-        prescriptionInfo.setPrescriptionTimes(prescriptionTimeDao.getPrescriptionTimesByPrescription(prescription));
+        prescriptionInfo.setPrescriptionTimes(prescriptionTimeService.getPrescriptionTimes(prescription));
         return prescriptionInfo;
     }
 
@@ -58,16 +56,16 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     public void updatePrescriptionInfo(PrescriptionInfo prescriptionInfo, String empName) {
         fillPrescription(prescriptionInfo, empName);
         fillPrescriptionTimes(prescriptionInfo);
-        PrescriptionInfo oldPrescriptionInfo = getPrescriptionById(prescriptionInfo.getPrescription().getId());
-        eventService.deleteEventsForPrescription(oldPrescriptionInfo);
+        PrescriptionInfo oldPrescriptionInfo = getPrescription(prescriptionInfo.getPrescription().getId());
+        eventService.deleteEvents(oldPrescriptionInfo);
 
         updatePrescription(prescriptionInfo);
-        eventService.addEventsForPrescription(prescriptionInfo);
+        eventService.addEvents(prescriptionInfo);
     }
 
     private void updatePrescription(PrescriptionInfo prescriptionInfo) {
         prescriptionDao.updatePrescription(prescriptionInfo.getPrescription());
-        prescriptionTimeDao.updatePrescriptionTimes(prescriptionInfo.getPrescriptionTimes());
+        prescriptionTimeService.updatePrescriptionTimes(prescriptionInfo.getPrescriptionTimes());
     }
 
     @Override
@@ -76,16 +74,16 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         fillPrescriptionTimes(prescriptionInfo);
 
         prescriptionDao.addPrescription(prescriptionInfo.getPrescription());
-        prescriptionInfo.getPrescriptionTimes().forEach(prescrTime -> prescriptionTimeDao.addPrescriptionTime(prescrTime));
-        eventService.addEventsForPrescription(prescriptionInfo);
+        prescriptionInfo.getPrescriptionTimes().forEach(prescrTime -> prescriptionTimeService.addPrescriptionTime(prescrTime));
+        eventService.addEvents(prescriptionInfo);
     }
 
     private void fillPrescription(PrescriptionInfo prescriptionInfo, String empName) {
-        prescriptionInfo.getPrescription().setPatient(patientDao.getPatientByName(
+        prescriptionInfo.getPrescription().setPatient(patientService.getPatient(
                 prescriptionInfo.getPrescription().getPatient().getName()));
-        prescriptionInfo.getPrescription().setType(procedureAndMedicamentDao.getElementWithId(
+        prescriptionInfo.getPrescription().setType(procedureAndMedicamentService.getElementWithId(
                 prescriptionInfo.getPrescription().getType()));
-        prescriptionInfo.getPrescription().setResponsibleDoctor(employeeDao.getEmployeeByName(empName));
+        prescriptionInfo.getPrescription().setResponsibleDoctor(employeeService.getEmployeeByName(empName));
     }
 
     private void fillPrescriptionTimes(PrescriptionInfo prescriptionInfo) {
@@ -94,17 +92,14 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public void deletePrescriptionById(int id) {
-        eventService.deleteEventsForPrescription(getPrescriptionById(id));
-        prescriptionTimeDao.deletePrescriptionTimesByPrescriptionId(id);
-        prescriptionDao.deletePrescriptionById(id);
+    public void deletePrescription(int id) {
+        eventService.deleteEvents(getPrescription(id));
+        prescriptionDao.deletePrescription(id);
     }
 
     @Override
-    public void deletePrescriptionsByPatientId(int id) {
-        List<Integer> ids = prescriptionDao.getPrescriptionsIdByPatientId(id);
-        ids.forEach(prescriptionTimeDao::deletePrescriptionTimesByPrescriptionId);
-        prescriptionDao.deletePrescriptionsByPatientId(id);
+    public void deletePrescriptions(int patientId) {
+        prescriptionDao.deletePrescriptions(patientId);
     }
 
 }

@@ -28,22 +28,22 @@ public class EventServiceImpl implements EventService {
     private EmployeeService employeeService;
 
     @Override
-    public void addEventsForPrescription(PrescriptionInfo prescriptionInfo) {
+    public void addEvents(PrescriptionInfo prescriptionInfo) {
         List<LocalTime> times = getPrescriptionTimes(prescriptionInfo);
         List<Event> events = collectEvents(prescriptionInfo, times);
         events.forEach(event -> eventDao.addEvent(event));
     }
 
     @Override
-    public void deleteEventsForPrescription(PrescriptionInfo prescriptionInfo) {
+    public void deleteEvents(PrescriptionInfo prescriptionInfo) {
         List<LocalTime> times = getPrescriptionTimes(prescriptionInfo);
         List<Event> events = collectEvents(prescriptionInfo, times);
         events.forEach(event -> eventDao.deleteEvent(event));
     }
 
     @Override
-    public void deleteEventsByPatientId(int id) {
-        eventDao.deleteEventsByPatientId(id);
+    public void deleteEvents(int patientId) {
+        eventDao.deleteEvents(patientId);
     }
 
     @Override
@@ -52,13 +52,18 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public List<Event> getEvents(int patientId) {
+        return eventDao.getEvents(patientId);
+    }
+
+    @Override
     public void takeTask(int id, String nurseName) {
-        eventDao.takeTask(id, employeeService.getEmployeeByName(nurseName));
+        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "In progress");
     }
 
     @Override
     public void rejectTask(int id, String nurseName, String comment) {
-        eventDao.rejectTask(id, employeeService.getEmployeeByName(nurseName), comment);
+        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), comment, "Rejected");
     }
 
     private List<Event> collectEvents(PrescriptionInfo prescriptionInfo, List<LocalTime> times) {
@@ -83,6 +88,5 @@ public class EventServiceImpl implements EventService {
                 .map(PrescriptionTime::getTime)
                 .collect(Collectors.toList());
     }
-
 
 }

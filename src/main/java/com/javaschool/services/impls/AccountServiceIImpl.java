@@ -1,13 +1,9 @@
 package com.javaschool.services.impls;
 
-import com.javaschool.dao.interfaces.PatientCardDao;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.PatientCard;
-import com.javaschool.services.interfaces.AccountService;
-import com.javaschool.services.interfaces.EmployeeService;
-import com.javaschool.services.interfaces.EventService;
-import com.javaschool.services.interfaces.PrescriptionService;
+import com.javaschool.services.interfaces.*;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +16,7 @@ import java.util.List;
 @Transactional
 public class AccountServiceIImpl implements AccountService {
     @Autowired
-    private PatientCardDao patientCardDao;
+    private PatientCardService patientCardService;
     @Autowired
     private EmployeeService employeeService;
     @Autowired
@@ -30,7 +26,7 @@ public class AccountServiceIImpl implements AccountService {
 
     @Override
     public List<PatientCard> getPatientCards() {
-        return patientCardDao.getPatientCards();
+        return patientCardService.getPatientCards();
     }
 
     @Override
@@ -40,13 +36,12 @@ public class AccountServiceIImpl implements AccountService {
 
     @Override
     public List<PrescriptionInfo> getPrescriptions() {
-        return prescriptionService.getAllPrescriptions();
+        return prescriptionService.getPrescriptions();
     }
 
     @Override
     public List<Event> getEvents() {
         return eventService.getEvents();
     }
-
 
 }

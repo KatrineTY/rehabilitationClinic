@@ -16,12 +16,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     @Override
-    public boolean checkEmployee(Employee employee) {
-        Employee employeeDB = employeeDao.getEmployeeByLogin(employee.getLogin());
-        return employeeDB != null && employeeDB.getPassword().equals(employee.getPassword());
-    }
-
-    @Override
     public Employee getEmployeeByLogin(String login) {
         return employeeDao.getEmployeeByLogin(login);
     }

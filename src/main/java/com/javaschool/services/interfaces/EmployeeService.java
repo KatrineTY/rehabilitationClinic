@@ -4,8 +4,6 @@ import com.javaschool.entities.Employee;
 
 public interface EmployeeService {
 
-    boolean checkEmployee(Employee employee);
-
     Employee getEmployeeByLogin(String login);
 
     Employee getEmployeeByName(String name);

@@ -8,13 +8,14 @@ public interface PrescriptionService {
 
     void addPrescription(PrescriptionInfo prescriptionInfo, String empName);
 
-    List<PrescriptionInfo> getAllPrescriptions();
+    List<PrescriptionInfo> getPrescriptions();
 
-    PrescriptionInfo getPrescriptionById(int id);
+    PrescriptionInfo getPrescription(int id);
 
     void updatePrescriptionInfo(PrescriptionInfo prescriptionInfo, String empName);
 
-    void deletePrescriptionById(int id);
+    void deletePrescription(int id);
 
-    void deletePrescriptionsByPatientId(int id);
+    void deletePrescriptions(int patientId);
+
 }

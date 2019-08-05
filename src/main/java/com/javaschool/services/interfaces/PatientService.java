@@ -1,20 +1,16 @@
 package com.javaschool.services.interfaces;
 
 import com.javaschool.dto.PatientInfo;
-import com.javaschool.entities.PatientCard;
-
-import java.util.List;
+import com.javaschool.entities.Patient;
 
 public interface PatientService {
 
     void addPatient(PatientInfo patientInfo);
 
-    PatientInfo getPatientInfoByPatientId(int id);
+    Patient getPatient(String name);
 
-    void updatePatientInfo(PatientInfo patientInfo);
+    Patient getPatient(int id);
 
-    List<PatientCard> getPatientCards();
-
-    void dischargePatientById(int id);
+    void updatePatient(Patient patient);
 
 }

@@ -7,15 +7,18 @@ import java.util.List;
 
 public interface EventService {
 
-    void addEventsForPrescription(PrescriptionInfo prescriptionInfo);
-
-    void deleteEventsForPrescription(PrescriptionInfo prescriptionInfo);
-
-    void deleteEventsByPatientId(int id);
-
     List<Event> getEvents();
+
+    List<Event> getEvents(int patientId);
+
+    void addEvents(PrescriptionInfo prescriptionInfo);
+
+    void deleteEvents(PrescriptionInfo prescriptionInfo);
+
+    void deleteEvents(int patientId);
 
     void takeTask(int id, String nurseName);
 
     void rejectTask(int id, String nurseName, String comment);
+
 }

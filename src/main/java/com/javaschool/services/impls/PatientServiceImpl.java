@@ -1,16 +1,16 @@
 package com.javaschool.services.impls;
 
-import com.javaschool.dao.interfaces.*;
+import com.javaschool.dao.interfaces.PatientDao;
 import com.javaschool.dto.PatientInfo;
-import com.javaschool.entities.PatientCard;
+import com.javaschool.entities.Patient;
+import com.javaschool.services.interfaces.DiagnosisServise;
+import com.javaschool.services.interfaces.EmployeeService;
+import com.javaschool.services.interfaces.PatientCardService;
 import com.javaschool.services.interfaces.PatientService;
-import com.javaschool.services.interfaces.PrescriptionService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Component
 @NoArgsConstructor
@@ -19,59 +19,36 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private PatientDao patientDao;
     @Autowired
-    private EmployeeDao employeeDao;
+    private EmployeeService employeeService;
     @Autowired
-    private DiagnosisDao diagnosisDao;
+    private DiagnosisServise diagnosisService;
     @Autowired
-    private PatientCardDao patientCardDao;
-    @Autowired
-    private EventDao eventDao;
-    @Autowired
-    private PrescriptionService prescriptionService;
+    private PatientCardService patientCardService;
 
     @Override
-    @Transactional
     public void addPatient(PatientInfo patientInfo) {
         patientDao.addPatient(patientInfo.getPatient());
         patientInfo.getPatientCard().setPatient(patientInfo.getPatient());
         patientInfo.getPatientCard().setAttendingDoctor(
-                employeeDao.getEmployeeByName(patientInfo.getPatientCard().getAttendingDoctor().getName()));
-        patientCardDao.addPatientCard(patientInfo.getPatientCard());
+                employeeService.getEmployeeByName(patientInfo.getPatientCard().getAttendingDoctor().getName()));
+        patientCardService.addPatientCard(patientInfo.getPatientCard());
         patientInfo.getDiagnoses().forEach(diag -> diag.setPatientCard(patientInfo.getPatientCard()));
-        patientInfo.getDiagnoses().forEach(diag -> diagnosisDao.addDiagnosis(diag));
+        patientInfo.getDiagnoses().forEach(diag -> diagnosisService.addDiagnosis(diag));
     }
 
     @Override
-    public PatientInfo getPatientInfoByPatientId(int id) {
-        PatientInfo patientInfo = new PatientInfo();
-        patientInfo.setPatient(patientDao.getPatientById(id));
-        patientInfo.setPatientCard(patientCardDao.getPatientCardByPatient(patientInfo.getPatient()));
-        patientInfo.setDiagnoses(diagnosisDao.getDiagnosesByCard(patientInfo.getPatientCard()));
-        return patientInfo;
+    public Patient getPatient(String name) {
+        return patientDao.getPatient(name);
     }
 
     @Override
-    public void updatePatientInfo(PatientInfo patientInfo) {
-        patientDao.updatePatient(patientInfo.getPatient());
-        patientInfo.getPatientCard().setAttendingDoctor(
-                employeeDao.getEmployeeByName(patientInfo.getPatientCard().getAttendingDoctor().getName()));
-        patientInfo.getPatientCard().setPatient(patientInfo.getPatient());
-        patientCardDao.updatePatientCard(patientInfo.getPatientCard());
-        patientInfo.getDiagnoses().forEach(diag -> diag.setPatientCard(patientInfo.getPatientCard()));
-        patientInfo.getDiagnoses().forEach(diag -> diagnosisDao.updateDiagnosis(diag));
+    public Patient getPatient(int id) {
+        return patientDao.getPatient(id);
     }
 
     @Override
-    public List<PatientCard> getPatientCards() {
-        return patientCardDao.getPatientCards();
+    public void updatePatient(Patient patient) {
+        patientDao.updatePatient(patient);
     }
-
-    @Override
-    public void dischargePatientById(int id) {
-        patientCardDao.dischargePatientByPatientId(id);
-        eventDao.deleteEventsByPatientId(id);
-        prescriptionService.deletePrescriptionsByPatientId(id);
-    }
-
 
 }
