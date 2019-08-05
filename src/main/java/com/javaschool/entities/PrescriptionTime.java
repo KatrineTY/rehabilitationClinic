@@ -13,7 +13,6 @@ import java.time.LocalTime;
 @Audited
 @Table(name = "prescription_times")
 public class PrescriptionTime {
-
     @Id
     @Column(name = "prescription_time_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

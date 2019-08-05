@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Audited
 @Table(name = "proceds_and_medics")
 public class ProcedureAndMedicament {
-
     @Id
     @Column(name = "type_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

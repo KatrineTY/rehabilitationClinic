@@ -8,13 +8,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
 @Audited
 @Table(name = "prescriptions")
 public class Prescription {
-
     @Id
     @Column(name = "prescription_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,5 +40,8 @@ public class Prescription {
     @ManyToOne
     @JoinColumn(name = "responsible_doctor", referencedColumnName = "employee_id")
     private Employee responsibleDoctor;
+
+    @OneToMany(mappedBy = "prescription", cascade = CascadeType.REMOVE)
+    private List<PrescriptionTime> prescriptionTimes;
 
 }

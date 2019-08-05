@@ -18,4 +18,5 @@ public class Patient {
     private String name;
     @Column
     private int insurance;
+
 }

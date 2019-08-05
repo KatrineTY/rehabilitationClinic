@@ -2,6 +2,7 @@ package com.javaschool.entities;
 
 import com.javaschool.converters.LocalDateTimeAttributeConverter;
 import lombok.Data;
+import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Audited
 @Table(name = "diagnoses")
 public class Diagnosis {
     @Id
@@ -30,6 +32,5 @@ public class Diagnosis {
     private LocalDateTime endDate;
     @Column
     private String comment;
-
 
 }

@@ -12,7 +12,6 @@ import java.time.LocalTime;
 @Audited
 @Table(name = "working_times")
 public class WorkingTime {
-
     @Id
     @Column(name = "working_time_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
