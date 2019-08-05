@@ -10,7 +10,7 @@
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-8 ml-auto mr-auto">
+        <div class="col-md-10 ml-auto mr-auto">
             <div class="card bg-custom mb-5">
                 <input class=" form-control" type="text" placeholder="Search"
                        aria-label="Search" onkeyup="searchPatient()" id="searchPatient">
@@ -38,7 +38,12 @@
                                 <td>${prescriptionInfo.prescription.startDate}</td>
                                 <td>${prescriptionInfo.prescription.endDate}</td>
                                 <td><a href="edit-prescription/${prescriptionInfo.prescription.id}">Edit</a></td>
-                                <td><a href="delete-prescription/${prescriptionInfo.prescription.id}">Delete</a></td>
+                                <td>
+                                    <form action="delete-prescription">
+                                        <input style="display: none" type="number"
+                                               value="${prescriptionInfo.prescription.id}" name="id"/>
+                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                    </form>
                             </tr>
                         </c:forEach>
                     </c:if>

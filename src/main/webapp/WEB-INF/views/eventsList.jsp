@@ -18,6 +18,7 @@
                     <thead class="card-header">
                     <tr>
                         <td><b>Date</b></td>
+                        <td><b>Patient name</b></td>
                         <td><b>Kind of treatment</b></td>
                         <td><b>Name of treatment</b></td>
                         <td><b>Status</b></td>
@@ -30,6 +31,7 @@
                         <c:forEach var="event" items="${events}">
                             <tr>
                                 <td><javatime:format value="${event.date}" style="MS"/></td>
+                                <td>${event.patient.name}</td>
                                 <td>${event.type.kind}</td>
                                 <td>${event.type.name}</td>
                                 <td>${event.status}</td>
@@ -60,7 +62,7 @@
                             <form action="reject-task" method="post" id="commentForm">
 
                                 <div class="modal-body">
-                                    <input style="display:none" name="event.id" type="text">
+                                    <input style="display:none" name="event.id" type="number">
                                     <input name="comment" placeholder="Please, enter your reason" type="text">
                                 </div>
                             </form>

@@ -37,12 +37,11 @@
                                 <td><a href="patient-schedule/${card.patient.id}">Show</a></td>
                                 <td><a href="edit-patient/${card.patient.id}">Edit</a></td>
                                 <td>
-                                    <form>
-                                        <button></button>
+                                    <form action="discharge-patient" method="post">
+                                        <input style="display: none" type="number" value="${card.patient.id}"
+                                               name="id"/>
+                                        <button type="submit" class="btn btn-primary">Discharge</button>
                                     </form>
-                                    <button onclick="window.location.href = 'discharge-patient/${card.patient.id}'">
-                                        Discharge
-                                    </button>
                                 </td>
                             </tr>
                         </c:forEach>

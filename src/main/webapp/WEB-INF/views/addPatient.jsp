@@ -26,7 +26,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="insurance">Insurance</label>
-                                        <input name="patient.insurance" type="text" class="form-control"
+                                        <input name="patient.insurance" type="number" class="form-control"
                                                id="insurance"
                                                placeholder="insurance"/>
                                     </div>
@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="ward">Ward</label>
-                                        <input name="patientCard.ward" type="text" class="form-control" id="ward"
+                                        <input name="patientCard.ward" type="number" class="form-control" id="ward"
                                                placeholder="ward"/>
                                     </div>
                                     <div class="form-group">

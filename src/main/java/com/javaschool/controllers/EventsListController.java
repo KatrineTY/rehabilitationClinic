@@ -19,13 +19,13 @@ public class EventsListController {
     EventService eventService;
 
     @RequestMapping(value = "/take-task/{id}", method = RequestMethod.POST)
-    public ModelAndView takeTask(@PathVariable String id, HttpSession httpSession) {
+    public ModelAndView takeTask(@PathVariable int id, HttpSession httpSession) {
         Object empName = httpSession.getAttribute("empName");
         ModelAndView model = new ModelAndView();
         if (empName == null) {
             model.setViewName("error403");
         } else {
-            eventService.takeTask(Integer.parseInt(id), (String) empName);
+            eventService.takeTask(id, (String) empName);
             model.setViewName("eventsList");
             model.addObject("events", eventService.getEvents());
         }
@@ -33,7 +33,7 @@ public class EventsListController {
     }
 
     @RequestMapping(value = "/reject-task", method = RequestMethod.POST)
-    public ModelAndView rejectTask(@RequestParam(name = "event.id") String eventId,
+    public ModelAndView rejectTask(@RequestParam(name = "event.id") int eventId,
                                    @RequestParam(name = "comment") String comment,
                                    HttpSession httpSession) {
         Object empName = httpSession.getAttribute("empName");
@@ -41,7 +41,7 @@ public class EventsListController {
         if (empName == null) {
             model.setViewName("error403");
         } else {
-            eventService.rejectTask(Integer.parseInt(eventId), (String) empName, comment);
+            eventService.rejectTask(eventId, (String) empName, comment);
             model.setViewName("eventsList");
             model.addObject("events", eventService.getEvents());
         }
