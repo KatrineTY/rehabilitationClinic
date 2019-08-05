@@ -32,7 +32,7 @@ public class PatientCardDaoImpl implements PatientCardDao {
     }
 
     @Override
-    public PatientCard getPatientCardByPatient(Patient patient) {
+    public PatientCard getPatientCard(Patient patient) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from PatientCard where patient = :patient");
         query.setParameter("patient", patient);
@@ -46,10 +46,10 @@ public class PatientCardDaoImpl implements PatientCardDao {
     }
 
     @Override
-    public void dischargePatientByPatientId(int id) {
+    public void changeStatus(int patientId, String status) {
         Session session = sessionFactory.getCurrentSession();
-        PatientCard patientCard = session.get(PatientCard.class, id);
-        patientCard.setStatus("Discharged");
+        PatientCard patientCard = session.get(PatientCard.class, patientId);
+        patientCard.setStatus(status);
         session.update(patientCard);
     }
 

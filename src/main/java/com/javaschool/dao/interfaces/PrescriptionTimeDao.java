@@ -9,10 +9,8 @@ public interface PrescriptionTimeDao {
 
     void addPrescriptionTime(PrescriptionTime prescriptionTime);
 
-    List<PrescriptionTime> getPrescriptionTimesByPrescription(Prescription prescription);
+    List<PrescriptionTime> getPrescriptionTimes(Prescription prescription);
 
-    void updatePrescriptionTimes(List<PrescriptionTime> prescriptionTimes);
-
-    void deletePrescriptionTimesByPrescriptionId(int id);
+    void updatePrescriptionTime(PrescriptionTime prescriptionTime);
 
 }

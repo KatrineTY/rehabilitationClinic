@@ -21,10 +21,19 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Event> getEventsByPatient(Patient patient) {
+    public List<Event> getEvents(Patient patient) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Event where patient = :patient");
         query.setParameter("patient", patient);
+        return (List<Event>) query.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getEvents(int patientId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event where patient.id = :id");
+        query.setParameter("id", patientId);
         return (List<Event>) query.list();
     }
 
@@ -38,7 +47,8 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public void deleteEvent(Event event) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event where patient = :patient and date = :date and type = :type");
+        Query query = session.createQuery("from Event " +
+                "where patient = :patient and date = :date and type = :type and status = 'Planned'");
         query.setParameter("patient", event.getPatient());
         query.setParameter("date", event.getDate());
         query.setParameter("type", event.getType());
@@ -47,10 +57,10 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void deleteEventsByPatientId(int id) {
+    public void deleteEvents(int patientId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event where patient.id = :id");
-        query.setParameter("id", id);
+        Query query = session.createQuery("from Event where patient.id = :id and status = 'Planned'");
+        query.setParameter("id", patientId);
         query.list().forEach(session::delete);
     }
 
@@ -63,26 +73,14 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public void takeTask(int id, Employee nurse) {
+    public void updateEventStatus(int id, Employee nurse, String comment, String status) {
         Session session = sessionFactory.getCurrentSession();
-        Event event = getEventById(id, session);
-        event.setNurse(nurse);
-        event.setStatus("In progress");
-    }
-
-    @Override
-    public void rejectTask(int id, Employee nurse, String comment) {
-        Session session = sessionFactory.getCurrentSession();
-        Event event = getEventById(id, session);
-        event.setStatus("Rejected");
-        event.setNurse(nurse);
-        event.setComment(comment);
-    }
-
-    private Event getEventById(int id, Session session) {
         Query query = session.createQuery("from Event where id = :id");
         query.setParameter("id", id);
-        return (Event) query.uniqueResult();
+        Event event = (Event) query.uniqueResult();
+        event.setNurse(nurse);
+        event.setStatus(status);
+        event.setComment(comment);
     }
 
 }

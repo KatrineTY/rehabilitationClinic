@@ -26,7 +26,7 @@ public class PrescriptionTimeDaoImpl implements PrescriptionTimeDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<PrescriptionTime> getPrescriptionTimesByPrescription(Prescription prescription) {
+    public List<PrescriptionTime> getPrescriptionTimes(Prescription prescription) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from PrescriptionTime where prescription = :prescription");
         query.setParameter("prescription", prescription);
@@ -34,17 +34,9 @@ public class PrescriptionTimeDaoImpl implements PrescriptionTimeDao {
     }
 
     @Override
-    public void updatePrescriptionTimes(List<PrescriptionTime> prescriptionTimes) {
+    public void updatePrescriptionTime(PrescriptionTime prescriptionTime) {
         Session session = sessionFactory.getCurrentSession();
-        prescriptionTimes.forEach(session::merge);
-    }
-
-    @Override
-    public void deletePrescriptionTimesByPrescriptionId(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("delete PrescriptionTime where prescription.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
+        session.update(prescriptionTime);
     }
 
 }

@@ -9,7 +9,7 @@ public interface DiagnosisDao {
 
     void addDiagnosis(Diagnosis diagnosis);
 
-    List<Diagnosis> getDiagnosesByCard(PatientCard patientCard);
+    List<Diagnosis> getDiagnoses(PatientCard patientCard);
 
     void updateDiagnosis(Diagnosis diagnosis);
 

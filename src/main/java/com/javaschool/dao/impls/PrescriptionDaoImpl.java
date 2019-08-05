@@ -14,7 +14,6 @@ import java.util.List;
 @Component
 @NoArgsConstructor
 public class PrescriptionDaoImpl implements PrescriptionDao {
-
     @Autowired
     SessionFactory sessionFactory;
 
@@ -26,14 +25,14 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Prescription> getAllPrescriptions() {
+    public List<Prescription> getPrescriptions() {
         Session session = sessionFactory.getCurrentSession();
         return (List<Prescription>) session.createQuery("from Prescription").list();
 
     }
 
     @Override
-    public Prescription getPrescriptionById(int id) {
+    public Prescription getPrescription(int id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Prescription.class, id);
     }
@@ -41,31 +40,22 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
     @Override
     public void updatePrescription(Prescription prescription) {
         Session session = sessionFactory.getCurrentSession();
-        session.merge(prescription);
+        session.update(prescription);
     }
 
     @Override
-    public void deletePrescriptionById(int id) {
+    public void deletePrescription(int id) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(session.get(Prescription.class, id));
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public void deletePrescriptionsByPatientId(int id) {
+    public void deletePrescriptions(int patientId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Prescription where patient.id = :id");
-        query.setParameter("id", id);
+        query.setParameter("id", patientId);
         query.list().forEach(session::delete);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Integer> getPrescriptionsIdByPatientId(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select prescr.id from Prescription prescr where patient.id = :id");
-        query.setParameter("id", id);
-        return query.list();
     }
 
 }

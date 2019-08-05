@@ -6,14 +6,15 @@ import com.javaschool.entities.PatientCard;
 import java.util.List;
 
 public interface PatientCardDao {
+
     void addPatientCard(PatientCard patientCard);
 
     List<PatientCard> getPatientCards();
 
-    PatientCard getPatientCardByPatient(Patient patient);
+    PatientCard getPatientCard(Patient patient);
 
     void updatePatientCard(PatientCard patientCard);
 
-    void dischargePatientByPatientId(int id);
+    void changeStatus(int patientId, String status);
 
 }

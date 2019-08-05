@@ -8,16 +8,14 @@ public interface PrescriptionDao {
 
     void addPrescription(Prescription prescription);
 
-    List<Prescription> getAllPrescriptions();
+    List<Prescription> getPrescriptions();
 
-    Prescription getPrescriptionById(int id);
+    Prescription getPrescription(int id);
 
     void updatePrescription(Prescription prescription);
 
-    void deletePrescriptionById(int id);
+    void deletePrescription(int id);
 
-    void deletePrescriptionsByPatientId(int id);
-
-    List<Integer> getPrescriptionsIdByPatientId(int id);
+    void deletePrescriptions(int patientId);
 
 }

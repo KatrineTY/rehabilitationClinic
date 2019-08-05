@@ -26,7 +26,7 @@ public class DiagnosisDaoImpl implements DiagnosisDao {
 
     @Override
     @SuppressWarnings(value = "unchecked")
-    public List<Diagnosis> getDiagnosesByCard(PatientCard patientCard) {
+    public List<Diagnosis> getDiagnoses(PatientCard patientCard) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Diagnosis where patient_card = :patientCard");
         query.setParameter("patientCard", patientCard);

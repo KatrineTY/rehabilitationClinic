@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 @NoArgsConstructor
 public class EmployeeDaoImpl implements EmployeeDao {
-
     @Autowired
     private SessionFactory sessionFactory;
 

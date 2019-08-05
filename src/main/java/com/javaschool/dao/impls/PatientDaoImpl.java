@@ -14,7 +14,6 @@ import java.util.List;
 @Component
 @NoArgsConstructor
 public class PatientDaoImpl implements PatientDao {
-
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -32,7 +31,7 @@ public class PatientDaoImpl implements PatientDao {
     }
 
     @Override
-    public Patient getPatientByName(String name) {
+    public Patient getPatient(String name) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Patient where name = :name");
         query.setParameter("name", name);
@@ -40,7 +39,7 @@ public class PatientDaoImpl implements PatientDao {
     }
 
     @Override
-    public Patient getPatientById(int id) {
+    public Patient getPatient(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Patient where id = :id");
         query.setParameter("id", id);

@@ -8,18 +8,18 @@ import java.util.List;
 
 public interface EventDao {
 
-    List<Event> getEventsByPatient(Patient patient);
+    List<Event> getEvents(Patient patient);
+
+    List<Event> getEvents(int patientId);
+
+    List<Event> getEvents();
 
     void addEvent(Event event);
 
     void deleteEvent(Event event);
 
-    void deleteEventsByPatientId(int id);
+    void deleteEvents(int patientId);
 
-    List<Event> getEvents();
-
-    void takeTask(int id, Employee nurse);
-
-    void rejectTask(int id, Employee nurse, String comment);
+    void updateEventStatus(int id, Employee nurse, String comment, String status);
 
 }
