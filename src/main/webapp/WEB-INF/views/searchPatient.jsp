@@ -40,7 +40,9 @@
                                     <form action="discharge-patient" method="post">
                                         <input style="display: none" type="number" value="${card.patient.id}"
                                                name="id"/>
-                                        <button type="submit" class="btn btn-primary">Discharge</button>
+                                        <button type="submit" class="btn btn-primary"
+                                            ${card.status=='Discharged'?'disabled':'none'}>Discharge
+                                        </button>
                                     </form>
                                 </td>
                             </tr>

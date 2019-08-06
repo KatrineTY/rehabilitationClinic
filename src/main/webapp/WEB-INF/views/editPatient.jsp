@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-8 ml-auto mr-auto">
-                            <form:form method="post" modelAttribute="patientInfo" action="../edit-patient">
+                            <form:form method="post" modelAttribute="patientInfo" action="${patientInfo.patient.id}">
                                 <div class="fields">
                                     <input style="display:none" name="patient.id" value="${patientInfo.patient.id}"
                                            type="number">
@@ -24,37 +24,58 @@
                                            value="${patientInfo.patientCard.id}" type="number">
                                     <div class="form-group">
                                         <label for="name">Name</label>
+                                        <form:errors path="patient.name" cssClass="text-danger"/>
                                         <input name="patient.name" type="text" class="form-control" id="name"
                                                value="${patientInfo.patient.name}"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="insurance">Insurance</label>
-                                        <input name="patient.insurance" type="number" class="form-control"
+                                        <form:errors path="patient.insurance" cssClass="text-danger"/>
+                                        <input name="patient.insurance" type="text" class="form-control"
                                                id="insurance"
                                                value="${patientInfo.patient.insurance}"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="attendingDoctor">Attending Doctor</label>
-                                        <input name="patientCard.attendingDoctor.name" type="text"
-                                               class="form-control"
-                                               id="attendingDoctor"
-                                               value="${patientInfo.patientCard.attendingDoctor.name}"/>
+                                        <select id="attendingDoctor" name="patientCard.attendingDoctor.name"
+                                                class="form-control">
+                                            <c:forEach var="doctor" items="${doctors}">
+                                                <option value="${doctor}"
+                                                    ${doctor==patientInfo.patientCard.attendingDoctor.name?'selected':'none'}>
+                                                        ${doctor}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="building">Building</label>
-                                        <input name="patientCard.building" type="text" class="form-control"
-                                               id="building"
-                                               value="${patientInfo.patientCard.building}"/>
+                                        <select id="building" name="patientCard.building" class="form-control">
+                                            <c:forTokens items="A,B,C" delims="," var="corpus">
+                                                <option value="${corpus}"
+                                                    ${corpus==patientInfo.patientCard.building?'selected':'none'}>${corpus}</option>
+                                            </c:forTokens>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="ward">Ward</label>
-                                        <input name="patientCard.ward" type="number" class="form-control" id="ward"
-                                               value="${patientInfo.patientCard.ward}"/>
+                                        <select id="ward" name="patientCard.ward" class="form-control">
+                                            <c:forEach var="room" begin="1" end="9">
+                                                <option value="${room}"
+                                                    ${room==patientInfo.patientCard.ward?'selected':'none'}>${room}</option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="status">Status</label>
-                                        <input name="patientCard.status" type="text" class="form-control" id="status"
-                                               value="${patientInfo.patientCard.status}"/>
+                                        <select name="patientCard.status" class="form-control" id="status">
+                                            <option value="Treated"
+                                                ${'Treated'==patientInfo.patientCard.status?'selected':'none'}>Treated
+                                            </option>
+                                            <option value="Discharged"
+                                                ${'Discharged'==patientInfo.patientCard.status?'selected':'none'}>
+                                                Discharged
+                                            </option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="diagnosis0">Diagnoses:</label>

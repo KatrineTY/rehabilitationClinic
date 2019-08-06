@@ -39,7 +39,7 @@
                                 <td>${prescriptionInfo.prescription.endDate}</td>
                                 <td><a href="edit-prescription/${prescriptionInfo.prescription.id}">Edit</a></td>
                                 <td>
-                                    <form action="delete-prescription">
+                                    <form action="delete-prescription" method="post">
                                         <input style="display: none" type="number"
                                                value="${prescriptionInfo.prescription.id}" name="id"/>
                                         <button type="submit" class="btn btn-primary">Delete</button>

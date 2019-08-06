@@ -6,6 +6,7 @@ import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Data
@@ -23,6 +24,7 @@ public class PrescriptionTime {
     @Column(name = "time")
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @Convert(converter = LocalTimeAttributeConverter.class)
+    @NotNull
     private LocalTime time;
 
 }

@@ -5,8 +5,11 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./resources/static/css/pageTemplate.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./resources/static/js/diagnoses.js"></script>
+    <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--%>
+    <script src="./resources/static/js/jquery-1.11.2.min.js"></script>
+    <script src="./resources/static/js/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet" href="./resources/static/js/easy-autocomplete.min.css">
 </head>
 <body>
 <div class="container mt-5">
@@ -18,35 +21,39 @@
                     <div class="row">
                         <div class="col-md-8 ml-auto mr-auto">
                             <form:form method="post" modelAttribute="patientInfo" action="add-patient">
+                                <input name="patientCard.attendingDoctor.name" type="text"
+                                       id="attendingDoctor"
+                                       style="display: none"
+                                       value="${sessionScope.empName}"/>
                                 <div class="fields">
                                     <div class="form-group">
                                         <label for="name">Name</label>
+                                        <form:errors path="patient.name" cssClass="text-danger"/>
                                         <input name="patient.name" type="text" class="form-control" id="name"
                                                placeholder="name"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="insurance">Insurance</label>
-                                        <input name="patient.insurance" type="number" class="form-control"
+                                        <form:errors path="patient.insurance" cssClass="text-danger"/>
+                                        <input name="patient.insurance" type="text" class="form-control"
                                                id="insurance"
                                                placeholder="insurance"/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="attendingDoctor">Attending Doctor</label>
-                                        <input name="patientCard.attendingDoctor.name" type="text"
-                                               class="form-control"
-                                               id="attendingDoctor"
-                                               placeholder="attending doctor"/>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="building">Building</label>
-                                        <input name="patientCard.building" type="text" class="form-control"
-                                               id="building"
-                                               placeholder="building"/>
+                                        <select id="building" name="patientCard.building" class="form-control">
+                                            <c:forTokens items="A,B,C" delims="," var="corpus">
+                                                <option value="${corpus}">${corpus}</option>
+                                            </c:forTokens>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="ward">Ward</label>
-                                        <input name="patientCard.ward" type="number" class="form-control" id="ward"
-                                               placeholder="ward"/>
+                                        <select id="ward" name="patientCard.ward" class="form-control">
+                                            <c:forEach var="room" begin="1" end="9">
+                                                <option value="${room}">${room}</option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="diagnosis0">Diagnoses:</label>
@@ -73,5 +80,36 @@
         </div>
     </div>
 </div>
+<script>
+
+    var options = {
+
+        url: "/RehabilitationClinic/getDoctors",
+
+        getValue: function (element) {
+            return element;
+        },
+
+        template: {
+            type: "description",
+            fields: {
+                description: "realName"
+            }
+        },
+
+        list: {
+            maxNumberOfElements: 8,
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+        },
+
+    };
+
+    $("#attendingDoctor").easyAutocomplete(options);
+</script>
 </body>
 </html>

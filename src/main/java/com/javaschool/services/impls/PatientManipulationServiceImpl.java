@@ -53,6 +53,21 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
     }
 
     @Override
+    public List<String> getAttendingDoctorNames() {
+        return employeeService.getAttendingDoctorNames();
+    }
+
+    @Override
+    public List<String> getResponsibleDoctorNames() {
+        return employeeService.getResponsibleDoctorNames();
+    }
+
+    @Override
+    public void addPatient(PatientInfo patientInfo) {
+        patientService.addPatient(patientInfo);
+    }
+
+    @Override
     public void dischargePatient(int id) {
         patientCardService.changeStatus(id, "Discharged");
         eventService.deleteEvents(id);

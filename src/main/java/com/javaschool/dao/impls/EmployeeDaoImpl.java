@@ -9,6 +9,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @NoArgsConstructor
 public class EmployeeDaoImpl implements EmployeeDao {
@@ -29,6 +31,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Query query = session.createQuery("from Employee where name = :name");
         query.setParameter("name", name);
         return (Employee) query.uniqueResult();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<String> getEmployeeWithRoleNames(String role) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select name from Employee where role.name = :role");
+        query.setParameter("role", role);
+        return query.list();
     }
 
 }

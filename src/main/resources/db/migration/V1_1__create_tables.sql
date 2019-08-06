@@ -75,7 +75,6 @@ CREATE TABLE prescriptions
     start_date         date              NOT NULL,
     end_date           date              NOT NULL,
     dose               VARCHAR(50),
-    version            INTEGER DEFAULT 1 NOT NULL,
     responsible_doctor INTEGER           NOT NULL REFERENCES employees (employee_id)
 );
 

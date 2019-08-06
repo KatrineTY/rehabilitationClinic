@@ -36,7 +36,8 @@
                                 <td>${event.type.name}</td>
                                 <td>${event.status}</td>
                                 <td>
-                                    <form action="take-task/${event.id}" method="post">
+                                    <form action="take-task" method="post">
+                                        <input style="display:none" name="event.id" type="number" value="${event.id}">
                                         <button type="submit" class="btn btn-primary">Get</button>
                                     </form>
                                 </td>

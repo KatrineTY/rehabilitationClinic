@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Component
 @NoArgsConstructor
 @Transactional
@@ -23,6 +25,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee getEmployeeByName(String name) {
         return employeeDao.getEmployeeByName(name);
+    }
+
+    @Override
+    public List<String> getAttendingDoctorNames() {
+        return employeeDao.getEmployeeWithRoleNames("ROLE_MAIN_DOCTOR");
+    }
+
+    @Override
+    public List<String> getResponsibleDoctorNames() {
+        return employeeDao.getEmployeeWithRoleNames("ROLE_DOCTOR");
     }
 
 

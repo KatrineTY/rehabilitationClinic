@@ -5,10 +5,12 @@ import com.javaschool.services.interfaces.PrescriptionService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @NoArgsConstructor
@@ -22,16 +24,15 @@ public class EditPrescriptionController {
                 "prescriptionInfo", prescriptionService.getPrescription(id));
     }
 
-    @RequestMapping(value = "/edit-prescription", method = RequestMethod.POST)
-    public ModelAndView editPrescription(@ModelAttribute PrescriptionInfo prescriptionInfo, HttpSession httpSession) {
-        Object empName = httpSession.getAttribute("empName");
+    @RequestMapping(value = "/edit-prescription/{id}", method = RequestMethod.POST)
+    public ModelAndView editPrescription(@Valid @ModelAttribute PrescriptionInfo prescriptionInfo, BindingResult bindingResult, HttpSession httpSession) {
+        String empName = (String) httpSession.getAttribute("empName");
         ModelAndView model = new ModelAndView();
-        if (empName == null) {
-            model.setViewName("error403");
+        if (bindingResult.hasErrors()) {
+            model.setViewName("editPrescription");
         } else {
-            prescriptionService.updatePrescriptionInfo(prescriptionInfo, (String) empName);
-            model.setViewName("prescriptionsList");
-            model.addObject("prescriptions", prescriptionService.getPrescriptions());
+            prescriptionService.updatePrescriptionInfo(prescriptionInfo, empName);
+            model.setViewName("redirect:get-prescriptions-list");
         }
         return model;
     }
@@ -39,7 +40,7 @@ public class EditPrescriptionController {
     @RequestMapping(value = "/delete-prescription", method = RequestMethod.POST)
     public ModelAndView deletePrescription(@RequestParam(name = "id") int id) {
         prescriptionService.deletePrescription(id);
-        return new ModelAndView("prescriptionsList", "prescriptions", prescriptionService.getPrescriptions());
+        return new ModelAndView("redirect:get-prescriptions-list");
     }
 
 }

@@ -15,4 +15,10 @@ public interface PatientManipulationService {
 
     List<PatientCard> getPatientCards();
 
+    List<String> getAttendingDoctorNames();
+
+    List<String> getResponsibleDoctorNames();
+
+    void addPatient(PatientInfo patientInfo);
+
 }
