@@ -28,6 +28,12 @@ public class EditPrescriptionController {
     public ModelAndView editPrescription(@Valid @ModelAttribute PrescriptionInfo prescriptionInfo, BindingResult bindingResult, HttpSession httpSession) {
         String empName = (String) httpSession.getAttribute("empName");
         ModelAndView model = new ModelAndView();
+
+        if (prescriptionInfo.getPrescription().getType().getKind().equals("Medicament")
+                && !prescriptionInfo.getPrescription().getDose().matches("\\d+mg|\\d+ml")) {
+            bindingResult.rejectValue("prescription.dose", "prescription.dose", "Wrong dose format");
+            model.setViewName("editPrescription");
+        }
         if (bindingResult.hasErrors()) {
             model.setViewName("editPrescription");
         } else {

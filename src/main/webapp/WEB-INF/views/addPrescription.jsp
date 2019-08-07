@@ -36,6 +36,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="type-name">Name</label>
+                                    <form:errors path="prescription.type" cssClass="text-danger"/>
                                     <input name="prescription.type.name" type="text" class="form-control" id="type-name"
                                            placeholder="name"/>
                                 </div>

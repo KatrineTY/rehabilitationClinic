@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @NoArgsConstructor
-public class HintsController {
+public class AutocompleteController {
     @Autowired
     private HintsService hintsService;
 

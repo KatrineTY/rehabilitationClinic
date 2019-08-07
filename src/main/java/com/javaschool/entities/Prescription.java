@@ -27,6 +27,7 @@ public class Prescription {
     private Patient patient;
     @OneToOne
     @JoinColumn(name = "type", referencedColumnName = "type_id")
+    @Valid
     private ProcedureAndMedicament type;
     @Column(name = "start_date")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -41,7 +42,6 @@ public class Prescription {
     @NotNull
     private LocalDate endDate;
     @Column
-//    @Pattern(regexp = "\\d+mg|\\d+ml")
     private String dose;
     @ManyToOne
     @JoinColumn(name = "responsible_doctor", referencedColumnName = "employee_id")

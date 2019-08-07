@@ -10,4 +10,6 @@ public interface ProcedureAndMedicamentService {
 
     List<ProcedureAndMedicament> getProceduresAndMedicines();
 
+    List<String> getMedicines();
+
 }

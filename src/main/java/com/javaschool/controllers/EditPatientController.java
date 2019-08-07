@@ -33,7 +33,7 @@ public class EditPatientController {
             return model;
         }
         patientManipulationService.updatePatientInfo(patientInfo);
-        model.setViewName("redirect:search-patient");
+        model.setViewName("redirect:../search-patient");
         return model;
     }
 

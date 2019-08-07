@@ -1,5 +1,7 @@
 package com.javaschool.entities;
 
+import com.javaschool.validators.EditsGroup;
+import com.javaschool.validators.PatientNameConstraint;
 import lombok.Data;
 import org.hibernate.envers.Audited;
 
@@ -20,6 +22,7 @@ public class Patient {
     @Column
     @NotBlank()
     @Pattern(regexp = "[a-zA-Z ]*")
+    @PatientNameConstraint(groups = {EditsGroup.class})
     private String name;
     @Column
     @Digits(integer = 10, fraction = 0)
