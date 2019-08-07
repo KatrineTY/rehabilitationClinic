@@ -4,15 +4,18 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="../resources/static/js/prescriptions.js"></script>
+    <script src="../resources/static/js/jquery-1.11.2.min.js"></script>
+    <script src="../resources/static/js/jquery.easy-autocomplete.min.js"></script>
+    <script src="../resources/static/js/doseHide.js"></script>
+    <link rel="stylesheet" href="../resources/static/js/easy-autocomplete.min.css">
 </head>
 <body>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6 ml-auto mr-auto">
             <div class="card bg-custom mb-5">
-                <h3 class="card-header">Patient</h3>
+                <h3 class="card-header">Prescription</h3>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-8 ml-auto mr-auto">
@@ -23,15 +26,15 @@
                                 <input style="display:none" name="prescription.responsibleDoctor.id" type="number"
                                        value="${prescriptionInfo.prescription.responsibleDoctor.id}">
                                 <div class="form-group">
-                                    <label for="patient.name">Patient name</label>
+                                    <label for="name">Patient name</label>
                                     <form:errors path="prescription.patient.name" cssClass="text-danger"/>
                                     <input name="prescription.patient.name" type="text" class="form-control"
-                                           id="patient.name"
+                                           id="name"
                                            value="${prescriptionInfo.prescription.patient.name}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="type.name">Procedure/Medicament</label>
-                                    <select name="prescription.type.kind" class="form-control" id="type.kind">
+                                    <label for="type-kind">Procedure/Medicament</label>
+                                    <select name="prescription.type.kind" class="form-control" id="type-kind">
                                         <option value="Procedure"
                                                 onclick="hideDose()"
                                             ${prescriptionInfo.prescription.type.kind=='Procedure'?'selected':'none'}>
@@ -46,8 +49,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="type.name">Name</label>
-                                    <input name="prescription.type.name" type="text" class="form-control" id="type.name"
+                                    <label for="type-name">Name</label>
+                                    <input name="prescription.type.name" type="text" class="form-control" id="type-name"
                                            value="${prescriptionInfo.prescription.type.name}"/>
                                 </div>
                                 <div class="form-group" id="dose-group"
@@ -111,14 +114,41 @@
     </div>
 </div>
 <script>
-    function hideDose() {
-        $("#dose-group").hide();
+    var patientNameOptions = {
+        url: "/RehabilitationClinic/getPatients",
+        list: {
+            maxNumberOfElements: 8,
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+        },
+        requestDelay: 300
+    };
 
-    }
+    $("#name").easyAutocomplete(patientNameOptions);
 
-    function showDose() {
-        $("#dose-group").show();
-    }
+    var procAndMedOptions = {
+        url: "/RehabilitationClinic/getProceduresAndMedicines",
+        list: {
+            maxNumberOfElements: 8,
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+        },
+        listLocation: "${prescriptionInfo.prescription.type.kind}",
+        requestDelay: 300
+    };
+    $("#type-kind").change(function () {
+        procAndMedOptions.listLocation = $("#type-kind option:selected").text().trim();
+        $("#type-name").easyAutocomplete(procAndMedOptions);
+    });
+    $("#type-name").easyAutocomplete(procAndMedOptions);
 </script>
 </body>
 </html>

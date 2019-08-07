@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Component
 @NoArgsConstructor
 @Transactional
@@ -49,6 +51,11 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public void updatePatient(Patient patient) {
         patientDao.updatePatient(patient);
+    }
+
+    @Override
+    public List<Patient> getPatients() {
+        return patientDao.getPatients();
     }
 
 }

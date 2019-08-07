@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Component
 @NoArgsConstructor
 @Transactional
@@ -18,6 +20,11 @@ public class ProcedureAndMedicamentServiceImpl implements ProcedureAndMedicament
     @Override
     public ProcedureAndMedicament getElementWithId(ProcedureAndMedicament procedureAndMedicament) {
         return procedureAndMedicamentDao.getElementWithId(procedureAndMedicament);
+    }
+
+    @Override
+    public List<ProcedureAndMedicament> getProceduresAndMedicines() {
+        return procedureAndMedicamentDao.getProceduresAndMedicines();
     }
 
 }
