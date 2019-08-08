@@ -24,7 +24,7 @@ CREATE TABLE employees
     name         VARCHAR(128)         NOT NULL,
     position     VARCHAR(30)          NOT NULL,
     login        VARCHAR(50)          NOT NULL UNIQUE,
-    password     VARCHAR(30)          NOT NULL,
+    password     VARCHAR(60)          NOT NULL,
     phone        VARCHAR(15)          NOT NULL UNIQUE,
     email        VARCHAR(50)          NOT NULL,
     working_time INTEGER              NOT NULL REFERENCES working_times (working_time_id),

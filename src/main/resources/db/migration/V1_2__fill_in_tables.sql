@@ -103,7 +103,8 @@ VALUES ('Zahir Durham', 'attending doctor', 'zahir.durham', 'WSV45RCN0IU', '1-17
        ('Troy Garcia', ' doctor', 'troy.garcia', 'XYI83HSC8OM', '1-554-148-3166',
         'elit.elit.fermentum@inhendrerit.co.uk', 1, 4),
 
-       ('Katrine F.', ' administrator', 'login', 'password', '1-554-148-3966', 'katrine@gmail.com', 1, 3);
+       ('Katrine F.', ' administrator', 'login',
+        '$2a$10$ftSAE5IBQHG6P8c9HBnNPOZJX1EP/80/MtboQiB7sn7JoIh.bt4AK', '1-554-148-3966', 'katrine@gmail.com', 1, 3);
 
 INSERT INTO "patient_cards" (patient, building, ward, attending_doctor)
 VALUES (1, 'A', 5, 2),
