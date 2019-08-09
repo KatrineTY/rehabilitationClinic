@@ -36,7 +36,7 @@ public class PrescriptionTimeDaoImpl implements PrescriptionTimeDao {
     @Override
     public void updatePrescriptionTime(PrescriptionTime prescriptionTime) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(prescriptionTime);
+        session.merge(prescriptionTime);
     }
 
 }

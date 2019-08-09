@@ -14,7 +14,7 @@ public class PatientNameValidator implements ConstraintValidator<PatientNameCons
 
     @Override
     public boolean isValid(String name, ConstraintValidatorContext constraintValidatorContext) {
-        return patientService
+        return name.isEmpty() || patientService
                 .getPatients()
                 .stream()
                 .map(Patient::getName)

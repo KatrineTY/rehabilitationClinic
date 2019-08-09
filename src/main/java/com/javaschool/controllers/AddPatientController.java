@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -26,7 +25,7 @@ public class AddPatientController {
     }
 
     @RequestMapping(value = "/add-patient", method = RequestMethod.POST)
-    public String addPatient(@Valid @ModelAttribute PatientInfo patientInfo, BindingResult bindingResult, HttpSession httpSession) {
+    public String addPatient(@Valid @ModelAttribute PatientInfo patientInfo, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "addPatient";
         }

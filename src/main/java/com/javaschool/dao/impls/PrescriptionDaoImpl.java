@@ -40,7 +40,7 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
     @Override
     public void updatePrescription(Prescription prescription) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(prescription);
+        session.merge(prescription);
     }
 
     @Override

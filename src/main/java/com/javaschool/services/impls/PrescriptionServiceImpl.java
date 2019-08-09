@@ -54,10 +54,10 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public void updatePrescriptionInfo(PrescriptionInfo prescriptionInfo, String empName) {
-        fillPrescription(prescriptionInfo, empName);
-        fillPrescriptionTimes(prescriptionInfo);
         PrescriptionInfo oldPrescriptionInfo = getPrescription(prescriptionInfo.getPrescription().getId());
         eventService.deleteEvents(oldPrescriptionInfo);
+        fillPrescription(prescriptionInfo, empName);
+        fillPrescriptionTimes(prescriptionInfo);
 
         updatePrescription(prescriptionInfo);
         eventService.addEvents(prescriptionInfo);

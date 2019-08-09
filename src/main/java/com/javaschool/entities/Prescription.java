@@ -1,6 +1,7 @@
 package com.javaschool.entities;
 
 import com.javaschool.converters.LocalDateAttributeConverter;
+import com.javaschool.validators.DoseConstraint;
 import lombok.Data;
 import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @Audited
 @Table(name = "prescriptions")
+@DoseConstraint
 public class Prescription {
     @Id
     @Column(name = "prescription_id")

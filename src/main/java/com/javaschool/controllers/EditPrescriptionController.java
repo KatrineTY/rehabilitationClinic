@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -25,20 +24,15 @@ public class EditPrescriptionController {
     }
 
     @RequestMapping(value = "/edit-prescription/{id}", method = RequestMethod.POST)
-    public ModelAndView editPrescription(@Valid @ModelAttribute PrescriptionInfo prescriptionInfo, BindingResult bindingResult, HttpSession httpSession) {
-        String empName = (String) httpSession.getAttribute("empName");
+    public ModelAndView editPrescription(@Valid @ModelAttribute PrescriptionInfo prescriptionInfo,
+                                         BindingResult bindingResult,
+                                         @SessionAttribute(name = "empName") String empName) {
         ModelAndView model = new ModelAndView();
-
-        if (prescriptionInfo.getPrescription().getType().getKind().equals("Medicament")
-                && !prescriptionInfo.getPrescription().getDose().matches("\\d+mg|\\d+ml")) {
-            bindingResult.rejectValue("prescription.dose", "prescription.dose", "Wrong dose format");
-            model.setViewName("editPrescription");
-        }
         if (bindingResult.hasErrors()) {
             model.setViewName("editPrescription");
         } else {
             prescriptionService.updatePrescriptionInfo(prescriptionInfo, empName);
-            model.setViewName("redirect:get-prescriptions-list");
+            model.setViewName("redirect:../get-prescriptions-list");
         }
         return model;
     }

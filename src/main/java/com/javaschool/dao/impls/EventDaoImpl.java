@@ -1,6 +1,7 @@
 package com.javaschool.dao.impls;
 
 import com.javaschool.dao.interfaces.EventDao;
+import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.Patient;
@@ -38,6 +39,16 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getEvents(PrescriptionInfo prescriptionInfo) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event where patient = :patient and type = :type and status = 'Planned'");
+        query.setParameter("patient", prescriptionInfo.getPrescription().getPatient());
+        query.setParameter("type", prescriptionInfo.getPrescription().getType());
+        return query.list();
+    }
+
+    @Override
     public void addEvent(Event event) {
         Session session = sessionFactory.getCurrentSession();
         session.save(event);
@@ -47,12 +58,7 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public void deleteEvent(Event event) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event " +
-                "where patient = :patient and date = :date and type = :type and status = 'Planned'");
-        query.setParameter("patient", event.getPatient());
-        query.setParameter("date", event.getDate());
-        query.setParameter("type", event.getType());
-        query.list().forEach(session::delete);
+        session.delete(event);
     }
 
     @Override

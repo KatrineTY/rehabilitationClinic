@@ -35,8 +35,8 @@ CREATE TABLE employees
 CREATE TABLE patients
 (
     patient_id SERIAL PRIMARY KEY,
-    name       VARCHAR(128)   NOT NULL,
-    insurance  INTEGER UNIQUE NOT NULL
+    name       VARCHAR(128)       NOT NULL,
+    insurance  VARCHAR(20) UNIQUE NOT NULL
 );
 
 CREATE TABLE patient_cards

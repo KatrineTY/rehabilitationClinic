@@ -1,5 +1,6 @@
 package com.javaschool.dao.interfaces;
 
+import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.Patient;
@@ -11,6 +12,8 @@ public interface EventDao {
     List<Event> getEvents(Patient patient);
 
     List<Event> getEvents(int patientId);
+
+    List<Event> getEvents(PrescriptionInfo prescriptionInfo);
 
     List<Event> getEvents();
 

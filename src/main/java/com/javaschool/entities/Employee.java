@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
@@ -19,8 +20,11 @@ public class Employee {
     @Column
     private String position;
     @Column
+//    @Pattern(regexp = "^[a-zA-Z]+(\\.[a-zA-Z]+)*$")
+    @NotBlank
     private String login;
     @Column
+    @NotBlank
     private String password;
     @Column
     private String phone;

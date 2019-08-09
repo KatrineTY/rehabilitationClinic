@@ -22,16 +22,16 @@
 -- VALUES (1, 1);
 
 INSERT INTO "patients" (name, insurance)
-VALUES ('Anne Beck', 99532443),
-       ('Unity Mccullough', 71449712),
-       ('Bernard Maldonado', 52535505),
-       ('Noble Sawyer', 54864812),
-       ('Deacon Fox', 83037978),
-       ('Chester Shields', 55096367),
-       ('Murphy Cooley', 19506853),
-       ('Jaquelyn Howard', 22730869),
-       ('Steven Pollard', 72023967),
-       ('Blossom Dominguez', 40184068);
+VALUES ('Anne Beck', '99532443'),
+       ('Unity Mccullough', '71449712'),
+       ('Bernard Maldonado', '52535505'),
+       ('Noble Sawyer', '54864812'),
+       ('Deacon Fox', '83037978'),
+       ('Chester Shields', '55096367'),
+       ('Murphy Cooley', '19506853'),
+       ('Jaquelyn Howard', '22730869'),
+       ('Steven Pollard', '72023967'),
+       ('Blossom Dominguez', '40184068');
 
 INSERT INTO working_times (start_hours, end_hours, mon, tue, wen, thu, fri, sat, sun)
 VALUES ('08:00:00', '16:00:00', true, true, true, true, true, false, false), -- doctors
@@ -162,26 +162,26 @@ VALUES (2, 1, '2019-01-29', '2019-08-02', 10, '2mg'),
        (1, 1, '2019-07-06', '2020-03-22', 12, '4mg');
 
 INSERT INTO "prescription_times" (prescription, time)
-VALUES ('1', '08:11:40'),
-       ('1', '20:33:33'),
-       ('2', '18:31:15'),
-       ('2', '10:11:43'),
-       ('3', '03:25:27'),
-       ('3', '14:01:06'),
-       ('4', '08:39:18'),
-       ('4', '05:20:39'),
-       ('5', '17:34:19'),
-       ('5', '04:48:45'),
-       ('6', '00:53:28'),
-       ('6', '13:22:45'),
-       ('7', '01:23:45'),
-       ('7', '07:29:01'),
-       ('8', '18:55:12'),
-       ('8', '16:32:00'),
-       ('1', '16:50:27'),
-       ('1', '17:27:31'),
-       ('2', '20:31:11'),
-       ('2', '12:09:16');
+VALUES ('1', '08:11'),
+       ('1', '20:33'),
+       ('2', '18:31'),
+       ('2', '10:11'),
+       ('3', '03:25'),
+       ('3', '14:01'),
+       ('4', '08:39'),
+       ('4', '05:20'),
+       ('5', '17:34'),
+       ('5', '04:48'),
+       ('6', '00:53'),
+       ('6', '13:22'),
+       ('7', '01:23'),
+       ('7', '07:29'),
+       ('8', '18:55'),
+       ('8', '16:32'),
+       ('1', '16:50'),
+       ('1', '17:27'),
+       ('2', '20:31'),
+       ('2', '12:09');
 
 INSERT INTO events (patient, type, date)
 SELECT patient, type, (date(start_date) || ' ' || time)::timestamp

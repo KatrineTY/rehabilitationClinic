@@ -7,9 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @NoArgsConstructor
@@ -18,30 +17,21 @@ public class EventsListController {
     EventService eventService;
 
     @RequestMapping(value = "/take-task", method = RequestMethod.POST)
-    public ModelAndView takeTask(@RequestParam(name = "event.id") int id, HttpSession httpSession) {
-        Object empName = httpSession.getAttribute("empName");
+    public ModelAndView takeTask(@RequestParam(name = "event.id") int id,
+                                 @SessionAttribute(name = "empName") String empName) {
         ModelAndView model = new ModelAndView();
-        if (empName == null) {
-            model.setViewName("error403");
-        } else {
-            eventService.takeTask(id, (String) empName);
-            model.setViewName("redirect:get-events-list");
-        }
+        eventService.takeTask(id, empName);
+        model.setViewName("redirect:get-events-list");
         return model;
     }
 
     @RequestMapping(value = "/reject-task", method = RequestMethod.POST)
     public ModelAndView rejectTask(@RequestParam(name = "event.id") int eventId,
                                    @RequestParam(name = "comment") String comment,
-                                   HttpSession httpSession) {
-        Object empName = httpSession.getAttribute("empName");
+                                   @SessionAttribute(name = "empName") String empName) {
         ModelAndView model = new ModelAndView();
-        if (empName == null) {
-            model.setViewName("redirect:error403");
-        } else {
-            eventService.rejectTask(eventId, (String) empName, comment);
-            model.setViewName("redirect:get-events-list");
-        }
+        eventService.rejectTask(eventId, empName, comment);
+        model.setViewName("redirect:get-events-list");
         return model;
     }
 
