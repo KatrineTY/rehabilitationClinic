@@ -56,6 +56,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     public void updatePrescriptionInfo(PrescriptionInfo prescriptionInfo, String empName) {
         PrescriptionInfo oldPrescriptionInfo = getPrescription(prescriptionInfo.getPrescription().getId());
         eventService.deleteEvents(oldPrescriptionInfo);
+        oldPrescriptionInfo.getPrescriptionTimes().forEach(prescriptionTimeService::deletePrescriptionTime);
         fillPrescription(prescriptionInfo, empName);
         fillPrescriptionTimes(prescriptionInfo);
 
@@ -92,7 +93,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public void deletePrescription(int id) {
+    public void deletePrescriptionWithEvents(int id) {
         eventService.deleteEvents(getPrescription(id));
         prescriptionDao.deletePrescription(id);
     }

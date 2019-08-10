@@ -3,7 +3,7 @@ package com.javaschool.services.impls;
 import com.javaschool.dao.interfaces.PatientDao;
 import com.javaschool.dto.PatientInfo;
 import com.javaschool.entities.Patient;
-import com.javaschool.services.interfaces.DiagnosisServise;
+import com.javaschool.services.interfaces.DiagnosisService;
 import com.javaschool.services.interfaces.EmployeeService;
 import com.javaschool.services.interfaces.PatientCardService;
 import com.javaschool.services.interfaces.PatientService;
@@ -23,7 +23,7 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private EmployeeService employeeService;
     @Autowired
-    private DiagnosisServise diagnosisService;
+    private DiagnosisService diagnosisService;
     @Autowired
     private PatientCardService patientCardService;
 

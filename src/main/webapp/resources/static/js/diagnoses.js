@@ -1,5 +1,5 @@
 function addDiagnosis() {
-    let diagnosisCount = $('*[placeholder="diagnosis"]').length;
+    let diagnosisCount = $('textarea').length;
     $('<div class="form-group">\n' +
         '    <div class="input-group">\n' +
         '        <input name="diagnoses[' + diagnosisCount + '].name" type="text" class="form-control"\n' +

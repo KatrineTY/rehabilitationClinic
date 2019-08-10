@@ -25,7 +25,7 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
     @Autowired
     private EmployeeService employeeService;
     @Autowired
-    private DiagnosisServise diagnosisService;
+    private DiagnosisService diagnosisService;
 
     @Override
     public PatientInfo getPatientInfo(int patientId) {
@@ -44,7 +44,7 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
         patientInfo.getPatientCard().setPatient(patientInfo.getPatient());
         patientCardService.updatePatientCard(patientInfo.getPatientCard());
         patientInfo.getDiagnoses().forEach(diag -> diag.setPatientCard(patientInfo.getPatientCard()));
-        patientInfo.getDiagnoses().forEach(diag -> diagnosisService.updateDiagnosis(diag));
+        patientInfo.getDiagnoses().forEach(diag -> diagnosisService.saveOrUpdateDiagnosis(diag));
     }
 
     @Override

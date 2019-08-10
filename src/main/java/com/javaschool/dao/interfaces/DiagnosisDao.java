@@ -11,6 +11,6 @@ public interface DiagnosisDao {
 
     List<Diagnosis> getDiagnoses(PatientCard patientCard);
 
-    void updateDiagnosis(Diagnosis diagnosis);
+    void saveOrUpdateDiagnosis(Diagnosis diagnosis);
 
 }

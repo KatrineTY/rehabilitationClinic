@@ -5,12 +5,12 @@ import com.javaschool.entities.PatientCard;
 
 import java.util.List;
 
-public interface DiagnosisServise {
+public interface DiagnosisService {
 
     void addDiagnosis(Diagnosis diagnosis);
 
     List<Diagnosis> getDiagnoses(PatientCard patientCard);
 
-    void updateDiagnosis(Diagnosis diagnosis);
+    void saveOrUpdateDiagnosis(Diagnosis diagnosis);
 
 }

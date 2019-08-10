@@ -1,7 +1,10 @@
 package com.javaschool.entities;
 
 import com.javaschool.converters.LocalDateTimeAttributeConverter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,6 +14,9 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Audited
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "diagnoses")
 public class Diagnosis {
     @Id

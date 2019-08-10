@@ -34,9 +34,9 @@ public class DiagnosisDaoImpl implements DiagnosisDao {
     }
 
     @Override
-    public void updateDiagnosis(Diagnosis diagnosis) {
+    public void saveOrUpdateDiagnosis(Diagnosis diagnosis) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(diagnosis);
+        session.saveOrUpdate(diagnosis);
     }
 
 }

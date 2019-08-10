@@ -2,7 +2,10 @@ package com.javaschool.entities;
 
 
 import com.javaschool.converters.LocalDateTimeAttributeConverter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,6 +13,9 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "events")
 public class Event {
     @Id

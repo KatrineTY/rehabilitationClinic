@@ -39,7 +39,7 @@ public class EditPrescriptionController {
 
     @RequestMapping(value = "/delete-prescription", method = RequestMethod.POST)
     public ModelAndView deletePrescription(@RequestParam(name = "id") int id) {
-        prescriptionService.deletePrescription(id);
+        prescriptionService.deletePrescriptionWithEvents(id);
         return new ModelAndView("redirect:get-prescriptions-list");
     }
 

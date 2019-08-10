@@ -1,6 +1,9 @@
 package com.javaschool.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -8,6 +11,9 @@ import javax.persistence.*;
 @Data
 @Entity
 @Audited
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "patient_cards")
 public class PatientCard {
     @Id

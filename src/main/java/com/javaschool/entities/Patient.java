@@ -2,7 +2,10 @@ package com.javaschool.entities;
 
 import com.javaschool.validators.EditsGroup;
 import com.javaschool.validators.PatientNameConstraint;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -11,6 +14,9 @@ import javax.validation.constraints.Pattern;
 @Data
 @Entity
 @Audited
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "patients")
 public class Patient {
     @Id
