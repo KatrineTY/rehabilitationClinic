@@ -39,4 +39,10 @@ public class PrescriptionTimeDaoImpl implements PrescriptionTimeDao {
         session.merge(prescriptionTime);
     }
 
+    @Override
+    public void deletePrescriptionTime(PrescriptionTime prescriptionTime) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(prescriptionTime);
+    }
+
 }

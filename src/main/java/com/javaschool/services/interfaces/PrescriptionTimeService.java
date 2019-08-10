@@ -13,4 +13,6 @@ public interface PrescriptionTimeService {
 
     void updatePrescriptionTimes(List<PrescriptionTime> prescriptionTimes);
 
+    void deletePrescriptionTime(PrescriptionTime prescriptionTime);
+
 }

@@ -33,4 +33,9 @@ public class PrescriptionTimeServiceImpl implements PrescriptionTimeService {
         prescriptionTimes.forEach(prescriptionTimeDao::updatePrescriptionTime);
     }
 
+    @Override
+    public void deletePrescriptionTime(PrescriptionTime prescriptionTime) {
+        prescriptionTimeDao.deletePrescriptionTime(prescriptionTime);
+    }
+
 }

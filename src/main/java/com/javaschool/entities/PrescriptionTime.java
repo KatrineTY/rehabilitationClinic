@@ -1,7 +1,10 @@
 package com.javaschool.entities;
 
 import com.javaschool.converters.LocalTimeAttributeConverter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,6 +15,9 @@ import java.time.LocalTime;
 @Data
 @Entity
 @Audited
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "prescription_times")
 public class PrescriptionTime {
     @Id
