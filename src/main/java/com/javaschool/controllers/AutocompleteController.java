@@ -1,7 +1,7 @@
 package com.javaschool.controllers;
 
 import com.javaschool.entities.ProcedureAndMedicament;
-import com.javaschool.services.interfaces.HintsService;
+import com.javaschool.services.interfaces.AutocompleteService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,47 +17,21 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class AutocompleteController {
     @Autowired
-    private HintsService hintsService;
+    private AutocompleteService autocompleteService;
 
     @RequestMapping(value = "/getPatients", method = RequestMethod.GET)
     @ResponseBody
     public List<String> getPatients() {
-        return hintsService.getPatientNames();
+        return autocompleteService.getPatientNames();
     }
 
     @RequestMapping(value = "/getProceduresAndMedicines", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, List<String>> getProceduresAndMedicines() {
-        return hintsService.getProcedureNames()
+        return autocompleteService.getProcedureAndMedicamentNames()
                 .stream()
                 .collect(Collectors.groupingBy(ProcedureAndMedicament::getKind,
                         Collectors.mapping(ProcedureAndMedicament::getName, Collectors.toList())));
     }
-
-    @RequestMapping(value = "/getMedicines", method = RequestMethod.GET)
-    @ResponseBody
-    public List<String> getMedicines() {
-        return hintsService.getMedicamentNames();
-    }
-
-
-    private class Pair {
-        String kind;
-        String name;
-
-        public Pair(String kind, String name) {
-            this.kind = kind;
-            this.name = name;
-        }
-
-        public String getKind() {
-            return kind;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-    }
-
+    
 }

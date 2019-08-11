@@ -4,11 +4,9 @@ import com.javaschool.entities.ProcedureAndMedicament;
 
 import java.util.List;
 
-public interface HintsService {
+public interface AutocompleteService {
     List<String> getPatientNames();
 
-    List<String> getMedicamentNames();
-
-    List<ProcedureAndMedicament> getProcedureNames();
+    List<ProcedureAndMedicament> getProcedureAndMedicamentNames();
 
 }
