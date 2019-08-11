@@ -14,6 +14,15 @@
     <div class="row">
         <div class="col-md-8 ml-auto mr-auto">
             <div class="card bg-custom mb-5">
+                <form action="1">
+                    <div class="input-group">
+                        <input class=" form-control" type="text" placeholder="search by patient's name"
+                               name="searchPatientName" value="${searchPatientName}">
+                        <input class=" form-control" type="date" placeholder="search by date" name="searchDate">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+
                 <table id="patientTable" class="table table-hover">
                     <thead class="card-header">
                     <tr>
@@ -51,6 +60,103 @@
                     </c:if>
                     </tbody>
                 </table>
+
+                <ul class="pagination justify-content-center">
+                    <li class="page-item ${currentPage == 1 ? "disabled" : ""}">
+                        <a class="page-link" href="${currentPage - 1}?${pageContext.request.queryString}" tabindex="-1">Previous</a>
+                    </li>
+                    <c:if test="${pageCount < 7}">
+                        <c:forEach var="page" begin="1" end="${pageCount}">
+                            <li class="page-item ${currentPage == page ? "active" : ""}">
+                                <a class="page-link" href="${page}?${pageContext.request.queryString}">${page}</a>
+                            </li>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${pageCount > 6}">
+                        <c:choose>
+                            <c:when test="${currentPage == 1}">
+                                <li class="page-item active">
+                                    <a class="page-link" href="1?${pageContext.request.queryString}">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">...</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="${pageCount}?${pageContext.request.queryString}">${pageCount}</a>
+                                </li>
+                            </c:when>
+                            <c:when test="${currentPage == 2}">
+                                <li class="page-item">
+                                    <a class="page-link" href="1?${pageContext.request.queryString}">1</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="2?${pageContext.request.queryString}">2</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">...</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="${pageCount}?${pageContext.request.queryString}">${pageCount}</a>
+                                </li>
+                            </c:when>
+                            <c:when test="${currentPage == pageCount - 1}">
+                                <li class="page-item">
+                                    <a class="page-link" href="1?${pageContext.request.queryString}">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">...</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link active"
+                                       href="${pageCount - 1}?${pageContext.request.queryString}">${pageCount - 1}</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="${pageCount}?${pageContext.request.queryString}">${pageCount}</a>
+                                </li>
+                            </c:when>
+                            <c:when test="${currentPage == pageCount}">
+                                <li class="page-item">
+                                    <a class="page-link" href="1?${pageContext.request.queryString}">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">...</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link"
+                                       href="${pageCount}?${pageContext.request.queryString}">${pageCount}</a>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item">
+                                    <a class="page-link" href="1?${pageContext.request.queryString}">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">...</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link"
+                                       href="${currentPage}?${pageContext.request.queryString}">${currentPage}</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">...</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="${pageCount}?${pageContext.request.queryString}">${pageCount}</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if>
+
+                    <li class="page-item ${currentPage == pageCount ? "disabled" : ""}">
+                        <a class="page-link" href="${currentPage + 1}?${pageContext.request.queryString}">Next</a>
+                        <%--                           href="${currentPage + 1}?searchPatientName=${pageContext.request.getAttribute("searchPatientName")}&searchDate=${pageContext.request.getAttribute("searchDate")}">Next</a>--%>
+
+                    </li>
+                </ul>
 
                 <div class="modal" id="rejectModal">
                     <div class="modal-dialog">

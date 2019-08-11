@@ -1,5 +1,6 @@
 package com.javaschool.services.impls;
 
+import com.javaschool.dao.impls.EventDaoImpl;
 import com.javaschool.dao.interfaces.EventDao;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.entities.Event;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Transactional
 public class EventServiceImpl implements EventService {
+    private int countOfEvents;
     @Autowired
     private EventDao eventDao;
     @Autowired
@@ -63,6 +65,43 @@ public class EventServiceImpl implements EventService {
     @Override
     public void rejectTask(int id, String nurseName, String comment) {
         eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), comment, "Rejected");
+    }
+
+    @Override
+    public List<Event> getEventsPage(int page) {
+        return eventDao.getEventsPage(page);
+    }
+
+    @Override
+    public int getCountOfEvents() {
+        return (int) Math.ceil(((float) countOfEvents / EventDaoImpl.COUNT_OF_EVENTS_PER_PAGE));
+    }
+
+    @Override
+    public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date) {
+        List<Event> events;
+        int dbPage = page - 1;
+        if (date != null && (patientName != null && !patientName.isEmpty())) {
+            events = eventDao.getFilteredEventsPage(dbPage, patientName, date);
+            countOfEvents = (int) getEvents().stream()
+                    .filter(event -> event.getPatient().getName().contains(patientName)
+                            && event.getDate().toLocalDate().equals(date))
+                    .count();
+        } else if (patientName != null && !patientName.isEmpty()) {
+            events = eventDao.getFilteredEventsPage(dbPage, patientName);
+            countOfEvents = (int) getEvents().stream()
+                    .filter(event -> event.getPatient().getName().contains(patientName))
+                    .count();
+        } else if (date != null) {
+            events = eventDao.getFilteredEventsPage(dbPage, date);
+            countOfEvents = (int) getEvents().stream()
+                    .filter(event -> event.getDate().toLocalDate().equals(date))
+                    .count();
+        } else {
+            events = getEventsPage(dbPage);
+            countOfEvents = getEvents().size();
+        }
+        return events;
     }
 
     private List<Event> collectEvents(PrescriptionInfo prescriptionInfo, List<LocalTime> times) {

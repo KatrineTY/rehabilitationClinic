@@ -12,11 +12,13 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
 @NoArgsConstructor
 public class EventDaoImpl implements EventDao {
+    public static final int COUNT_OF_EVENTS_PER_PAGE = 5;
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -87,6 +89,53 @@ public class EventDaoImpl implements EventDao {
         event.setNurse(nurse);
         event.setStatus(status);
         event.setComment(comment);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getEventsPage(int page) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event order by patient.name");
+        query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
+                .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
+        return query.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getFilteredEventsPage(int page, LocalDate date) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event where date(date) = :date order by patient.name");
+        query.setParameter("date", date);
+        query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
+                .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
+        return query.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getFilteredEventsPage(int page, String patientName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event where patient.name = :name order by patient.name");
+        query.setParameter("name", patientName);
+        query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
+                .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
+        return query.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event " +
+                "where patient.name = :name " +
+                "and date(date) = :date " +
+                "order by patient.name");
+        query.setParameter("name", patientName);
+        query.setParameter("date", date);
+        query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
+                .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
+        return query.list();
     }
 
 }

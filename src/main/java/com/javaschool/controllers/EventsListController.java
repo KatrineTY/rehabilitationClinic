@@ -3,12 +3,12 @@ package com.javaschool.controllers;
 import com.javaschool.services.interfaces.EventService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.time.LocalDate;
 
 @Controller
 @NoArgsConstructor
@@ -32,6 +32,25 @@ public class EventsListController {
         ModelAndView model = new ModelAndView();
         eventService.rejectTask(eventId, empName, comment);
         model.setViewName("redirect:get-events-list");
+        return model;
+    }
+
+    @RequestMapping(value = "get-event-list/{page}")
+    public ModelAndView getEventList(@PathVariable int page,
+                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                     @RequestParam(name = "searchDate", required = false)
+                                             LocalDate date,
+                                     @RequestParam(name = "searchPatientName", required = false) String patientName) {
+        ModelAndView model = new ModelAndView("eventsList");
+        model.addObject("events", eventService.getFilteredEventsPage(page, patientName, date));
+        model.addObject("pageCount", eventService.getCountOfEvents());
+        model.addObject("currentPage", page);
+        if (date != null) {
+            model.addObject("searchDate", date);
+        }
+        if (patientName != null) {
+            model.addObject("searchPatientName", patientName);
+        }
         return model;
     }
 

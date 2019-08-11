@@ -36,9 +36,4 @@ public class AccountController {
         return new ModelAndView("prescriptionsList", "prescriptions", accountService.getPrescriptions());
     }
 
-    @RequestMapping(value = "/get-events-list", method = RequestMethod.GET)
-    public ModelAndView getEventsList() {
-        return new ModelAndView("eventsList", "events", accountService.getEvents());
-    }
-
 }

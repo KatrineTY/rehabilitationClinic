@@ -5,6 +5,7 @@ import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.Patient;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface EventDao {
@@ -24,5 +25,13 @@ public interface EventDao {
     void deleteEvents(int patientId);
 
     void updateEventStatus(int id, Employee nurse, String comment, String status);
+
+    List<Event> getEventsPage(int page);
+
+    List<Event> getFilteredEventsPage(int page, LocalDate date);
+
+    List<Event> getFilteredEventsPage(int page, String patientName);
+
+    List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date);
 
 }

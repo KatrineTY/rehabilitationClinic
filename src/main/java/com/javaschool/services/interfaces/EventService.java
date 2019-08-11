@@ -3,6 +3,7 @@ package com.javaschool.services.interfaces;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.entities.Event;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface EventService {
@@ -20,5 +21,11 @@ public interface EventService {
     void takeTask(int id, String nurseName);
 
     void rejectTask(int id, String nurseName, String comment);
+
+    List<Event> getEventsPage(int page);
+
+    int getCountOfEvents();
+
+    List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date);
 
 }
