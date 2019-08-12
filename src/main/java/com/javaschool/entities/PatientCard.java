@@ -1,5 +1,6 @@
 package com.javaschool.entities;
 
+import com.javaschool.validation.constraints.PatientCountInWardConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "patient_cards")
+@PatientCountInWardConstraint
 public class PatientCard {
     @Id
     @Column(name = "patient_card_id")

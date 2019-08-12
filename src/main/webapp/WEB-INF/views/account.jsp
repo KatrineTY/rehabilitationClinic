@@ -18,7 +18,7 @@
                         <a href="add-prescription" class="list-group-item list-group-item-action">Add prescription</a>
                         <a href="get-prescriptions-list" class="list-group-item list-group-item-action">Prescriptions
                             list</a>
-                        <a href="get-event-list/1" class="list-group-item list-group-item-action">Events list</a>
+                        <a href="get-events-list/1" class="list-group-item list-group-item-action">Events list</a>
                     </ul>
                 </div>
             </div>

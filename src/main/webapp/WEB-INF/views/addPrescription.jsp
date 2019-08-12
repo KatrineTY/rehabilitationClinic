@@ -29,6 +29,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="type-kind">Procedure/Medicament</label>
+                                    <form:errors path="prescription.type.kind" cssClass="text-danger"/>
                                     <select name="prescription.type.kind" class="form-control" id="type-kind">
                                         <option value="Procedure" onclick="hideDose()">Procedure</option>
                                         <option value="Medicament" selected onclick="showDose()">Medicament</option>
@@ -58,7 +59,7 @@
                                 <div class="times">
                                     <div class="form-group">
                                         <label for="prescriptionTimes0">Time:</label>
-                                        <form:errors path="prescriptionTimes[0].time" cssClass="text-danger"/>
+                                        <form:errors path="prescriptionTimes" cssClass="text-danger"/>
                                         <div class="input-group">
                                             <input name="prescriptionTimes[0].time" type="time" class="form-control"
                                                    id="prescriptionTimes0"/>

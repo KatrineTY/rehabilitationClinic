@@ -52,4 +52,13 @@ public class PatientDaoImpl implements PatientDao {
         session.update(patient);
     }
 
+    @Override
+    public boolean isInsuranceContains(String insurance) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Patient where insurance = :insurance");
+        query.setParameter("insurance", insurance);
+        return !query.list().isEmpty();
+
+    }
+
 }

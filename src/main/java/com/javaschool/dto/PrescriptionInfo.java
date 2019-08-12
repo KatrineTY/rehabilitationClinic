@@ -2,6 +2,7 @@ package com.javaschool.dto;
 
 import com.javaschool.entities.Prescription;
 import com.javaschool.entities.PrescriptionTime;
+import com.javaschool.validation.constraints.PrescriptionTimesListConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ import java.util.List;
 public class PrescriptionInfo {
     @Valid
     Prescription prescription;
-    @Valid
+    @PrescriptionTimesListConstraint
     List<PrescriptionTime> prescriptionTimes;
 
 }

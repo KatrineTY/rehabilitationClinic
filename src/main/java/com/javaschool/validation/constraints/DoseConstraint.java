@@ -1,4 +1,6 @@
-package com.javaschool.validators;
+package com.javaschool.validation.constraints;
+
+import com.javaschool.validation.validators.DoseValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

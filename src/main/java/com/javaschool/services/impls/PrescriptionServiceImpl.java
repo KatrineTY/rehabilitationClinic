@@ -3,6 +3,7 @@ package com.javaschool.services.impls;
 import com.javaschool.dao.interfaces.PrescriptionDao;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.entities.Prescription;
+import com.javaschool.entities.ProcedureAndMedicament;
 import com.javaschool.services.interfaces.*;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +102,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public void deletePrescriptions(int patientId) {
         prescriptionDao.deletePrescriptions(patientId);
+    }
+
+    @Override
+    public Prescription getLastPrescription(String patientName, ProcedureAndMedicament promed) {
+        return prescriptionDao.getLastPrescription(patientName, promed);
     }
 
 }

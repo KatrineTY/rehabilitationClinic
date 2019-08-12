@@ -58,4 +58,9 @@ public class PatientServiceImpl implements PatientService {
         return patientDao.getPatients();
     }
 
+    @Override
+    public boolean isInsuranceContains(String insurance) {
+        return patientDao.isInsuranceContains(insurance);
+    }
+
 }

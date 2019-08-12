@@ -1,6 +1,7 @@
-package com.javaschool.validators;
+package com.javaschool.validation.validators;
 
 import com.javaschool.entities.Prescription;
+import com.javaschool.validation.constraints.DoseConstraint;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

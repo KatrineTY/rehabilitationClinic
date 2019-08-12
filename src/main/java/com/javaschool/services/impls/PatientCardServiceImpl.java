@@ -43,4 +43,9 @@ public class PatientCardServiceImpl implements PatientCardService {
         patientCardDao.changeStatus(patientId, status);
     }
 
+    @Override
+    public boolean isFreeBedInTheWard(String building, int ward) {
+        return patientCardDao.isFreeBedInTheWard(building, ward);
+    }
+
 }

@@ -1,7 +1,9 @@
 package com.javaschool.entities;
 
-import com.javaschool.validators.EditsGroup;
-import com.javaschool.validators.PatientNameConstraint;
+import com.javaschool.validation.constraints.PatientNameConstraint;
+import com.javaschool.validation.constraints.UniqueInsuranceConstraint;
+import com.javaschool.validation.groups.AddGroup;
+import com.javaschool.validation.groups.EditGroup;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,10 +27,11 @@ public class Patient {
     private int id;
     @Column
     @Pattern(regexp = "[a-zA-Z ]+")
-    @PatientNameConstraint(groups = {EditsGroup.class})
+    @PatientNameConstraint(groups = {EditGroup.class})
     private String name;
     @Column
     @Pattern(regexp = "[A-Z0-9 ]+")
+    @UniqueInsuranceConstraint(groups = {AddGroup.class})
     private String insurance;
 
 }

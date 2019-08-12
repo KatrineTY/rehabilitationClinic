@@ -1,7 +1,7 @@
 package com.javaschool.entities;
 
 import com.javaschool.converters.LocalDateAttributeConverter;
-import com.javaschool.validators.DoseConstraint;
+import com.javaschool.validation.constraints.DoseConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

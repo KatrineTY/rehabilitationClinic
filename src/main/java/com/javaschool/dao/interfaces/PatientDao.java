@@ -16,4 +16,6 @@ public interface PatientDao {
 
     void updatePatient(Patient patient);
 
+    boolean isInsuranceContains(String insurance);
+
 }

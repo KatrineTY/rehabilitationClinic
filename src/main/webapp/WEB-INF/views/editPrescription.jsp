@@ -74,8 +74,7 @@
                                 </div>
                                 <div class="times">
                                     <label for="time0">Times:</label>
-                                    <form:errors path="prescriptionTimes[0].time" cssClass="text-danger"/>
-
+                                    <form:errors path="prescriptionTimes" cssClass="text-danger"/>
                                     <c:if test="${not empty prescriptionInfo.prescriptionTimes}">
                                         <c:forEach var="time" items="${prescriptionInfo.prescriptionTimes}"
                                                    varStatus="loop">

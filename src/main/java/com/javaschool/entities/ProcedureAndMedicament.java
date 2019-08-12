@@ -1,6 +1,6 @@
 package com.javaschool.entities;
 
-import com.javaschool.validators.ProcAndMedConstraint;
+import com.javaschool.validation.constraints.ProcAndMedConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

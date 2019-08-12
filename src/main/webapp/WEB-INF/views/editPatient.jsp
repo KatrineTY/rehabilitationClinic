@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="../resources/static/js/diagnoses.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../resources/static/js/jquery-1.11.2.min.js"></script>
 </head>
 <body>
 <div class="container mt-5">
@@ -22,18 +22,13 @@
                                            type="number">
                                     <input style="display:none" name="patientCard.id"
                                            value="${patientInfo.patientCard.id}" type="number">
+                                    <input style="display:none" name="patient.insurance"
+                                           value="${patientInfo.patient.insurance}" type="text">
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <form:errors path="patient.name" cssClass="text-danger"/>
                                         <input name="patient.name" type="text" class="form-control" id="name"
                                                value="${patientInfo.patient.name}"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="insurance">Insurance</label>
-                                        <form:errors path="patient.insurance" cssClass="text-danger"/>
-                                        <input name="patient.insurance" type="text" class="form-control"
-                                               id="insurance"
-                                               value="${patientInfo.patient.insurance}"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="attendingDoctor">Attending Doctor</label>
@@ -79,6 +74,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="diagnosis0">Diagnoses:</label>
+                                        <form:errors path="diagnoses" cssClass="text-danger"/>
                                         <c:if test="${not empty patientInfo.diagnoses}">
                                             <c:forEach var="diagnosis" items="${patientInfo.diagnoses}"
                                                        varStatus="loop">

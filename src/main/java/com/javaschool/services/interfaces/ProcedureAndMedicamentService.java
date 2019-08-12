@@ -12,4 +12,6 @@ public interface ProcedureAndMedicamentService {
 
     List<String> getMedicines();
 
+    List<String> getProcedures();
+
 }

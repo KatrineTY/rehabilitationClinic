@@ -3,6 +3,7 @@ package com.javaschool.dto;
 import com.javaschool.entities.Diagnosis;
 import com.javaschool.entities.Patient;
 import com.javaschool.entities.PatientCard;
+import com.javaschool.validation.constraints.DiagnosesListNamesConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +23,7 @@ public class PatientInfo {
     private Patient patient;
     @Valid
     private PatientCard patientCard;
-    @Valid
+    @DiagnosesListNamesConstraint
     private List<Diagnosis> diagnoses;
 
 }

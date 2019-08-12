@@ -62,9 +62,7 @@
                 </table>
 
                 <ul class="pagination justify-content-center">
-                    <li class="page-item ${currentPage == 1 ? "disabled" : ""}">
-                        <a class="page-link" href="${currentPage - 1}?${pageContext.request.queryString}" tabindex="-1">Previous</a>
-                    </li>
+
                     <c:if test="${pageCount < 7}">
                         <c:forEach var="page" begin="1" end="${pageCount}">
                             <li class="page-item ${currentPage == page ? "active" : ""}">
@@ -73,6 +71,10 @@
                         </c:forEach>
                     </c:if>
                     <c:if test="${pageCount > 6}">
+                        <li class="page-item ${currentPage == 1 ? "disabled" : ""}">
+                            <a class="page-link" href="${currentPage - 1}?${pageContext.request.queryString}"
+                               tabindex="-1">Previous</a>
+                        </li>
                         <c:choose>
                             <c:when test="${currentPage == 1}">
                                 <li class="page-item active">
@@ -149,15 +151,11 @@
                                 </li>
                             </c:otherwise>
                         </c:choose>
+                        <li class="page-item ${currentPage == pageCount ? "disabled" : ""}">
+                            <a class="page-link" href="${currentPage + 1}?${pageContext.request.queryString}">Next</a>
+                        </li>
                     </c:if>
-
-                    <li class="page-item ${currentPage == pageCount ? "disabled" : ""}">
-                        <a class="page-link" href="${currentPage + 1}?${pageContext.request.queryString}">Next</a>
-                        <%--                           href="${currentPage + 1}?searchPatientName=${pageContext.request.getAttribute("searchPatientName")}&searchDate=${pageContext.request.getAttribute("searchDate")}">Next</a>--%>
-
-                    </li>
                 </ul>
-
                 <div class="modal" id="rejectModal">
                     <div class="modal-dialog">
                         <div class="modal-content">

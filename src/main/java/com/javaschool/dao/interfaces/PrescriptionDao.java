@@ -1,6 +1,7 @@
 package com.javaschool.dao.interfaces;
 
 import com.javaschool.entities.Prescription;
+import com.javaschool.entities.ProcedureAndMedicament;
 
 import java.util.List;
 
@@ -17,5 +18,7 @@ public interface PrescriptionDao {
     void deletePrescription(int id);
 
     void deletePrescriptions(int patientId);
+
+    Prescription getLastPrescription(String patientName, ProcedureAndMedicament promed);
 
 }

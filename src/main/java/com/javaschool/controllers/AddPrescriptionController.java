@@ -3,7 +3,7 @@ package com.javaschool.controllers;
 
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.services.interfaces.PrescriptionService;
-import com.javaschool.validators.EditsGroup;
+import com.javaschool.validation.groups.EditGroup;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class AddPrescriptionController {
     }
 
     @RequestMapping(value = "/add-prescription", method = RequestMethod.POST)
-    public String addPrescription(@Validated({Default.class, EditsGroup.class}) @ModelAttribute PrescriptionInfo prescriptionInfo,
+    public String addPrescription(@Validated({Default.class, EditGroup.class}) @ModelAttribute PrescriptionInfo prescriptionInfo,
                                   BindingResult bindingResult,
                                   @SessionAttribute(name = "empName") String empName) {
         if (bindingResult.hasErrors()) {

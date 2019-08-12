@@ -1,6 +1,8 @@
 package com.javaschool.services.interfaces;
 
 import com.javaschool.dto.PrescriptionInfo;
+import com.javaschool.entities.Prescription;
+import com.javaschool.entities.ProcedureAndMedicament;
 
 import java.util.List;
 
@@ -17,5 +19,7 @@ public interface PrescriptionService {
     void deletePrescriptionWithEvents(int id);
 
     void deletePrescriptions(int patientId);
+
+    Prescription getLastPrescription(String patientName, ProcedureAndMedicament promed);
 
 }

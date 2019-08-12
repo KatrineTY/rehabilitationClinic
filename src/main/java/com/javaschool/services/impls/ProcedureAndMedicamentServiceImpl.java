@@ -37,4 +37,13 @@ public class ProcedureAndMedicamentServiceImpl implements ProcedureAndMedicament
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<String> getProcedures() {
+        return getProceduresAndMedicines()
+                .stream()
+                .filter(x -> x.getKind().equals("Procedure"))
+                .map(ProcedureAndMedicament::getName)
+                .collect(Collectors.toList());
+    }
+
 }

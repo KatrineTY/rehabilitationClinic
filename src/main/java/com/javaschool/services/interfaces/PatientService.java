@@ -17,4 +17,6 @@ public interface PatientService {
 
     List<Patient> getPatients();
 
+    boolean isInsuranceContains(String insurance);
+
 }

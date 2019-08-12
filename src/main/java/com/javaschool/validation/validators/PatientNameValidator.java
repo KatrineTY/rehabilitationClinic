@@ -1,7 +1,8 @@
-package com.javaschool.validators;
+package com.javaschool.validation.validators;
 
 import com.javaschool.entities.Patient;
 import com.javaschool.services.interfaces.PatientService;
+import com.javaschool.validation.constraints.PatientNameConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

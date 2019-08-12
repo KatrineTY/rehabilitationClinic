@@ -48,9 +48,21 @@ public class PatientCardDaoImpl implements PatientCardDao {
     @Override
     public void changeStatus(int patientId, String status) {
         Session session = sessionFactory.getCurrentSession();
-        PatientCard patientCard = session.get(PatientCard.class, patientId);
+        Query query = session.createQuery("from PatientCard where patient.id =: patientId");
+        query.setParameter("patientId", patientId);
+        PatientCard patientCard = (PatientCard) query.uniqueResult();
         patientCard.setStatus(status);
         session.update(patientCard);
+    }
+
+    @Override
+    public boolean isFreeBedInTheWard(String building, int ward) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from PatientCard where building = :building and ward = :ward");
+        query.setParameter("building", building);
+        query.setParameter("ward", ward);
+        return query.list().size() < 4;
+
     }
 
 }

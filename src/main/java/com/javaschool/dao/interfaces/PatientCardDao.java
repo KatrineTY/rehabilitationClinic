@@ -17,4 +17,6 @@ public interface PatientCardDao {
 
     void changeStatus(int patientId, String status);
 
+    boolean isFreeBedInTheWard(String building, int ward);
+
 }

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./resources/static/css/pageTemplate.css">
     <script src="./resources/static/js/diagnoses.js"></script>
-    <%--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--%>
     <script src="./resources/static/js/jquery-1.11.2.min.js"></script>
     <script src="./resources/static/js/jquery.easy-autocomplete.min.js"></script>
     <link rel="stylesheet" href="./resources/static/js/easy-autocomplete.min.css">
@@ -49,6 +48,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="ward">Ward</label>
+                                        <form:errors path="patientCard.ward" cssClass="text-danger"/>
                                         <select id="ward" name="patientCard.ward" class="form-control">
                                             <c:forEach var="room" begin="1" end="9">
                                                 <option value="${room}">${room}</option>
@@ -57,6 +57,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="diagnosis0">Diagnoses:</label>
+                                        <form:errors path="diagnoses" cssClass="text-danger"/>
                                         <div class="input-group">
                                             <input name="diagnoses[0].name" type="text" class="form-control"
                                                    id="diagnosis0"

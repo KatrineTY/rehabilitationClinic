@@ -84,13 +84,13 @@ public class EventServiceImpl implements EventService {
         if (date != null && (patientName != null && !patientName.isEmpty())) {
             events = eventDao.getFilteredEventsPage(dbPage, patientName, date);
             countOfEvents = (int) getEvents().stream()
-                    .filter(event -> event.getPatient().getName().contains(patientName)
+                    .filter(event -> event.getPatient().getName().equals(patientName)
                             && event.getDate().toLocalDate().equals(date))
                     .count();
         } else if (patientName != null && !patientName.isEmpty()) {
             events = eventDao.getFilteredEventsPage(dbPage, patientName);
             countOfEvents = (int) getEvents().stream()
-                    .filter(event -> event.getPatient().getName().contains(patientName))
+                    .filter(event -> event.getPatient().getName().equals(patientName))
                     .count();
         } else if (date != null) {
             events = eventDao.getFilteredEventsPage(dbPage, date);
