@@ -2,10 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="resources/static/css/pageTemplate.css">
+    <link rel="stylesheet" href="./resources/static/css/bootstrap.min.css">
+    <script>
+        window.addEventListener('load', () => {
+            document.getElementById('loading').style.display = 'none';
+        });
+    </script>
+
+    <title>Login</title>
 </head>
 <body>
+
+<div id="loading" style="text-align: center">
+    <span>Loading...</span>
+</div>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6 ml-auto mr-auto">
@@ -21,12 +31,12 @@
                                 <div class="form-group">
                                     <label for="login">Login</label>
                                     <input name="user_login" type="text" class="form-control" id="login"
-                                                placeholder="login"/>
+                                           placeholder="login"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input name="password_login" type="password" class="form-control" id="password"
-                                                placeholder="password"/>
+                                           placeholder="password"/>
                                 </div>
                                 <div class="form-group form-check">
                                     <input name="_spring_security_remember_me" type="checkbox" class="form-check-input"

@@ -2,12 +2,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./resources/static/css/pageTemplate.css">
+    <link rel="stylesheet" href="./resources/static/css/bootstrap.min.css">
     <script src="./resources/static/js/searchPatient.js"></script>
+
+    <title>Patients</title>
 </head>
 <body>
-
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8 ml-auto mr-auto">

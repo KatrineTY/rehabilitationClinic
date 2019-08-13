@@ -3,9 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/static/css/bootstrap.min.css">
     <script src="../resources/static/js/diagnoses.js"></script>
     <script src="../resources/static/js/jquery-1.11.2.min.js"></script>
+
+    <title>Edit patient</title>
 </head>
 <body>
 <div class="container mt-5">

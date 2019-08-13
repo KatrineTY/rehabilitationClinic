@@ -26,7 +26,6 @@ public class Employee {
     @Column
     private String position;
     @Column
-//    @Pattern(regexp = "^[a-zA-Z]+(\\.[a-zA-Z]+)*$")
     @NotBlank
     private String login;
     @Column
