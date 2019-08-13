@@ -2,14 +2,16 @@ package com.javaschool.controllers;
 
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.services.interfaces.PrescriptionService;
+import com.javaschool.validation.groups.EditGroup;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
+import javax.validation.groups.Default;
 
 @Controller
 @NoArgsConstructor
@@ -24,7 +26,7 @@ public class EditPrescriptionController {
     }
 
     @RequestMapping(value = "/edit-prescription/{id}", method = RequestMethod.POST)
-    public ModelAndView editPrescription(@Valid @ModelAttribute PrescriptionInfo prescriptionInfo,
+    public ModelAndView editPrescription(@Validated({Default.class, EditGroup.class}) @ModelAttribute PrescriptionInfo prescriptionInfo,
                                          BindingResult bindingResult,
                                          @SessionAttribute(name = "empName") String empName) {
         ModelAndView model = new ModelAndView();

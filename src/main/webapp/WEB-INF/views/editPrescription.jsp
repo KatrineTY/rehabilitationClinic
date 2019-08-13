@@ -28,13 +28,13 @@
                                 <div class="form-group">
                                     <label for="name">Patient name</label>
                                     <form:errors path="prescription.patient.name" cssClass="text-danger"/>
-                                    <input name="prescription.patient.name" type="text" class="form-control"
-                                           id="name"
-                                           value="${prescriptionInfo.prescription.patient.name}"/>
+                                    <form:input path="prescription.patient.name" type="text" class="form-control"
+                                                id="name"
+                                                value="${prescriptionInfo.prescription.patient.name}"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="type-kind">Procedure/Medicament</label>
-                                    <select name="prescription.type.kind" class="form-control" id="type-kind">
+                                    <form:select path="prescription.type.kind" class="form-control" id="type-kind">
                                         <option value="Procedure"
                                                 onclick="hideDose()"
                                             ${prescriptionInfo.prescription.type.kind=='Procedure'?'selected':'none'}>
@@ -46,30 +46,31 @@
 
                                             Medicament
                                         </option>
-                                    </select>
+                                    </form:select>
                                 </div>
                                 <div class="form-group">
                                     <label for="type-name">Name</label>
                                     <form:errors path="prescription.type" cssClass="text-danger"/>
-                                    <input name="prescription.type.name" type="text" class="form-control" id="type-name"
-                                           value="${prescriptionInfo.prescription.type.name}"/>
+                                    <form:input path="prescription.type.name" type="text" class="form-control"
+                                                id="type-name"
+                                                value="${prescriptionInfo.prescription.type.name}"/>
                                 </div>
                                 <div class="form-group" id="dose-group"
                                     ${prescriptionInfo.prescription.type.kind=='Procedure'?'style="display: none;"':''} >
                                     <label for="dose">Dose</label>
                                     <form:errors path="prescription.dose" cssClass="text-danger"/>
-                                    <input name="prescription.dose" type="text" class="form-control" id="dose"
-                                           value="${prescriptionInfo.prescription.dose}"/>
+                                    <form:input path="prescription.dose" type="text" class="form-control" id="dose"
+                                                value="${prescriptionInfo.prescription.dose}"/>
                                 </div>
                                 <div class="form-group">
                                     <label>Period</label>
                                     <div class="input-group">
                                         <form:errors path="prescription.startDate" cssClass="text-danger"/>
-                                        <input name="prescription.startDate" type="date" class="form-control"
-                                               value="${prescriptionInfo.prescription.startDate}">
+                                        <form:input path="prescription.startDate" type="date" class="form-control"
+                                                    value="${prescriptionInfo.prescription.startDate}"/>
                                         <form:errors path="prescription.endDate" cssClass="text-danger"/>
-                                        <input name="prescription.endDate" type="date" class="form-control"
-                                               value="${prescriptionInfo.prescription.endDate}">
+                                        <form:input path="prescription.endDate" type="date" class="form-control"
+                                                    value="${prescriptionInfo.prescription.endDate}"/>
                                     </div>
                                 </div>
                                 <div class="times">

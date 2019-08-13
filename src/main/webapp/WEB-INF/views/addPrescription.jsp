@@ -24,36 +24,38 @@
                                 <div class="form-group">
                                     <label for="name">Patient name</label>
                                     <form:errors path="prescription.patient.name" cssClass="text-danger"/>
-                                    <input name="prescription.patient.name" type="text" class="form-control" id="name"
-                                           placeholder="name"/>
+                                    <form:input path="prescription.patient.name" type="text" class="form-control"
+                                                id="name"
+                                                placeholder="name"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="type-kind">Procedure/Medicament</label>
                                     <form:errors path="prescription.type.kind" cssClass="text-danger"/>
-                                    <select name="prescription.type.kind" class="form-control" id="type-kind">
+                                    <form:select path="prescription.type.kind" class="form-control" id="type-kind">
                                         <option value="Procedure" onclick="hideDose()">Procedure</option>
                                         <option value="Medicament" selected onclick="showDose()">Medicament</option>
-                                    </select>
+                                    </form:select>
                                 </div>
                                 <div class="form-group">
                                     <label for="type-name">Name</label>
                                     <form:errors path="prescription.type" cssClass="text-danger"/>
-                                    <input name="prescription.type.name" type="text" class="form-control" id="type-name"
-                                           placeholder="name"/>
+                                    <form:input path="prescription.type.name" type="text" class="form-control"
+                                                id="type-name"
+                                                placeholder="name"/>
                                 </div>
                                 <div class="form-group" id="dose-group">
                                     <label for="dose">Dose</label>
                                     <form:errors path="prescription.dose" cssClass="text-danger"/>
-                                    <input name="prescription.dose" type="text" class="form-control" id="dose"
-                                           placeholder="dose"/>
+                                    <form:input path="prescription.dose" type="text" class="form-control" id="dose"
+                                                placeholder="dose"/>
                                 </div>
                                 <div class="form-group">
                                     <label>Period</label>
                                     <div class="input-group">
                                         <form:errors path="prescription.startDate" cssClass="text-danger"/>
-                                        <input name="prescription.startDate" type="date" class="form-control">
+                                        <form:input path="prescription.startDate" type="date" class="form-control"/>
                                         <form:errors path="prescription.endDate" cssClass="text-danger"/>
-                                        <input name="prescription.endDate" type="date" class="form-control">
+                                        <form:input path="prescription.endDate" type="date" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="times">

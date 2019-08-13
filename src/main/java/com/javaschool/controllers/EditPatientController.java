@@ -29,6 +29,7 @@ public class EditPatientController {
     public ModelAndView editPatient(@Valid @ModelAttribute PatientInfo patientInfo, BindingResult bindingResult) {
         ModelAndView model = new ModelAndView();
         if (bindingResult.hasErrors()) {
+            model.addObject("doctors", patientManipulationService.getAttendingDoctorNames());
             model.setViewName("editPatient");
             return model;
         }

@@ -27,42 +27,42 @@
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <form:errors path="patient.name" cssClass="text-danger"/>
-                                        <input name="patient.name" type="text" class="form-control" id="name"
-                                               value="${patientInfo.patient.name}"/>
+                                        <form:input path="patient.name" type="text" class="form-control" id="name"
+                                                    value="${patientInfo.patient.name}"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="attendingDoctor">Attending Doctor</label>
-                                        <select id="attendingDoctor" name="patientCard.attendingDoctor.name"
-                                                class="form-control">
+                                        <form:select id="attendingDoctor" path="patientCard.attendingDoctor.name"
+                                                     class="form-control">
                                             <c:forEach var="doctor" items="${doctors}">
                                                 <option value="${doctor}"
                                                     ${doctor==patientInfo.patientCard.attendingDoctor.name?'selected':'none'}>
                                                         ${doctor}
                                                 </option>
                                             </c:forEach>
-                                        </select>
+                                        </form:select>
                                     </div>
                                     <div class="form-group">
                                         <label for="building">Building</label>
-                                        <select id="building" name="patientCard.building" class="form-control">
+                                        <form:select id="building" path="patientCard.building" class="form-control">
                                             <c:forTokens items="A,B,C" delims="," var="corpus">
                                                 <option value="${corpus}"
                                                     ${corpus==patientInfo.patientCard.building?'selected':'none'}>${corpus}</option>
                                             </c:forTokens>
-                                        </select>
+                                        </form:select>
                                     </div>
                                     <div class="form-group">
                                         <label for="ward">Ward</label>
-                                        <select id="ward" name="patientCard.ward" class="form-control">
+                                        <form:select id="ward" path="patientCard.ward" class="form-control">
                                             <c:forEach var="room" begin="1" end="9">
                                                 <option value="${room}"
                                                     ${room==patientInfo.patientCard.ward?'selected':'none'}>${room}</option>
                                             </c:forEach>
-                                        </select>
+                                        </form:select>
                                     </div>
                                     <div class="form-group">
                                         <label for="status">Status</label>
-                                        <select name="patientCard.status" class="form-control" id="status">
+                                        <form:select path="patientCard.status" class="form-control" id="status">
                                             <option value="Treated"
                                                 ${'Treated'==patientInfo.patientCard.status?'selected':'none'}>Treated
                                             </option>
@@ -70,7 +70,7 @@
                                                 ${'Discharged'==patientInfo.patientCard.status?'selected':'none'}>
                                                 Discharged
                                             </option>
-                                        </select>
+                                        </form:select>
                                     </div>
                                     <div class="form-group">
                                         <label for="diagnosis0">Diagnoses:</label>

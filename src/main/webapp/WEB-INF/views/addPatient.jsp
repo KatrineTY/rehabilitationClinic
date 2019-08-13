@@ -28,32 +28,32 @@
                                     <div class="form-group">
                                         <label for="name">Name</label>
                                         <form:errors path="patient.name" cssClass="text-danger"/>
-                                        <input name="patient.name" type="text" class="form-control" id="name"
-                                               placeholder="name"/>
+                                        <form:input path="patient.name" type="text" class="form-control" id="name"
+                                                    placeholder="name"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="insurance">Insurance</label>
                                         <form:errors path="patient.insurance" cssClass="text-danger"/>
-                                        <input name="patient.insurance" type="text" class="form-control"
-                                               id="insurance"
-                                               placeholder="insurance"/>
+                                        <form:input path="patient.insurance" type="text" class="form-control"
+                                                    id="insurance"
+                                                    placeholder="insurance"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="building">Building</label>
-                                        <select id="building" name="patientCard.building" class="form-control">
+                                        <form:select id="building" path="patientCard.building" class="form-control">
                                             <c:forTokens items="A,B,C" delims="," var="corpus">
                                                 <option value="${corpus}">${corpus}</option>
                                             </c:forTokens>
-                                        </select>
+                                        </form:select>
                                     </div>
                                     <div class="form-group">
                                         <label for="ward">Ward</label>
                                         <form:errors path="patientCard.ward" cssClass="text-danger"/>
-                                        <select id="ward" name="patientCard.ward" class="form-control">
+                                        <form:select id="ward" path="patientCard.ward" class="form-control">
                                             <c:forEach var="room" begin="1" end="9">
                                                 <option value="${room}">${room}</option>
                                             </c:forEach>
-                                        </select>
+                                        </form:select>
                                     </div>
                                     <div class="form-group">
                                         <label for="diagnosis0">Diagnoses:</label>
