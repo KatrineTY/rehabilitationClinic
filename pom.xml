@@ -134,6 +134,7 @@
             <groupId>org.junit</groupId>
             <artifactId>junit5-engine</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

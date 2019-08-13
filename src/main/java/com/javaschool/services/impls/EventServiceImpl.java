@@ -8,6 +8,7 @@ import com.javaschool.entities.PrescriptionTime;
 import com.javaschool.services.interfaces.EmployeeService;
 import com.javaschool.services.interfaces.EventService;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,7 +74,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public int getCountOfEvents() {
+    public int getCountOfPages() {
         return (int) Math.ceil(((float) countOfEvents / EventDaoImpl.COUNT_OF_EVENTS_PER_PAGE));
     }
 
@@ -84,13 +85,13 @@ public class EventServiceImpl implements EventService {
         if (date != null && (patientName != null && !patientName.isEmpty())) {
             events = eventDao.getFilteredEventsPage(dbPage, patientName, date);
             countOfEvents = (int) getEvents().stream()
-                    .filter(event -> event.getPatient().getName().equals(patientName)
+                    .filter(event -> StringUtils.containsIgnoreCase(event.getPatient().getName(), patientName)
                             && event.getDate().toLocalDate().equals(date))
                     .count();
         } else if (patientName != null && !patientName.isEmpty()) {
             events = eventDao.getFilteredEventsPage(dbPage, patientName);
             countOfEvents = (int) getEvents().stream()
-                    .filter(event -> event.getPatient().getName().equals(patientName))
+                    .filter(event -> StringUtils.containsIgnoreCase(event.getPatient().getName(), patientName))
                     .count();
         } else if (date != null) {
             events = eventDao.getFilteredEventsPage(dbPage, date);

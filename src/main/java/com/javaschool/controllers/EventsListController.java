@@ -43,7 +43,7 @@ public class EventsListController {
                                      @RequestParam(name = "searchPatientName", required = false) String patientName) {
         ModelAndView model = new ModelAndView("eventsList");
         model.addObject("events", eventService.getFilteredEventsPage(page, patientName, date));
-        model.addObject("pageCount", eventService.getCountOfEvents());
+        model.addObject("pageCount", eventService.getCountOfPages());
         model.addObject("currentPage", page);
         if (date != null) {
             model.addObject("searchDate", date);

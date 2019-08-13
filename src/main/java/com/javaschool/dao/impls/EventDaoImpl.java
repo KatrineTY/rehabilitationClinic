@@ -116,7 +116,7 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public List<Event> getFilteredEventsPage(int page, String patientName) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event where patient.name = :name order by patient.name");
+        Query query = session.createQuery("from Event where patient.name like '%' || :name || '%' order by patient.name");
         query.setParameter("name", patientName);
         query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
                 .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
@@ -128,7 +128,7 @@ public class EventDaoImpl implements EventDao {
     public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Event " +
-                "where patient.name = :name " +
+                "where patient.name like '%' || :name || '%' " +
                 "and date(date) = :date " +
                 "order by patient.name");
         query.setParameter("name", patientName);

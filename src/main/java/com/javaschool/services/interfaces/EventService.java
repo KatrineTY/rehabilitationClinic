@@ -24,7 +24,7 @@ public interface EventService {
 
     List<Event> getEventsPage(int page);
 
-    int getCountOfEvents();
+    int getCountOfPages();
 
     List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date);
 
