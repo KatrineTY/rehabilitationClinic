@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item ${pageContext.request.requestURI.endsWith('account.jsp')?'active':''}">
                 <a class="nav-link" href="<c:url value="/account"/>">Account </a>
             </li>
             <li class="nav-item ${pageContext.request.requestURI.endsWith('addPatient.jsp')?'active':''}">
-                <a class="nav-link " href="<c:url value="/add-patient"/>">Add patient</a>
+                <a class="nav-link" href="<c:url value="/add-patient"/>">Add patient</a>
             </li>
             <li class="nav-item" ${pageContext.request.requestURI.endsWith('addPrescription.jsp')?'active':''}>
                 <a class="nav-link" href="<c:url value="/add-prescription"/>">Add prescription</a>
@@ -23,5 +23,12 @@
                 <a class="nav-link" href="<c:url value="/get-events-list/1"/>">Events list</a>
             </li>
         </ul>
+        <ul class="navbar-nav navbar-right">
+            <li class="nav-item ">
+                <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
+            </li>
+        </ul>
+        <%--            <ul class="navbar-nav mr-auto">--%>
+
     </div>
 </nav>
