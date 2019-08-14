@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <link rel="stylesheet" href="../resources/static/css/bootstrap.min.css">
@@ -11,12 +12,48 @@
     <link rel="stylesheet" href="../resources/static/js/easy-autocomplete.min.css">
 
     <title>Edit prescription</title>
+    <script>
+        var patientNameOptions = {
+            url: "/RehabilitationClinic/getPatients",
+            list: {
+                maxNumberOfElements: 8,
+                match: {
+                    enabled: true
+                },
+                sort: {
+                    enabled: true
+                }
+            },
+            requestDelay: 300
+        };
+
+        $("#name").easyAutocomplete(patientNameOptions);
+
+        var procAndMedOptions = {
+            url: "/RehabilitationClinic/getProceduresAndMedicines",
+            list: {
+                maxNumberOfElements: 8,
+                match: {
+                    enabled: true
+                },
+                sort: {
+                    enabled: true
+                }
+            },
+            listLocation: "${prescriptionInfo.prescription.type.kind}",
+            requestDelay: 300
+        };
+        $("#type-kind").change(function () {
+            procAndMedOptions.listLocation = $("#type-kind option:selected").text().trim();
+            $("#type-name").easyAutocomplete(procAndMedOptions);
+        });
+        $("#type-name").easyAutocomplete(procAndMedOptions);
+    </script>
+
 </head>
 <body>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 ml-auto mr-auto">
-            <div class="card bg-custom mb-5">
+<t:page>
+    <jsp:body>
                 <h3 class="card-header">Prescription</h3>
                 <div class="card-body">
                     <div class="row">
@@ -112,46 +149,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script>
-    var patientNameOptions = {
-        url: "/RehabilitationClinic/getPatients",
-        list: {
-            maxNumberOfElements: 8,
-            match: {
-                enabled: true
-            },
-            sort: {
-                enabled: true
-            }
-        },
-        requestDelay: 300
-    };
+    </jsp:body>
+</t:page>
 
-    $("#name").easyAutocomplete(patientNameOptions);
-
-    var procAndMedOptions = {
-        url: "/RehabilitationClinic/getProceduresAndMedicines",
-        list: {
-            maxNumberOfElements: 8,
-            match: {
-                enabled: true
-            },
-            sort: {
-                enabled: true
-            }
-        },
-        listLocation: "${prescriptionInfo.prescription.type.kind}",
-        requestDelay: 300
-    };
-    $("#type-kind").change(function () {
-        procAndMedOptions.listLocation = $("#type-kind option:selected").text().trim();
-        $("#type-name").easyAutocomplete(procAndMedOptions);
-    });
-    $("#type-name").easyAutocomplete(procAndMedOptions);
-</script>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class AccountController {
         return "account";
     }
 
-    @RequestMapping(value = "/search-patient", method = RequestMethod.GET)
+    @RequestMapping(value = "/patients-list", method = RequestMethod.GET)
     public ModelAndView searchPatient() {
         return new ModelAndView("patientsList", "patientCards", accountService.getPatientCards());
     }

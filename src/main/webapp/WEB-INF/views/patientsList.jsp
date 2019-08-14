@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <link rel="stylesheet" href="./resources/static/css/bootstrap.min.css">
@@ -8,10 +9,8 @@
     <title>Patients</title>
 </head>
 <body>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-8 ml-auto mr-auto">
-            <div class="card bg-custom mb-5">
+<t:page width="10">
+    <jsp:body>
                 <input class=" form-control" type="text" placeholder="Search"
                        aria-label="Search" onkeyup="searchPatient()" id="searchPatient">
                 <table id="patientTable" class="table table-hover">
@@ -50,10 +49,8 @@
                     </c:if>
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-</div>
+    </jsp:body>
+</t:page>
 
 </body>
 </html>
