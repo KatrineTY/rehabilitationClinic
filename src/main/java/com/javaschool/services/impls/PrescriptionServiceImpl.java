@@ -57,7 +57,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     public void updatePrescriptionInfo(PrescriptionInfo prescriptionInfo, String empName) {
         PrescriptionInfo oldPrescriptionInfo = getPrescription(prescriptionInfo.getPrescription().getId());
         eventService.deleteEvents(oldPrescriptionInfo);
-        oldPrescriptionInfo.getPrescriptionTimes().forEach(prescriptionTimeService::deletePrescriptionTime);
         fillPrescription(prescriptionInfo, empName);
         fillPrescriptionTimes(prescriptionInfo);
 

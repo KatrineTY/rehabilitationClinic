@@ -25,6 +25,8 @@ public interface EventDao {
 
     void deleteEvents(int patientId);
 
+    void deleteEvents(PrescriptionInfo prescriptionInfo);
+
     void updateEventStatus(int id, Employee nurse, String comment, String status);
 
     List<Event> getEventsPage(int page);

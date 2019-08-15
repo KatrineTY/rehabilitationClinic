@@ -68,9 +68,18 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public void deleteEvents(int patientId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event where patient.id = :id and status = 'Planned'");
+        Query query = session.createQuery("delete from Event where patient.id = :id and status = 'Planned'");
         query.setParameter("id", patientId);
-        query.list().forEach(session::delete);
+        query.executeUpdate();
+    }
+
+    @Override
+    public void deleteEvents(PrescriptionInfo prescriptionInfo) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("delete from Event where patient = :patient and type = :type and status = 'Planned'");
+        query.setParameter("patient", prescriptionInfo.getPrescription().getPatient());
+        query.setParameter("type", prescriptionInfo.getPrescription().getType());
+        query.executeUpdate();
     }
 
     @Override
@@ -111,12 +120,12 @@ public class EventDaoImpl implements EventDao {
                 "and cast(date as time) between cast(:startTime as time) and cast(:endTime as time) " +
                 "order by patient.name");
         query.setParameter("date", date);
-        query.setParameter("startTime", timePeriodInfo.getStartTime());
-        query.setParameter("endTime", timePeriodInfo.getEndTime());
+        setPeriodTime(timePeriodInfo, query);
         query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
                 .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
         return query.list();
     }
+
 
     @Override
     @SuppressWarnings("unchecked")
@@ -127,8 +136,7 @@ public class EventDaoImpl implements EventDao {
                 "and cast(date as time) between cast(:startTime as time) and cast(:endTime as time) " +
                 "order by patient.name");
         query.setParameter("name", patientName);
-        query.setParameter("startTime", timePeriodInfo.getStartTime());
-        query.setParameter("endTime", timePeriodInfo.getEndTime());
+        setPeriodTime(timePeriodInfo, query);
         query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
                 .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
         return query.list();
@@ -145,8 +153,7 @@ public class EventDaoImpl implements EventDao {
                 "order by patient.name");
         query.setParameter("name", patientName);
         query.setParameter("date", date);
-        query.setParameter("startTime", timePeriodInfo.getStartTime());
-        query.setParameter("endTime", timePeriodInfo.getEndTime());
+        setPeriodTime(timePeriodInfo, query);
         query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
                 .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
         return query.list();
@@ -159,11 +166,15 @@ public class EventDaoImpl implements EventDao {
         Query query = session.createQuery("from Event " +
                 "where cast(date as time) between cast(:startTime as time) and cast(:endTime as time) " +
                 "order by patient.name");
-        query.setParameter("startTime", timePeriodInfo.getStartTime());
-        query.setParameter("endTime", timePeriodInfo.getEndTime());
+        setPeriodTime(timePeriodInfo, query);
         query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
                 .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
         return query.list();
+    }
+
+    private void setPeriodTime(TimePeriodInfo timePeriodInfo, Query query) {
+        query.setParameter("startTime", timePeriodInfo.getStartTime());
+        query.setParameter("endTime", timePeriodInfo.getEndTime());
     }
 
 }

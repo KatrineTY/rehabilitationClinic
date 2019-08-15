@@ -54,9 +54,9 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
     @SuppressWarnings("unchecked")
     public void deletePrescriptions(int patientId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Prescription where patient.id = :id");
+        Query query = session.createQuery("delete from Prescription where patient.id = :id");
         query.setParameter("id", patientId);
-        query.list().forEach(session::delete);
+        query.executeUpdate();
     }
 
     @Override
