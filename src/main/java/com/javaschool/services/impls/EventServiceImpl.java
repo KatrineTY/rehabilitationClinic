@@ -3,6 +3,7 @@ package com.javaschool.services.impls;
 import com.javaschool.dao.impls.EventDaoImpl;
 import com.javaschool.dao.interfaces.EventDao;
 import com.javaschool.dto.PrescriptionInfo;
+import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.PrescriptionTime;
 import com.javaschool.services.interfaces.EmployeeService;
@@ -79,30 +80,46 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date) {
+    public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date, TimePeriodInfo timePeriodInfo) {
         List<Event> events;
         int dbPage = page - 1;
         if (date != null && (patientName != null && !patientName.isEmpty())) {
-            events = eventDao.getFilteredEventsPage(dbPage, patientName, date);
+            events = eventDao.getFilteredEventsPage(dbPage, patientName, date, timePeriodInfo);
             countOfEvents = (int) getEvents().stream()
                     .filter(event -> StringUtils.containsIgnoreCase(event.getPatient().getName(), patientName)
-                            && event.getDate().toLocalDate().equals(date))
+                            && event.getDate().toLocalDate().equals(date)
+                            && isDateInPeriod(timePeriodInfo, event))
                     .count();
         } else if (patientName != null && !patientName.isEmpty()) {
-            events = eventDao.getFilteredEventsPage(dbPage, patientName);
+            events = eventDao.getFilteredEventsPage(dbPage, patientName, timePeriodInfo);
             countOfEvents = (int) getEvents().stream()
-                    .filter(event -> StringUtils.containsIgnoreCase(event.getPatient().getName(), patientName))
+                    .filter(event -> StringUtils.containsIgnoreCase(event.getPatient().getName(), patientName)
+                            && isDateInPeriod(timePeriodInfo, event))
                     .count();
         } else if (date != null) {
-            events = eventDao.getFilteredEventsPage(dbPage, date);
+            events = eventDao.getFilteredEventsPage(dbPage, date, timePeriodInfo);
             countOfEvents = (int) getEvents().stream()
-                    .filter(event -> event.getDate().toLocalDate().equals(date))
+                    .filter(event -> event.getDate().toLocalDate().equals(date)
+                            && isDateInPeriod(timePeriodInfo, event))
+                    .count();
+        } else if (!timePeriodInfo.getEndTime().equals(LocalTime.of(23, 59))
+                || !timePeriodInfo.getStartTime().equals(LocalTime.of(0, 0))) {
+            events = eventDao.getFilteredEventsPage(dbPage, timePeriodInfo);
+            countOfEvents = (int) getEvents().stream()
+                    .filter(event -> isDateInPeriod(timePeriodInfo, event))
                     .count();
         } else {
             events = getEventsPage(dbPage);
             countOfEvents = getEvents().size();
         }
         return events;
+    }
+
+    private boolean isDateInPeriod(TimePeriodInfo timePeriodInfo, Event event) {
+        return (event.getDate().toLocalTime().isBefore(timePeriodInfo.getEndTime())
+                || event.getDate().toLocalTime().equals(timePeriodInfo.getEndTime()))
+                && (event.getDate().toLocalTime().isAfter(timePeriodInfo.getStartTime())
+                || event.getDate().toLocalTime().equals(timePeriodInfo.getStartTime()));
     }
 
     private List<Event> collectEvents(PrescriptionInfo prescriptionInfo, List<LocalTime> times) {

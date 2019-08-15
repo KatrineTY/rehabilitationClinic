@@ -1,5 +1,6 @@
 package com.javaschool.controllers;
 
+import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.services.interfaces.EventService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Controller
 @NoArgsConstructor
@@ -38,19 +40,27 @@ public class EventsListController {
     @RequestMapping(value = "get-events-list/{page}")
     public ModelAndView getEventList(@PathVariable int page,
                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-                                     @RequestParam(name = "searchDate", required = false)
-                                             LocalDate date,
-                                     @RequestParam(name = "searchPatientName", required = false) String patientName) {
+                                     @RequestParam(name = "searchDate", required = false) LocalDate date,
+                                     @RequestParam(name = "searchPatientName", required = false) String patientName,
+                                     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+                                     @RequestParam(name = "searchStartTime", required = false) LocalTime startTime,
+                                     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+                                     @RequestParam(name = "searchEndTime", required = false) LocalTime endTime) {
         ModelAndView model = new ModelAndView("eventsList");
-        model.addObject("events", eventService.getFilteredEventsPage(page, patientName, date));
+        TimePeriodInfo timePeriodInfo = new TimePeriodInfo();
+        if (startTime != null) {
+            timePeriodInfo.setStartTime(startTime);
+        }
+        if (endTime != null) {
+            timePeriodInfo.setEndTime(endTime);
+        }
+        model.addObject("events", eventService.getFilteredEventsPage(page, patientName, date, timePeriodInfo));
         model.addObject("pageCount", eventService.getCountOfPages());
         model.addObject("currentPage", page);
-        if (date != null) {
-            model.addObject("searchDate", date);
-        }
-        if (patientName != null) {
-            model.addObject("searchPatientName", patientName);
-        }
+        model.addObject("searchDate", date);
+        model.addObject("searchPatientName", patientName);
+        model.addObject("searchStartTime", startTime);
+        model.addObject("searchEndTime", endTime);
         return model;
     }
 

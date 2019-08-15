@@ -2,6 +2,7 @@ package com.javaschool.services.impls;
 
 import com.javaschool.dao.interfaces.EventDao;
 import com.javaschool.dto.PrescriptionInfo;
+import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.*;
 import com.javaschool.services.interfaces.EmployeeService;
 import com.javaschool.services.interfaces.EventService;
@@ -29,6 +30,13 @@ class EventServiceImplTest {
     private static final Employee NURSE;
     private static final String COMMENT = "Comment";
     private static final String REJECTED_STATUS = "Rejected";
+    // for filters
+    private static final List<Event> EVENTS_LIST;
+    private static final int PAGE = 1;
+    private static final int DB_PAGE = PAGE - 1;
+    private static final LocalDate DATE = LocalDate.of(1990, 2, 5);
+    private static final String NAME = "PATIENT";
+    private static final TimePeriodInfo TIME_PERIOD;
 
     static {
         Patient patient = Patient.builder()
@@ -73,6 +81,20 @@ class EventServiceImplTest {
         NURSE = Employee.builder()
                 .name("Claret")
                 .build();
+
+        EVENTS_LIST = Arrays.asList(
+                Event.builder().patient(
+                        Patient.builder().name("test patient").build()
+                ).date(LocalDateTime.of(DATE, LocalTime.now())).build(),
+                Event.builder().patient(
+                        Patient.builder().name("patient").build()
+                ).date(LocalDateTime.of(1990, 2, 6, 10, 20)).build(),
+                Event.builder().patient(
+                        Patient.builder().name("test").build()
+                ).date(LocalDateTime.of(1990, 2, 7, 10, 20)).build()
+        );
+
+        TIME_PERIOD = new TimePeriodInfo();
     }
 
     @Mock
@@ -111,6 +133,35 @@ class EventServiceImplTest {
 
     private void tuneEventDao() {
         when(eventDao.getEvents(PRESCRIPTION_INFO)).thenReturn(EVENTS);
+    }
+
+    // filters
+    @Test
+    void should_getAllEvents_whenFilteringParamsAreEmpty() {
+        when(eventDao.getEvents()).thenReturn(EVENTS_LIST);
+        eventService.getFilteredEventsPage(PAGE, null, null, TIME_PERIOD);
+        verify(eventDao).getEventsPage(DB_PAGE);
+    }
+
+    @Test
+    void should_getFilteredEvents_whenFilteringByPatientName() {
+        when(eventDao.getEvents()).thenReturn(EVENTS_LIST);
+        eventService.getFilteredEventsPage(PAGE, NAME, null, TIME_PERIOD);
+        verify(eventDao).getFilteredEventsPage(DB_PAGE, NAME, TIME_PERIOD);
+    }
+
+    @Test
+    void should_getFilteredEvents_whenFilteringByDate() {
+        when(eventDao.getEvents()).thenReturn(EVENTS_LIST);
+        eventService.getFilteredEventsPage(PAGE, null, DATE, TIME_PERIOD);
+        verify(eventDao).getFilteredEventsPage(DB_PAGE, DATE, TIME_PERIOD);
+    }
+
+    @Test
+    void should_getFilteredEvents_whenFilteringByPatientNameAndDate() {
+        when(eventDao.getEvents()).thenReturn(EVENTS_LIST);
+        eventService.getFilteredEventsPage(PAGE, NAME, DATE, TIME_PERIOD);
+        verify(eventDao).getFilteredEventsPage(DB_PAGE, NAME, DATE, TIME_PERIOD);
     }
 
 }

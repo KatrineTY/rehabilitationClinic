@@ -28,7 +28,5 @@
                 <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
             </li>
         </ul>
-        <%--            <ul class="navbar-nav mr-auto">--%>
-
     </div>
 </nav>

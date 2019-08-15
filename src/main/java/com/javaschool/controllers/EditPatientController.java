@@ -34,14 +34,14 @@ public class EditPatientController {
             return model;
         }
         patientManipulationService.updatePatientInfo(patientInfo);
-        model.setViewName("redirect:../search-patient");
+        model.setViewName("redirect:../patients-list");
         return model;
     }
 
     @RequestMapping(value = "/discharge-patient", method = RequestMethod.POST)
     public ModelAndView dischargePatient(@RequestParam(name = "id") int id) {
         patientManipulationService.dischargePatient(id);
-        return new ModelAndView("redirect:search-patient");
+        return new ModelAndView("redirect:patients-list");
 
     }
 

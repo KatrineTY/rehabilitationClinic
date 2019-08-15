@@ -2,6 +2,7 @@ package com.javaschool.dao.impls;
 
 import com.javaschool.dao.interfaces.EventDao;
 import com.javaschool.dto.PrescriptionInfo;
+import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.Patient;
@@ -103,36 +104,63 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Event> getFilteredEventsPage(int page, LocalDate date) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event where date(date) = :date order by patient.name");
-        query.setParameter("date", date);
-        query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
-                .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
-        return query.list();
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Event> getFilteredEventsPage(int page, String patientName) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event where patient.name like '%' || :name || '%' order by patient.name");
-        query.setParameter("name", patientName);
-        query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
-                .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
-        return query.list();
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date) {
+    public List<Event> getFilteredEventsPage(int page, LocalDate date, TimePeriodInfo timePeriodInfo) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Event " +
-                "where patient.name like '%' || :name || '%' " +
+                "where date(date) = :date " +
+                "and cast(date as time) between cast(:startTime as time) and cast(:endTime as time) " +
+                "order by patient.name");
+        query.setParameter("date", date);
+        query.setParameter("startTime", timePeriodInfo.getStartTime());
+        query.setParameter("endTime", timePeriodInfo.getEndTime());
+        query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
+                .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
+        return query.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getFilteredEventsPage(int page, String patientName, TimePeriodInfo timePeriodInfo) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event " +
+                "where lower(patient.name) like '%' || lower(:name) || '%' " +
+                "and cast(date as time) between cast(:startTime as time) and cast(:endTime as time) " +
+                "order by patient.name");
+        query.setParameter("name", patientName);
+        query.setParameter("startTime", timePeriodInfo.getStartTime());
+        query.setParameter("endTime", timePeriodInfo.getEndTime());
+        query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
+                .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
+        return query.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date, TimePeriodInfo timePeriodInfo) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event " +
+                "where lower(patient.name) like '%' || lower(:name) || '%' " +
                 "and date(date) = :date " +
+                "and cast(date as time) between cast(:startTime as time) and cast(:endTime as time) " +
                 "order by patient.name");
         query.setParameter("name", patientName);
         query.setParameter("date", date);
+        query.setParameter("startTime", timePeriodInfo.getStartTime());
+        query.setParameter("endTime", timePeriodInfo.getEndTime());
+        query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
+                .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
+        return query.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getFilteredEventsPage(int page, TimePeriodInfo timePeriodInfo) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event " +
+                "where cast(date as time) between cast(:startTime as time) and cast(:endTime as time) " +
+                "order by patient.name");
+        query.setParameter("startTime", timePeriodInfo.getStartTime());
+        query.setParameter("endTime", timePeriodInfo.getEndTime());
         query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
                 .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
         return query.list();

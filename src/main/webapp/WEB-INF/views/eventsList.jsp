@@ -2,18 +2,14 @@
 <%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <link rel="stylesheet" href="../resources/static/css/bootstrap.min.css">
     <script src="../resources/static/js/jquery-1.11.2.min.js"></script>
     <script src="../resources/static/js/popper.min.js"></script>
     <script src="../resources/static/js/bootstrap.min.js"></script>
-    <script>
-        $('#rejectModal').on('show.bs.modal', function (e) {
-            var eventId = $(e.relatedTarget).data('event-id');
-            $(e.currentTarget).find('input[name="event.id"]').val(eventId);
-        });
-    </script>
+
     <title>Events</title>
 </head>
 <body>
@@ -23,8 +19,13 @@
         <form action="1">
             <div class="input-group">
                 <input class=" form-control" type="text" placeholder="search by patient's name"
-                       name="searchPatientName" value="${searchPatientName}">
-                <input class=" form-control" type="date" placeholder="search by date" name="searchDate">
+                       name="searchPatientName" value="${searchPatientName}"/>
+                <input class=" form-control" type="date" placeholder="search by date" name="searchDate"
+                       value="${searchDate}"/>
+                <input class=" form-control" type="time" placeholder="search by time" name="searchStartTime"
+                       value="${searchStartTime}"/>
+                <input class=" form-control" type="time" placeholder="search by time" name="searchEndTime"
+                       value="${searchEndTime}"/>
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </form>
@@ -53,12 +54,16 @@
                         <td>
                             <form action="take-task" method="post">
                                 <input style="display:none" name="event.id" type="number" value="${event.id}">
-                                <button type="submit" class="btn btn-primary">Get</button>
+                                <button type="submit" class="btn btn-primary"
+                                        <c:if test="${event.status!='Planned'}">disabled</c:if>>Get
+                                </button>
                             </form>
                         </td>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#rejectModal" data-event-id="${event.id}">Reject
+                                    data-target="#rejectModal" data-event-id="${event.id}"
+                                    <c:if test="${event.status!='Planned' && event.status!='In progress'}">disabled</c:if>>
+                                Reject
                             </button>
                         </td>
                     </tr>
@@ -170,7 +175,7 @@
                         <h4 class="modal-title">Reject task confirmation</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    <form action="reject-task" method="post" id="commentForm">
+                    <form action="<c:url value="/get-events-list/reject-task"/>" method="post" id="commentForm">
 
                         <div class="modal-body">
                             <input style="display:none" name="event.id" type="number">
@@ -189,6 +194,11 @@
     </jsp:body>
 </t:page>
 
-
+<script>
+    $('#rejectModal').on('show.bs.modal', function (e) {
+        let eventId = $(e.relatedTarget).data('event-id');
+        $(e.currentTarget).find('input[name="event.id"]').val(eventId);
+    });
+</script>
 </body>
 </html>

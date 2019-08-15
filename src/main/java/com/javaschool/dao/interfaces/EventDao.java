@@ -1,6 +1,7 @@
 package com.javaschool.dao.interfaces;
 
 import com.javaschool.dto.PrescriptionInfo;
+import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
 import com.javaschool.entities.Patient;
@@ -28,10 +29,12 @@ public interface EventDao {
 
     List<Event> getEventsPage(int page);
 
-    List<Event> getFilteredEventsPage(int page, LocalDate date);
+    List<Event> getFilteredEventsPage(int page, LocalDate date, TimePeriodInfo timePeriodInfo);
 
-    List<Event> getFilteredEventsPage(int page, String patientName);
+    List<Event> getFilteredEventsPage(int page, String patientName, TimePeriodInfo timePeriodInfo);
 
-    List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date);
+    List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date, TimePeriodInfo timePeriodInfo);
+
+    List<Event> getFilteredEventsPage(int dbPage, TimePeriodInfo timePeriodInfo);
 
 }

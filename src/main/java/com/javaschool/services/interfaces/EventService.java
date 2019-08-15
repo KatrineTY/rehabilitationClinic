@@ -1,6 +1,7 @@
 package com.javaschool.services.interfaces;
 
 import com.javaschool.dto.PrescriptionInfo;
+import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.Event;
 
 import java.time.LocalDate;
@@ -26,6 +27,6 @@ public interface EventService {
 
     int getCountOfPages();
 
-    List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date);
+    List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date, TimePeriodInfo timePeriodInfo);
 
 }
