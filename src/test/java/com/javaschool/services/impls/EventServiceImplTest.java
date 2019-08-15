@@ -46,6 +46,8 @@ class EventServiceImplTest {
                 .patient(patient)
                 .startDate(LocalDate.now())
                 .endDate(LocalDate.now().plusDays(3))
+                .prescriptionDays(Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"))
+
                 .build();
         List<PrescriptionTime> prescriptionTimes = Arrays.asList(
                 PrescriptionTime.builder()
@@ -113,14 +115,6 @@ class EventServiceImplTest {
     }
 
     @Test
-    void should_deleteSixEvents_forPrescriptionWithThreeDaysAndTwoTimes() {
-        tuneEventDao();
-        eventService.deleteEvents(PRESCRIPTION_INFO);
-        verify(eventDao).getEvents(PRESCRIPTION_INFO);
-        verify(eventDao, times(6)).deleteEvent(any());
-    }
-
-    @Test
     void should_updateEventStatusWithSpecifiedNurse_whenRejectTask() {
         tuneEmployeeService();
         eventService.rejectTask(1, NURSE.getName(), COMMENT);
@@ -129,10 +123,6 @@ class EventServiceImplTest {
 
     private void tuneEmployeeService() {
         when(employeeService.getEmployeeByName(NURSE.getName())).thenReturn(NURSE);
-    }
-
-    private void tuneEventDao() {
-        when(eventDao.getEvents(PRESCRIPTION_INFO)).thenReturn(EVENTS);
     }
 
     // filters
