@@ -11,31 +11,7 @@
     <script src="./resources/static/js/jquery.easy-autocomplete.min.js"></script>
     <link rel="stylesheet" href="./resources/static/js/easy-autocomplete.min.css">
     <title>Add patient</title>
-    <script>
-        var options = {
-            url: "/RehabilitationClinic/getDoctors",
-            getValue: function (element) {
-                return element;
-            },
-            template: {
-                type: "description",
-                fields: {
-                    description: "realName"
-                }
-            },
-            list: {
-                maxNumberOfElements: 8,
-                match: {
-                    enabled: true
-                },
-                sort: {
-                    enabled: true
-                }
-            },
-        };
 
-        $("#attendingDoctor").easyAutocomplete(options);
-    </script>
 </head>
 <body>
 <t:page>
@@ -104,6 +80,30 @@
         </div>
     </jsp:body>
 </t:page>
+<script>
+    var options = {
+        url: "/RehabilitationClinic/getDoctors",
+        getValue: function (element) {
+            return element;
+        },
+        template: {
+            type: "description",
+            fields: {
+                description: "realName"
+            }
+        },
+        list: {
+            maxNumberOfElements: 8,
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+        },
+    };
 
+    $("#attendingDoctor").easyAutocomplete(options);
+</script>
 </body>
 </html>

@@ -12,43 +12,6 @@
     <link rel="stylesheet" href="../resources/static/js/easy-autocomplete.min.css">
 
     <title>Edit prescription</title>
-    <script>
-        var patientNameOptions = {
-            url: "/RehabilitationClinic/getPatients",
-            list: {
-                maxNumberOfElements: 8,
-                match: {
-                    enabled: true
-                },
-                sort: {
-                    enabled: true
-                }
-            },
-            requestDelay: 300
-        };
-
-        $("#name").easyAutocomplete(patientNameOptions);
-
-        var procAndMedOptions = {
-            url: "/RehabilitationClinic/getProceduresAndMedicines",
-            list: {
-                maxNumberOfElements: 8,
-                match: {
-                    enabled: true
-                },
-                sort: {
-                    enabled: true
-                }
-            },
-            listLocation: "${prescriptionInfo.prescription.type.kind}",
-            requestDelay: 300
-        };
-        $("#type-kind").change(function () {
-            procAndMedOptions.listLocation = $("#type-kind option:selected").text().trim();
-            $("#type-name").easyAutocomplete(procAndMedOptions);
-        });
-        $("#type-name").easyAutocomplete(procAndMedOptions);
-    </script>
 
 </head>
 <body>
@@ -112,6 +75,40 @@
                                                     value="${prescriptionInfo.prescription.endDate}"/>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Days</label>
+                                    <form:errors path="prescription.prescriptionDays" cssClass="text-danger"/>
+                                    <div class="input-group">
+                                        <div class="form-check form-check-inline">
+                                            <form:checkbox path="prescription.prescriptionDays" value="MONDAY"
+                                                           class="form-check-input" id="mon"/>Mon
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <form:checkbox path="prescription.prescriptionDays" value="TUESDAY"
+                                                           class="form-check-input" id="tue"/>Tue
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <form:checkbox path="prescription.prescriptionDays" value="WEDNESDAY"
+                                                           class="form-check-input" id="wed"/>Wed
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <form:checkbox path="prescription.prescriptionDays" value="THURSDAY"
+                                                           class="form-check-input" id="thu"/>Thu
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <form:checkbox path="prescription.prescriptionDays" value="FRIDAY"
+                                                           class="form-check-input" id="fri"/>Fri
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <form:checkbox path="prescription.prescriptionDays" value="SATURDAY"
+                                                           class="form-check-input" id="sat"/>Sat
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <form:checkbox path="prescription.prescriptionDays" value="SUNDAY"
+                                                           class="form-check-input" id="sun"/>Sun
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="times">
                                     <label for="time0">Times:</label>
                                     <form:errors path="prescriptionTimes" cssClass="text-danger"/>
@@ -151,6 +148,43 @@
                 </div>
     </jsp:body>
 </t:page>
+<script>
+    var patientNameOptions = {
+        url: "/RehabilitationClinic/getPatients",
+        list: {
+            maxNumberOfElements: 8,
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+        },
+        requestDelay: 300
+    };
+
+    $("#name").easyAutocomplete(patientNameOptions);
+
+    var procAndMedOptions = {
+        url: "/RehabilitationClinic/getProceduresAndMedicines",
+        list: {
+            maxNumberOfElements: 8,
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+        },
+        listLocation: "${prescriptionInfo.prescription.type.kind}",
+        requestDelay: 300
+    };
+    $("#type-kind").change(function () {
+        procAndMedOptions.listLocation = $("#type-kind option:selected").text().trim();
+        $("#type-name").easyAutocomplete(procAndMedOptions);
+    });
+    $("#type-name").easyAutocomplete(procAndMedOptions);
+</script>
 
 </body>
 </html>

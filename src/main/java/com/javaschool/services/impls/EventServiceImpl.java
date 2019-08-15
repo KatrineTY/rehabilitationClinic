@@ -123,16 +123,19 @@ public class EventServiceImpl implements EventService {
     }
 
     private List<Event> collectEvents(PrescriptionInfo prescriptionInfo, List<LocalTime> times) {
+        List<String> prescriptionDays = prescriptionInfo.getPrescription().getPrescriptionDays();
         List<Event> events = new ArrayList<>();
         for (LocalTime time : times) {
             for (LocalDate date = prescriptionInfo.getPrescription().getStartDate();
                  date.isBefore(prescriptionInfo.getPrescription().getEndDate());
                  date = date.plusDays(1)) {
-                Event event = new Event();
-                event.setPatient(prescriptionInfo.getPrescription().getPatient());
-                event.setType(prescriptionInfo.getPrescription().getType());
-                event.setDate(LocalDateTime.of(date, time));
-                events.add(event);
+                if (prescriptionDays.contains(date.getDayOfWeek().name())) {
+                    Event event = new Event();
+                    event.setPatient(prescriptionInfo.getPrescription().getPatient());
+                    event.setType(prescriptionInfo.getPrescription().getType());
+                    event.setDate(LocalDateTime.of(date, time));
+                    events.add(event);
+                }
             }
         }
         return events;

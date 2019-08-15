@@ -4,7 +4,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
-    <link rel="stylesheet" href="./resources/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/static/css/bootstrap.min.css">
 
     <title>Patient schedule</title>
 </head>

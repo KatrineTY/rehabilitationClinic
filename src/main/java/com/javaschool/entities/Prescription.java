@@ -13,6 +13,7 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -57,5 +58,8 @@ public class Prescription {
 
     @OneToMany(mappedBy = "prescription", cascade = CascadeType.REMOVE)
     private List<PrescriptionTime> prescriptionTimes;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Size(min = 1, message = "At least one day should be chosen")
+    private List<String> prescriptionDays;
 
 }

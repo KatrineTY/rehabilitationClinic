@@ -70,12 +70,12 @@ CREATE TABLE proceds_and_medics
 CREATE TABLE prescriptions
 (
     prescription_id    SERIAL PRIMARY KEY,
-    patient            INTEGER           NOT NULL REFERENCES patients (patient_id),
+    patient            INTEGER NOT NULL REFERENCES patients (patient_id),
     type               INTEGER REFERENCES proceds_and_medics (type_id),
-    start_date         date              NOT NULL,
-    end_date           date              NOT NULL,
+    start_date         date    NOT NULL,
+    end_date           date    NOT NULL,
     dose               VARCHAR(50),
-    responsible_doctor INTEGER           NOT NULL REFERENCES employees (employee_id)
+    responsible_doctor INTEGER NOT NULL REFERENCES employees (employee_id)
 );
 
 CREATE TABLE prescription_times
