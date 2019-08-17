@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniquePatientsPromedConstraint {
-    String message() default "Prescription with this promed already exists in this period of time";
+    String message() default "";
 
     Class<?>[] groups() default {};
 

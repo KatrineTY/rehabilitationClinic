@@ -14,14 +14,20 @@ public class UniquePatientsPromedValidator implements ConstraintValidator<Unique
 
     @Override
     public boolean isValid(Prescription prescription, ConstraintValidatorContext constraintValidatorContext) {
-        Prescription lastPrescriptionWithCurrentPromed = prescriptionService
-                .getLastPrescription(prescription.getPatient().getName(), prescription.getType());
-        boolean isValid = lastPrescriptionWithCurrentPromed.getEndDate().isBefore(prescription.getStartDate());
-        if (!isValid) {
-            constraintValidatorContext.disableDefaultConstraintViolation();
-            constraintValidatorContext
-                    .buildConstraintViolationWithTemplate(constraintValidatorContext.getDefaultConstraintMessageTemplate())
-                    .addPropertyNode(".type.kind").addConstraintViolation();
+        boolean isValid;
+        if (prescription.getPatient().getName().isEmpty() || prescription.getType().getName().isEmpty()) {
+            isValid = false;
+        } else {
+            Prescription lastPrescriptionWithCurrentPromed = prescriptionService
+                    .getLastPrescription(prescription.getPatient().getName(), prescription.getType());
+            isValid = lastPrescriptionWithCurrentPromed == null ||
+                    lastPrescriptionWithCurrentPromed.getEndDate().isBefore(prescription.getStartDate());
+            if (!isValid) {
+                constraintValidatorContext.disableDefaultConstraintViolation();
+                constraintValidatorContext
+                        .buildConstraintViolationWithTemplate("Prescription with this promed already exists in this period of time")
+                        .addPropertyNode("type.kind").addConstraintViolation();
+            }
         }
         return isValid;
     }

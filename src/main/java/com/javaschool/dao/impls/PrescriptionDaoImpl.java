@@ -63,11 +63,16 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
     public Prescription getLastPrescription(String patientName, ProcedureAndMedicament promed) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Prescription " +
-                "where patient.name =: patientName and type =: promed " +
+                "where patient.name =: patientName and type.name =: name and type.kind =: kind " +
                 "order by endDate");
         query.setParameter("patientName", patientName);
-        query.setParameter("promed", promed);
-        return (Prescription) query.list().get(0);
+        query.setParameter("name", promed.getName());
+        query.setParameter("kind", promed.getKind());
+        if (query.list().isEmpty()) {
+            return null;
+        } else {
+            return (Prescription) query.list().get(0);
+        }
     }
 
 }
