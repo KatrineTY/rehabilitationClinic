@@ -184,6 +184,10 @@
         $("#type-name").easyAutocomplete(procAndMedOptions);
     });
     $("#type-name").easyAutocomplete(procAndMedOptions);
+    $('form').submit(function () {
+        $('form > div:hidden > input').attr("disabled", true);
+        $('form').submit();
+    })
 </script>
 
 </body>

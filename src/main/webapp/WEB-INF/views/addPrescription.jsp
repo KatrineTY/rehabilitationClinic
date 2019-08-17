@@ -32,10 +32,10 @@
                         <div class="form-group">
                             <label for="type-kind">Procedure/Medicament</label>
                             <form:errors path="prescription.type.kind" cssClass="text-danger"/>
-                            <form:select path="prescription.type.kind" class="form-control" id="type-kind">
+                            <select name="prescription.type.kind" class="form-control" id="type-kind">
                                 <option value="Procedure" onclick="hideDose()">Procedure</option>
                                 <option value="Medicament" selected onclick="showDose()">Medicament</option>
-                            </form:select>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="type-name">Name</label>
@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Add prescription</button>
+                        <button type="submit" class="btn btn-primary" id="submit">Add prescription</button>
                     </form:form>
                 </div>
             </div>
@@ -151,6 +151,10 @@
         procAndMedOptions.listLocation = $("#type-kind option:selected").text().trim();
         $("#type-name").easyAutocomplete(procAndMedOptions);
     });
+    $('form').submit(function () {
+        $('form > div:hidden > input').attr("disabled", true);
+        $('form').submit();
+    })
 </script>
 </body>
 </html>
