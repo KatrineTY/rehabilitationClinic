@@ -18,21 +18,30 @@ public class DiagnosisDaoImpl implements DiagnosisDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addDiagnosis(Diagnosis diagnosis) {
         Session session = sessionFactory.getCurrentSession();
         session.save(diagnosis);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings(value = "unchecked")
     public List<Diagnosis> getDiagnoses(PatientCard patientCard) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Diagnosis where patient_card = :patientCard");
+        Query query = session.createQuery("from Diagnosis where patientCard = :patientCard");
         query.setParameter("patientCard", patientCard);
         return (List<Diagnosis>) query.list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveOrUpdateDiagnosis(Diagnosis diagnosis) {
         Session session = sessionFactory.getCurrentSession();

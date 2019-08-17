@@ -22,11 +22,17 @@ public class AutocompleteServiceImpl implements AutocompleteService {
     @Autowired
     private ProcedureAndMedicamentService procedureAndMedicamentService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getPatientNames() {
         return patientService.getPatients().stream().map(Patient::getName).collect(Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ProcedureAndMedicament> getProcedureAndMedicamentNames() {
         return procedureAndMedicamentService.getProceduresAndMedicines();

@@ -5,7 +5,6 @@ import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
-import com.javaschool.entities.Patient;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,15 +22,9 @@ public class EventDaoImpl implements EventDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Event> getEvents(Patient patient) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event where patient = :patient");
-        query.setParameter("patient", patient);
-        return (List<Event>) query.list();
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<Event> getEvents(int patientId) {
@@ -41,29 +34,18 @@ public class EventDaoImpl implements EventDao {
         return (List<Event>) query.list();
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Event> getEvents(PrescriptionInfo prescriptionInfo) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event where patient = :patient and type = :type and status = 'Planned'");
-        query.setParameter("patient", prescriptionInfo.getPrescription().getPatient());
-        query.setParameter("type", prescriptionInfo.getPrescription().getType());
-        return query.list();
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addEvent(Event event) {
         Session session = sessionFactory.getCurrentSession();
         session.save(event);
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public void deleteEvent(Event event) {
-        Session session = sessionFactory.getCurrentSession();
-        session.delete(event);
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public void deleteEvents(int patientId) {
@@ -73,6 +55,9 @@ public class EventDaoImpl implements EventDao {
         query.executeUpdate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteEvents(PrescriptionInfo prescriptionInfo) {
         Session session = sessionFactory.getCurrentSession();
@@ -82,6 +67,9 @@ public class EventDaoImpl implements EventDao {
         query.executeUpdate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<Event> getEvents() {
@@ -90,6 +78,9 @@ public class EventDaoImpl implements EventDao {
         return query.list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateEventStatus(int id, Employee nurse, String comment, String status) {
         Session session = sessionFactory.getCurrentSession();
@@ -101,6 +92,9 @@ public class EventDaoImpl implements EventDao {
         event.setComment(comment);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<Event> getEventsPage(int page) {
@@ -111,6 +105,9 @@ public class EventDaoImpl implements EventDao {
         return query.list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<Event> getFilteredEventsPage(int page, LocalDate date, TimePeriodInfo timePeriodInfo) {
@@ -126,7 +123,9 @@ public class EventDaoImpl implements EventDao {
         return query.list();
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<Event> getFilteredEventsPage(int page, String patientName, TimePeriodInfo timePeriodInfo) {
@@ -142,6 +141,9 @@ public class EventDaoImpl implements EventDao {
         return query.list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date, TimePeriodInfo timePeriodInfo) {
@@ -159,6 +161,9 @@ public class EventDaoImpl implements EventDao {
         return query.list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<Event> getFilteredEventsPage(int page, TimePeriodInfo timePeriodInfo) {
@@ -172,6 +177,12 @@ public class EventDaoImpl implements EventDao {
         return query.list();
     }
 
+    /**
+     * Set query start and end times
+     *
+     * @param timePeriodInfo - time period that contains start and end times
+     * @param query          - the modifica
+     */
     private void setPeriodTime(TimePeriodInfo timePeriodInfo, Query query) {
         query.setParameter("startTime", timePeriodInfo.getStartTime());
         query.setParameter("endTime", timePeriodInfo.getEndTime());

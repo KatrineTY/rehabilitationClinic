@@ -29,6 +29,9 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private PatientCardService patientCardService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPatient(PatientInfo patientInfo) {
         patientDao.addPatient(patientInfo.getPatient());
@@ -41,26 +44,41 @@ public class PatientServiceImpl implements PatientService {
         log.debug("added patient info: {}", patientInfo);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Patient getPatient(String name) {
         return patientDao.getPatient(name);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Patient getPatient(int id) {
         return patientDao.getPatient(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePatient(Patient patient) {
         patientDao.updatePatient(patient);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Patient> getPatients() {
         return patientDao.getPatients();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInsuranceContains(String insurance) {
         return patientDao.isInsuranceContains(insurance);

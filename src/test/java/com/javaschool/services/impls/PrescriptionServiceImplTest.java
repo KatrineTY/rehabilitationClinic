@@ -116,7 +116,7 @@ class PrescriptionServiceImplTest {
     }
 
     private void tuneProcedureAndMedicamentServiceService() {
-        when(procedureAndMedicamentService.getElementWithId(PRESCRIPTION_INFO.getPrescription().getType()))
+        when(procedureAndMedicamentService.getPromedWithId(PRESCRIPTION_INFO.getPrescription().getType()))
                 .thenReturn(PROMED);
     }
 

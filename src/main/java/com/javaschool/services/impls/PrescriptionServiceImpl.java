@@ -32,6 +32,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Autowired
     private EventService eventService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<PrescriptionInfo> getPrescriptions() {
         return prescriptionDao.getPrescriptions()
@@ -46,6 +49,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PrescriptionInfo getPrescription(int id) {
         log.debug("get prescription info with prescription id: {}", id);
@@ -56,6 +62,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         return prescriptionInfo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePrescriptionInfo(PrescriptionInfo prescriptionInfo, String empName) {
         PrescriptionInfo oldPrescriptionInfo = getPrescription(prescriptionInfo.getPrescription().getId());
@@ -68,11 +77,19 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         log.debug("updated prescription info: {}", prescriptionInfo);
     }
 
+    /**
+     * Update prescription and prescription times
+     *
+     * @param prescriptionInfo - prescription info that contains specified prescription and prescription times
+     */
     private void updatePrescription(PrescriptionInfo prescriptionInfo) {
         prescriptionDao.updatePrescription(prescriptionInfo.getPrescription());
         prescriptionTimeService.updatePrescriptionTimes(prescriptionInfo.getPrescriptionTimes());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPrescription(PrescriptionInfo prescriptionInfo, String empName) {
         fillPrescription(prescriptionInfo, empName);
@@ -83,30 +100,50 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         eventService.addEvents(prescriptionInfo);
     }
 
+    /**
+     * Collect prescription from prescription info and with employee name who uses prescription
+     *
+     * @param prescriptionInfo - the prescription info to collect full information about prescription
+     * @param empName          - the name of an employee who uses prescription
+     */
     private void fillPrescription(PrescriptionInfo prescriptionInfo, String empName) {
         prescriptionInfo.getPrescription().setPatient(patientService.getPatient(
                 prescriptionInfo.getPrescription().getPatient().getName()));
-        prescriptionInfo.getPrescription().setType(procedureAndMedicamentService.getElementWithId(
+        prescriptionInfo.getPrescription().setType(procedureAndMedicamentService.getPromedWithId(
                 prescriptionInfo.getPrescription().getType()));
         prescriptionInfo.getPrescription().setResponsibleDoctor(employeeService.getEmployeeByName(empName));
     }
 
+    /**
+     * Collect prescription times from prescription info
+     *
+     * @param prescriptionInfo - the prescription info to collect full information about prescription times
+     */
     private void fillPrescriptionTimes(PrescriptionInfo prescriptionInfo) {
         Prescription prescription = prescriptionInfo.getPrescription();
         prescriptionInfo.getPrescriptionTimes().forEach(prescrTime -> prescrTime.setPrescription(prescription));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deletePrescriptionWithEvents(int id) {
         eventService.deleteEvents(getPrescription(id));
         prescriptionDao.deletePrescription(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deletePrescriptions(int patientId) {
         prescriptionDao.deletePrescriptions(patientId);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Prescription getLastPrescription(String patientName, ProcedureAndMedicament promed) {
         return prescriptionDao.getLastPrescription(patientName, promed);

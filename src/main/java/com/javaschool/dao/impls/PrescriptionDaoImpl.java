@@ -18,12 +18,18 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
     @Autowired
     SessionFactory sessionFactory;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPrescription(Prescription prescription) {
         Session session = sessionFactory.getCurrentSession();
         session.save(prescription);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<Prescription> getPrescriptions() {
@@ -32,24 +38,36 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Prescription getPrescription(int id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Prescription.class, id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePrescription(Prescription prescription) {
         Session session = sessionFactory.getCurrentSession();
         session.merge(prescription);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deletePrescription(int id) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(session.get(Prescription.class, id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public void deletePrescriptions(int patientId) {
@@ -59,6 +77,9 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
         query.executeUpdate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Prescription getLastPrescription(String patientName, ProcedureAndMedicament promed) {
         Session session = sessionFactory.getCurrentSession();

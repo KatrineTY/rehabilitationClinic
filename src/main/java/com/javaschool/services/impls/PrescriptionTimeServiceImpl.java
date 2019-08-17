@@ -18,24 +18,28 @@ public class PrescriptionTimeServiceImpl implements PrescriptionTimeService {
     @Autowired
     private PrescriptionTimeDao prescriptionTimeDao;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPrescriptionTime(PrescriptionTime prescriptionTime) {
         prescriptionTimeDao.addPrescriptionTime(prescriptionTime);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<PrescriptionTime> getPrescriptionTimes(Prescription prescription) {
         return prescriptionTimeDao.getPrescriptionTimes(prescription);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePrescriptionTimes(List<PrescriptionTime> prescriptionTimes) {
         prescriptionTimes.forEach(prescriptionTimeDao::updatePrescriptionTime);
-    }
-
-    @Override
-    public void deletePrescriptionTime(PrescriptionTime prescriptionTime) {
-        prescriptionTimeDao.deletePrescriptionTime(prescriptionTime);
     }
 
 }

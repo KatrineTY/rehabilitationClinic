@@ -17,6 +17,9 @@ public class ProcedureAndMedicamentDaoImpl implements ProcedureAndMedicamentDao 
     @Autowired
     SessionFactory sessionFactory;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ProcedureAndMedicament getElementWithId(ProcedureAndMedicament procedureAndMedicament) {
         Session session = sessionFactory.getCurrentSession();
@@ -26,6 +29,9 @@ public class ProcedureAndMedicamentDaoImpl implements ProcedureAndMedicamentDao 
         return (ProcedureAndMedicament) query.uniqueResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<ProcedureAndMedicament> getProceduresAndMedicines() {

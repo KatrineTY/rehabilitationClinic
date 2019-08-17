@@ -17,25 +17,36 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Employee getEmployeeByLogin(String login) {
         return employeeDao.getEmployeeByLogin(login);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Employee getEmployeeByName(String name) {
         return employeeDao.getEmployeeByName(name);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getAttendingDoctorNames() {
         return employeeDao.getEmployeeWithRoleNames("ROLE_MAIN_DOCTOR");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getResponsibleDoctorNames() {
         return employeeDao.getEmployeeWithRoleNames("ROLE_DOCTOR");
     }
-
 
 }

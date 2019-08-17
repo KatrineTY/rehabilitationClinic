@@ -18,12 +18,18 @@ public class PrescriptionTimeDaoImpl implements PrescriptionTimeDao {
     @Autowired
     SessionFactory sessionFactory;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPrescriptionTime(PrescriptionTime prescriptionTime) {
         Session session = sessionFactory.getCurrentSession();
         session.save(prescriptionTime);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<PrescriptionTime> getPrescriptionTimes(Prescription prescription) {
@@ -33,16 +39,13 @@ public class PrescriptionTimeDaoImpl implements PrescriptionTimeDao {
         return query.list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePrescriptionTime(PrescriptionTime prescriptionTime) {
         Session session = sessionFactory.getCurrentSession();
         session.merge(prescriptionTime);
-    }
-
-    @Override
-    public void deletePrescriptionTime(PrescriptionTime prescriptionTime) {
-        Session session = sessionFactory.getCurrentSession();
-        session.delete(prescriptionTime);
     }
 
 }

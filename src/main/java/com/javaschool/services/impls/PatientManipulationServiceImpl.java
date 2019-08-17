@@ -1,7 +1,6 @@
 package com.javaschool.services.impls;
 
 import com.javaschool.dto.PatientInfo;
-import com.javaschool.entities.PatientCard;
 import com.javaschool.services.interfaces.*;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +28,9 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
     @Autowired
     private DiagnosisService diagnosisService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PatientInfo getPatientInfo(int patientId) {
         log.debug("get patient info with patient id: {}", patientId);
@@ -39,6 +41,9 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
         return patientInfo;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePatientInfo(PatientInfo patientInfo) {
         patientService.updatePatient(patientInfo.getPatient());
@@ -51,26 +56,25 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
         log.debug("updated patient info: {}", patientInfo);
     }
 
-    @Override
-    public List<PatientCard> getPatientCards() {
-        return patientCardService.getPatientCards();
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getAttendingDoctorNames() {
         return employeeService.getAttendingDoctorNames();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getResponsibleDoctorNames() {
         return employeeService.getResponsibleDoctorNames();
     }
 
-    @Override
-    public void addPatient(PatientInfo patientInfo) {
-        patientService.addPatient(patientInfo);
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void dischargePatient(int id) {
         patientCardService.changeStatus(id, "Discharged");

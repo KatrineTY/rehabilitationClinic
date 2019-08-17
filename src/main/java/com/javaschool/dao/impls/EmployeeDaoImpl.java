@@ -17,6 +17,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Employee getEmployeeByLogin(String login) {
         Session session = sessionFactory.getCurrentSession();
@@ -25,6 +28,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return (Employee) query.uniqueResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Employee getEmployeeByName(String name) {
         Session session = sessionFactory.getCurrentSession();
@@ -33,6 +39,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return (Employee) query.uniqueResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings("unchecked")
     public List<String> getEmployeeWithRoleNames(String role) {

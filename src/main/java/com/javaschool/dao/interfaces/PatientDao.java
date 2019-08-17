@@ -6,16 +6,49 @@ import java.util.List;
 
 public interface PatientDao {
 
+    /**
+     * Retrieve all patients
+     *
+     * @return list of patients
+     */
     List<Patient> getPatients();
 
+    /**
+     * Add patient into DB
+     *
+     * @param patient - the patient to be added into DB
+     */
     void addPatient(Patient patient);
 
+    /**
+     * Retrieve patient by his name
+     *
+     * @param name - the name to be used to get patient
+     * @return the specified patient
+     */
     Patient getPatient(String name);
 
+    /**
+     * Retrieve patient by his id
+     *
+     * @param id - the id to be used to get patient
+     * @return the specified patient
+     */
     Patient getPatient(int id);
 
+    /**
+     * Update patient
+     *
+     * @param patient - the patient to be updated
+     */
     void updatePatient(Patient patient);
 
+    /**
+     * Check if an insurance already exists in the DB
+     *
+     * @param insurance - the insurance to be checked
+     * @return true is the isurance already exists, false otherwise
+     */
     boolean isInsuranceContains(String insurance);
 
 }

@@ -18,16 +18,25 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     @Autowired
     private DiagnosisDao diagnosisDao;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addDiagnosis(Diagnosis diagnosis) {
         diagnosisDao.addDiagnosis(diagnosis);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Diagnosis> getDiagnoses(PatientCard patientCard) {
         return diagnosisDao.getDiagnoses(patientCard);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveOrUpdateDiagnosis(Diagnosis diagnosis) {
         diagnosisDao.saveOrUpdateDiagnosis(diagnosis);

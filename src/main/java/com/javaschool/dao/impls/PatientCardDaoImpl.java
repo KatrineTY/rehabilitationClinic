@@ -18,12 +18,18 @@ public class PatientCardDaoImpl implements PatientCardDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPatientCard(PatientCard patientCard) {
         Session session = sessionFactory.getCurrentSession();
         session.save(patientCard);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings(value = "unchecked")
     public List<PatientCard> getPatientCards() {
@@ -31,6 +37,9 @@ public class PatientCardDaoImpl implements PatientCardDao {
         return (List<PatientCard>) session.createQuery("from PatientCard").list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PatientCard getPatientCard(Patient patient) {
         Session session = sessionFactory.getCurrentSession();
@@ -39,12 +48,18 @@ public class PatientCardDaoImpl implements PatientCardDao {
         return (PatientCard) query.uniqueResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePatientCard(PatientCard patientCard) {
         Session session = sessionFactory.getCurrentSession();
         session.update(patientCard);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void changeStatus(int patientId, String status) {
         Session session = sessionFactory.getCurrentSession();
@@ -55,6 +70,9 @@ public class PatientCardDaoImpl implements PatientCardDao {
         session.update(patientCard);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFreeBedInTheWard(String building, int ward) {
         Session session = sessionFactory.getCurrentSession();

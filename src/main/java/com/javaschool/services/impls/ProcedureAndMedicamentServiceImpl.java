@@ -18,16 +18,25 @@ public class ProcedureAndMedicamentServiceImpl implements ProcedureAndMedicament
     @Autowired
     private ProcedureAndMedicamentDao procedureAndMedicamentDao;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public ProcedureAndMedicament getElementWithId(ProcedureAndMedicament procedureAndMedicament) {
+    public ProcedureAndMedicament getPromedWithId(ProcedureAndMedicament procedureAndMedicament) {
         return procedureAndMedicamentDao.getElementWithId(procedureAndMedicament);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ProcedureAndMedicament> getProceduresAndMedicines() {
         return procedureAndMedicamentDao.getProceduresAndMedicines();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getMedicines() {
         return getProceduresAndMedicines()
@@ -37,6 +46,9 @@ public class ProcedureAndMedicamentServiceImpl implements ProcedureAndMedicament
                 .collect(Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getProcedures() {
         return getProceduresAndMedicines()

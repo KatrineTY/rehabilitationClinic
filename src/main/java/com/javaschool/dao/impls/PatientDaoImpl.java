@@ -17,6 +17,9 @@ public class PatientDaoImpl implements PatientDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @SuppressWarnings(value = "unchecked")
     public List<Patient> getPatients() {
@@ -24,12 +27,18 @@ public class PatientDaoImpl implements PatientDao {
         return (List<Patient>) session.createQuery("from Patient").list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addPatient(Patient patient) {
         Session session = sessionFactory.getCurrentSession();
         session.save(patient);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Patient getPatient(String name) {
         Session session = sessionFactory.getCurrentSession();
@@ -38,6 +47,9 @@ public class PatientDaoImpl implements PatientDao {
         return (Patient) query.uniqueResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Patient getPatient(int id) {
         Session session = sessionFactory.getCurrentSession();
@@ -46,12 +58,18 @@ public class PatientDaoImpl implements PatientDao {
         return (Patient) query.uniqueResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updatePatient(Patient patient) {
         Session session = sessionFactory.getCurrentSession();
         session.update(patient);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isInsuranceContains(String insurance) {
         Session session = sessionFactory.getCurrentSession();

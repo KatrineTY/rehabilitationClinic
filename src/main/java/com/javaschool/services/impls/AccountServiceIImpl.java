@@ -24,21 +24,33 @@ public class AccountServiceIImpl implements AccountService {
     @Autowired
     private EventService eventService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<PatientCard> getPatientCards() {
         return patientCardService.getPatientCards();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getEmployeeNameByLogin(String login) {
         return employeeService.getEmployeeByLogin(login).getName();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<PrescriptionInfo> getPrescriptions() {
         return prescriptionService.getPrescriptions();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Event> getEvents() {
         return eventService.getEvents();
