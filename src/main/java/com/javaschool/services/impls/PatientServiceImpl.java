@@ -8,6 +8,7 @@ import com.javaschool.services.interfaces.EmployeeService;
 import com.javaschool.services.interfaces.PatientCardService;
 import com.javaschool.services.interfaces.PatientService;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.List;
 @Component
 @NoArgsConstructor
 @Transactional
+@Slf4j
 public class PatientServiceImpl implements PatientService {
     @Autowired
     private PatientDao patientDao;
@@ -36,6 +38,7 @@ public class PatientServiceImpl implements PatientService {
         patientCardService.addPatientCard(patientInfo.getPatientCard());
         patientInfo.getDiagnoses().forEach(diag -> diag.setPatientCard(patientInfo.getPatientCard()));
         patientInfo.getDiagnoses().forEach(diag -> diagnosisService.addDiagnosis(diag));
+        log.debug("added patient info: {}", patientInfo);
     }
 
     @Override

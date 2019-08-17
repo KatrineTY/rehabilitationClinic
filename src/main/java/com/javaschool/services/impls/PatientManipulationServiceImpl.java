@@ -4,6 +4,7 @@ import com.javaschool.dto.PatientInfo;
 import com.javaschool.entities.PatientCard;
 import com.javaschool.services.interfaces.*;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import java.util.List;
 @Component
 @NoArgsConstructor
 @Transactional
+@Slf4j
 public class PatientManipulationServiceImpl implements PatientManipulationService {
     @Autowired
     private PatientCardService patientCardService;
@@ -29,6 +31,7 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
 
     @Override
     public PatientInfo getPatientInfo(int patientId) {
+        log.debug("get patient info with patient id: {}", patientId);
         PatientInfo patientInfo = new PatientInfo();
         patientInfo.setPatient(patientService.getPatient(patientId));
         patientInfo.setPatientCard(patientCardService.getPatientCard(patientInfo.getPatient()));
@@ -45,6 +48,7 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
         patientCardService.updatePatientCard(patientInfo.getPatientCard());
         patientInfo.getDiagnoses().forEach(diag -> diag.setPatientCard(patientInfo.getPatientCard()));
         patientInfo.getDiagnoses().forEach(diag -> diagnosisService.saveOrUpdateDiagnosis(diag));
+        log.debug("updated patient info: {}", patientInfo);
     }
 
     @Override

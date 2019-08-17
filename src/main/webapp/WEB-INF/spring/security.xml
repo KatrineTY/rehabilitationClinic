@@ -5,12 +5,15 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
     <http use-expressions="true">
-        <intercept-url pattern="/account" access="isAuthenticated()"/>
+        <intercept-url pattern="/login" access="permitAll()"/>
+        <intercept-url pattern="/" access="permitAll()"/>
+        <intercept-url pattern="/*" access="isAuthenticated()"/>
         <form-login login-page='/login'
                     default-target-url="/account"
                     authentication-failure-url="/login?error=true"
                     username-parameter="user_login"
-                    password-parameter="password_login"/>
+                    password-parameter="password_login"
+                    always-use-default-target="true"/>
         <logout logout-success-url="/login" logout-url="/logout"/>
         <remember-me key="uniqueAndSecret"/>
     </http>

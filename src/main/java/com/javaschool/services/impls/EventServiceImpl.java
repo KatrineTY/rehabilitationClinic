@@ -9,6 +9,7 @@ import com.javaschool.entities.PrescriptionTime;
 import com.javaschool.services.interfaces.EmployeeService;
 import com.javaschool.services.interfaces.EventService;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @Component
 @NoArgsConstructor
 @Transactional
+@Slf4j
 public class EventServiceImpl implements EventService {
     private int countOfEvents;
     @Autowired
@@ -80,6 +82,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date, TimePeriodInfo timePeriodInfo) {
+        log.debug("filters of filtering events for {} page: patient name - {}, date - {}, time period - {}"
+                , page, patientName, date, timePeriodInfo);
         List<Event> events;
         int dbPage = page - 1;
         if (date != null && (patientName != null && !patientName.isEmpty())) {

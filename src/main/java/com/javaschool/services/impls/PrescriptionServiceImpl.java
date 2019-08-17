@@ -6,6 +6,7 @@ import com.javaschool.entities.Prescription;
 import com.javaschool.entities.ProcedureAndMedicament;
 import com.javaschool.services.interfaces.*;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @Component
 @NoArgsConstructor
 @Transactional
+@Slf4j
 public class PrescriptionServiceImpl implements PrescriptionService {
     @Autowired
     private PrescriptionDao prescriptionDao;
@@ -46,6 +48,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public PrescriptionInfo getPrescription(int id) {
+        log.debug("get prescription info with prescription id: {}", id);
         PrescriptionInfo prescriptionInfo = new PrescriptionInfo();
         Prescription prescription = prescriptionDao.getPrescription(id);
         prescriptionInfo.setPrescription(prescription);
@@ -62,6 +65,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
         updatePrescription(prescriptionInfo);
         eventService.addEvents(prescriptionInfo);
+        log.debug("updated prescription info: {}", prescriptionInfo);
     }
 
     private void updatePrescription(PrescriptionInfo prescriptionInfo) {

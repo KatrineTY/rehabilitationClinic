@@ -1,9 +1,6 @@
 package com.javaschool.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -27,9 +24,11 @@ public class Employee {
     private String position;
     @Column
     @NotBlank
+    @ToString.Exclude
     private String login;
     @Column
     @NotBlank
+    @ToString.Exclude
     private String password;
     @Column
     private String phone;
@@ -37,6 +36,7 @@ public class Employee {
     private String email;
     @ManyToOne
     @JoinColumn(name = "working_time", referencedColumnName = "working_time_id")
+    @ToString.Exclude
     private WorkingTime workingTime;
     @Column
     private boolean enabled = true;

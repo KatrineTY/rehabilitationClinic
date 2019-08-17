@@ -3,6 +3,7 @@ package com.javaschool.controllers;
 import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.services.interfaces.EventService;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import java.time.LocalTime;
 
 @Controller
 @NoArgsConstructor
+@Slf4j
 public class EventsListController {
     @Autowired
     EventService eventService;
@@ -21,18 +23,22 @@ public class EventsListController {
     @RequestMapping(value = "get-events-list/take-task", method = RequestMethod.POST)
     public ModelAndView takeTask(@RequestParam(name = "event.id") int id,
                                  @SessionAttribute(name = "empName") String empName) {
+        log.info("attempted to take event with id: {}", id);
         ModelAndView model = new ModelAndView();
         eventService.takeTask(id, empName);
+        log.info("took event with id: {}", id);
         model.setViewName("redirect:../get-events-list/1");
         return model;
     }
 
     @RequestMapping(value = "get-events-list/reject-task", method = RequestMethod.POST)
-    public ModelAndView rejectTask(@RequestParam(name = "event.id") int eventId,
+    public ModelAndView rejectTask(@RequestParam(name = "event.id") int id,
                                    @RequestParam(name = "comment") String comment,
                                    @SessionAttribute(name = "empName") String empName) {
+        log.info("attempted to reject event with id: {}", id);
         ModelAndView model = new ModelAndView();
-        eventService.rejectTask(eventId, empName, comment);
+        eventService.rejectTask(id, empName, comment);
+        log.info("rejected event with id: {}", id);
         model.setViewName("redirect:../get-events-list/1");
         return model;
     }
@@ -46,6 +52,7 @@ public class EventsListController {
                                      @RequestParam(name = "searchStartTime", required = false) LocalTime startTime,
                                      @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
                                      @RequestParam(name = "searchEndTime", required = false) LocalTime endTime) {
+        log.info("requested events list");
         ModelAndView model = new ModelAndView("eventsList");
         TimePeriodInfo timePeriodInfo = new TimePeriodInfo();
         if (startTime != null) {

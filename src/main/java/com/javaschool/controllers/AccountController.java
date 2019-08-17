@@ -2,6 +2,7 @@ package com.javaschool.controllers;
 
 import com.javaschool.services.interfaces.AccountService;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @NoArgsConstructor
+@Slf4j
 public class AccountController {
     @Autowired
     AccountService accountService;
@@ -28,11 +30,13 @@ public class AccountController {
 
     @RequestMapping(value = "/patients-list", method = RequestMethod.GET)
     public ModelAndView searchPatient() {
+        log.info("requested patients list");
         return new ModelAndView("patientsList", "patientCards", accountService.getPatientCards());
     }
 
     @RequestMapping(value = "/get-prescriptions-list", method = RequestMethod.GET)
     public ModelAndView getPrescriptionsList() {
+        log.info("requested prescriptions list");
         return new ModelAndView("prescriptionsList", "prescriptions", accountService.getPrescriptions());
     }
 
