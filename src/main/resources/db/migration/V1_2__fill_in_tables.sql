@@ -183,8 +183,8 @@ VALUES ('1', '08:11'),
        ('2', '20:31'),
        ('2', '12:09');
 
-INSERT INTO events (patient, type, date)
-SELECT patient, type, (date(start_date) || ' ' || time)::timestamp
+INSERT INTO events (patient, type, date, dose)
+SELECT patient, type, (date(start_date) || ' ' || time)::timestamp, dose
 FROM prescriptions
          INNER JOIN prescription_times ON prescriptions.prescription_id = prescription_times.prescription;
 

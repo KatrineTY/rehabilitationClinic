@@ -38,6 +38,8 @@
                 <td><b>Kind of treatment</b></td>
                 <td><b>Name of treatment</b></td>
                 <td><b>Status</b></td>
+                <td><b>Comment</b></td>
+                <td><b>Dose</b></td>
                 <td>Get task</td>
                 <td>Reject task</td>
             </tr>
@@ -51,6 +53,8 @@
                         <td>${event.type.kind}</td>
                         <td>${event.type.name}</td>
                         <td>${event.status}</td>
+                        <td>${event.comment}</td>
+                        <td>${event.dose}</td>
                         <td>
                             <form action="take-task" method="post">
                                 <input style="display:none" name="event.id" type="number" value="${event.id}">

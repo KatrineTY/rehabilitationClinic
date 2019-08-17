@@ -92,6 +92,7 @@ CREATE TABLE events
     date     TIMESTAMP                     NOT NULL,
     status   VARCHAR(12) DEFAULT 'Planned' NOT NULL CHECK (status = 'Planned' OR status = 'In progress' OR status = 'Rejected'),
     type     INTEGER                       NOT NULL REFERENCES proceds_and_medics (type_id),
+    dose     VARCHAR(50),
     nurse    INTEGER REFERENCES employees (employee_id),
     comment  VARCHAR(50)
 );

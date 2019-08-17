@@ -137,6 +137,7 @@ public class EventServiceImpl implements EventService {
                     event.setPatient(prescriptionInfo.getPrescription().getPatient());
                     event.setType(prescriptionInfo.getPrescription().getType());
                     event.setDate(LocalDateTime.of(date, time));
+                    event.setDose(prescriptionInfo.getPrescription().getDose());
                     events.add(event);
                 }
             }

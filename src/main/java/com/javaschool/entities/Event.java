@@ -39,5 +39,7 @@ public class Event {
     private Employee nurse;
     @Column
     private String comment;
+    @Column
+    private String dose;
 
 }
