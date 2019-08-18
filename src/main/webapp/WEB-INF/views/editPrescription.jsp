@@ -123,7 +123,8 @@
                                                     <input name="prescriptionTimes[${loop.index}].time" type="time"
                                                            class="form-control"
                                                            id="time${loop.index}"
-                                                           value="${time.time}"/>
+                                                           value="${time.time}"
+                                                           step="60"/>
                                                     <div class="input-group-append">
                                                         <button class="btn btn-primary" type="button"
                                                                 onclick="addPrescriptionTime()">

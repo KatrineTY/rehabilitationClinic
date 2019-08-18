@@ -100,7 +100,7 @@
                                 <form:errors path="prescriptionTimes" cssClass="text-danger"/>
                                 <div class="input-group">
                                     <input name="prescriptionTimes[0].time" type="time" class="form-control"
-                                           id="prescriptionTimes0"/>
+                                           id="prescriptionTimes0" step="60"/>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button"
                                                 onclick="addPrescriptionTime()">

@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PrescriptionTimesListConstraint {
-    String message() default "Time cannot be empty";
+    String message() default "Wrong time";
 
     Class<?>[] groups() default {};
 

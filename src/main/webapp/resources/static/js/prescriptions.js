@@ -2,7 +2,7 @@ function addPrescriptionTime() {
     let timesCount = $('*[type="time"]').length;
     $('<div class="form-group">\n' +
         '    <div class="input-group">\n' +
-        '        <input name="prescriptionTimes[' + timesCount + '].time" type="time" class="form-control"\n' +
+        '        <input name="prescriptionTimes[' + timesCount + '].time" type="time" class="form-control" step="60"\n' +
         '             />\n' +
         '        <div class="input-group-append">\n' +
         '            <button class="btn btn-primary" type="button" onclick="addPrescriptionTime()">\n' +
