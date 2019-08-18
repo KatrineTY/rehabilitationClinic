@@ -52,10 +52,13 @@
                         </div>
                         <div class="form-group">
                             <label>Period</label>
+                            <br/>
+                            <form:errors path="prescription.startDate" cssClass="text-danger"/>
                             <div class="input-group">
-                                <form:errors path="prescription.startDate" cssClass="text-danger"/>
                                 <form:input path="prescription.startDate" type="date" class="form-control"/>
-                                <form:errors path="prescription.endDate" cssClass="text-danger"/>
+                            </div>
+                            <form:errors path="prescription.endDate" cssClass="text-danger"/>
+                            <div class="input-group">
                                 <form:input path="prescription.endDate" type="date" class="form-control"/>
                             </div>
                         </div>
