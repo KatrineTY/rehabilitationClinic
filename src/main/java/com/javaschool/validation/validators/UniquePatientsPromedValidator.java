@@ -15,7 +15,8 @@ public class UniquePatientsPromedValidator implements ConstraintValidator<Unique
     @Override
     public boolean isValid(Prescription prescription, ConstraintValidatorContext constraintValidatorContext) {
         boolean isValid;
-        if (prescription.getPatient().getName().isEmpty() || prescription.getType().getName().isEmpty()) {
+        if (prescription.getPatient().getName().isEmpty() || prescription.getType().getName().isEmpty()
+                || prescription.getEndDate() == null || prescription.getStartDate() == null) {
             isValid = false;
         } else {
             Prescription lastPrescriptionWithCurrentPromed = prescriptionService
