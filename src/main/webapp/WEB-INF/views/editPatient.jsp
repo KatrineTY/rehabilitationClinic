@@ -79,28 +79,38 @@
                                 <c:if test="${not empty patientInfo.diagnoses}">
                                     <c:forEach var="diagnosis" items="${patientInfo.diagnoses}"
                                                varStatus="loop">
-                                        <input style="display:none" name="diagnoses[${loop.index}].id"
-                                               value="${patientInfo.diagnoses[loop.index].id}">
-                                        <input style="display:none" name="diagnoses[${loop.index}].startDate"
-                                               value="${patientInfo.diagnoses[loop.index].startDate}"
-                                               type="datetime-local">
-                                        <input style="display:none" name="diagnoses[${loop.index}].endDate"
-                                               value="${patientInfo.diagnoses[loop.index].endDate}"
-                                               type="datetime-local">
-                                        <div class="input-group">
-                                            <input name="diagnoses[${loop.index}].name" type="text"
-                                                   class="form-control"
-                                                   id="diagnosis${loop.index}"
-                                                   value="${diagnosis.name}"/>
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button"
-                                                        onclick="addDiagnosis()">
-                                                    +
-                                                </button>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input style="display:none" name="diagnoses[${loop.index}].id"
+                                                       value="${patientInfo.diagnoses[loop.index].id}">
+                                                <input style="display:none" name="diagnoses[${loop.index}].startDate"
+                                                       value="${patientInfo.diagnoses[loop.index].startDate}"
+                                                       type="datetime-local">
+                                                <input style="display:none" name="diagnoses[${loop.index}].endDate"
+                                                       value="${patientInfo.diagnoses[loop.index].endDate}"
+                                                       type="datetime-local">
+                                                <div class="input-group">
+                                                    <input name="diagnoses[${loop.index}].name" type="text"
+                                                           class="form-control"
+                                                           id="diagnosis${loop.index}"
+                                                           value="${diagnosis.name}"/>
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="button"
+                                                                onclick="addDiagnosis()">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                    <c:if test="${loop.index != 0}">
+                                                        <button class="btn btn-danger" type="button"
+                                                                onclick="removeDiagnosis(this)">
+                                                            ×
+                                                        </button>
+                                                    </c:if>
+                                                </div>
+                                                <textarea name="diagnoses[${loop.index}].comment" class="form-control"
+                                                          rows="0.5" placeholder="${diagnosis.comment}"></textarea>
                                             </div>
                                         </div>
-                                        <textarea name="diagnoses[${loop.index}].comment" class="form-control"
-                                                  rows="0.5" placeholder="${diagnosis.comment}"></textarea>
                                     </c:forEach>
                                 </c:if>
 

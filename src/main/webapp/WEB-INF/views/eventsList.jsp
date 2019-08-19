@@ -3,6 +3,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <html>
 <head>
     <link rel="stylesheet" href="../resources/static/css/bootstrap.min.css">
@@ -18,14 +20,15 @@
     <jsp:body>
         <form action="1">
             <div class="input-group">
+
                 <input class=" form-control" type="text" placeholder="search by patient's name"
                        name="searchPatientName" value="${searchPatientName}"/>
                 <input class=" form-control" type="date" placeholder="search by date" name="searchDate"
                        value="${searchDate}"/>
                 <input class=" form-control" type="time" placeholder="search by time" name="searchStartTime"
-                       value="${searchStartTime}"/>
+                       value="${searchStartTime}" step="60"/>
                 <input class=" form-control" type="time" placeholder="search by time" name="searchEndTime"
-                       value="${searchEndTime}"/>
+                       value="${searchEndTime}" step="60"/>
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </form>
@@ -40,8 +43,10 @@
                 <td><b>Status</b></td>
                 <td><b>Comment</b></td>
                 <td><b>Dose</b></td>
-                <td>Get task</td>
-                <td>Reject task</td>
+                <security:authorize access="hasRole('ROLE_NURCE')">
+                    <td>Get task</td>
+                    <td>Reject task</td>
+                </security:authorize>
             </tr>
             </thead>
             <tbody>
@@ -55,21 +60,23 @@
                         <td>${event.status}</td>
                         <td>${event.comment}</td>
                         <td>${event.dose}</td>
-                        <td>
-                            <form action="take-task" method="post">
-                                <input style="display:none" name="event.id" type="number" value="${event.id}">
-                                <button type="submit" class="btn btn-primary"
-                                        <c:if test="${event.status!='Planned'}">disabled</c:if>>Get
+                        <security:authorize access="hasRole('ROLE_NURCE')">
+                            <td>
+                                <form action="take-task" method="post">
+                                    <input style="display:none" name="event.id" type="number" value="${event.id}">
+                                    <button type="submit" class="btn btn-primary"
+                                            <c:if test="${event.status!='Planned'}">disabled</c:if>>Get
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#rejectModal" data-event-id="${event.id}"
+                                        <c:if test="${event.status!='Planned' && event.status!='In progress'}">disabled</c:if>>
+                                    Reject
                                 </button>
-                            </form>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#rejectModal" data-event-id="${event.id}"
-                                    <c:if test="${event.status!='Planned' && event.status!='In progress'}">disabled</c:if>>
-                                Reject
-                            </button>
-                        </td>
+                            </td>
+                        </security:authorize>
                     </tr>
                 </c:forEach>
             </c:if>

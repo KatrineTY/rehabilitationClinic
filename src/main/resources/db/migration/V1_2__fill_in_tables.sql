@@ -76,12 +76,14 @@ VALUES ('ROLE_MAIN_DOCTOR'),
        ('ROLE_DOCTOR');
 
 INSERT INTO "employees" (name, position, login, password, phone, email, working_time, role)
-VALUES ('Zahir Durham', 'attending doctor', 'zahir.durham', 'WSV45RCN0IU', '1-174-699-7045',
+VALUES ('Zahir Durham', 'attending doctor', 'zahir.durham',
+        '$2a$11$58tVkEfWNoigOmFI/5CxPOMaj6UU4W17VhlxfcJ1AyHuQJWGV4tW2', '1-174-699-7045',
         'mauris@arcuNunc.edu', 1, 1),
        ('Berk Estrada', 'attending doctor', 'berk.estrada', 'KLV69DRM4RX', '1-159-671-7913',
         'auctor.nunc.nulla@estvitae.edu', 1, 1),
 
-       ('Kelsey Fulton', ' nurse', 'kelsey.fulton', 'MLC65SUE0NB', '1-460-421-3616',
+       ('Kelsey Fulton', ' nurse', 'kelsey.fulton', '$2a$11$vua77rQXEvcKoIXa8Kmw0.C.YRxH.UKL6xK09jzrtY9ij/mOKl/qO',
+        '1-460-421-3616',
         'nunc@eleifendCras.co.uk', 2, 2),
        ('Cathleen Bailey', 'nurse', 'cathleen.bailey', 'GPA79OGX2PH', '1-181-662-0346',
         'Integer@auguemalesuada.org', 2, 2),
@@ -96,7 +98,8 @@ VALUES ('Zahir Durham', 'attending doctor', 'zahir.durham', 'WSV45RCN0IU', '1-17
        ('Chandler Hester', 'nurse', 'chandler.hester', 'KNQ50LUY3BG', '1-384-153-2692',
         'laoreet.lectus@eterosProin.edu', 6, 2),
 
-       ('Skyler Pope', ' doctor', 'skyler.rope', 'SLG76RUU1DF', '1-400-129-4351',
+       ('Skyler Pope', ' doctor', 'skyler.rope', '$2a$11$mDJXVc3db46nnWeaVE.dVOpAQwE7lSnteuqniowtuW0VdY05ljdqO',
+        '1-400-129-4351',
         'facilisis.non.bibendum@nislMaecenasmalesuada.org', 1, 4),
        ('Tana Hebert', ' doctor', 'iana.hobert', 'NJC98YBH9FU', '1-857-866-2914',
         'mattis.Cras.eget@elitafeugiat.edu', 1, 4),

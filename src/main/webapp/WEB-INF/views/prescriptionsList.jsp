@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <link rel="stylesheet" href="./resources/static/css/bootstrap.min.css">
@@ -22,8 +23,10 @@
                 <td><b>Dose</b></td>
                 <td><b>Start date</b></td>
                 <td><b>End date</b></td>
-                <td>Edit</td>
-                <td>Delete</td>
+                <security:authorize access="hasRole('ROLE_DOCTOR')">
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </security:authorize>
             </tr>
             </thead>
             <tbody>
@@ -36,13 +39,16 @@
                         <td>${prescriptionInfo.prescription.dose}</td>
                         <td>${prescriptionInfo.prescription.startDate}</td>
                         <td>${prescriptionInfo.prescription.endDate}</td>
-                        <td><a href="edit-prescription/${prescriptionInfo.prescription.id}">Edit</a></td>
-                        <td>
-                            <form action="delete-prescription" method="post">
-                                <input style="display: none" type="number"
-                                       value="${prescriptionInfo.prescription.id}" name="id"/>
-                                <button type="submit" class="btn btn-primary">Delete</button>
-                            </form>
+                        <security:authorize access="hasRole('ROLE_DOCTOR')">
+                            <td><a href="edit-prescription/${prescriptionInfo.prescription.id}">Edit</a></td>
+                            <td>
+                                <form action="delete-prescription" method="post">
+                                    <input style="display: none" type="number"
+                                           value="${prescriptionInfo.prescription.id}" name="id"/>
+                                    <button type="submit" class="btn btn-primary">Delete</button>
+                                </form>
+                            </td>
+                        </security:authorize>
                     </tr>
                 </c:forEach>
             </c:if>

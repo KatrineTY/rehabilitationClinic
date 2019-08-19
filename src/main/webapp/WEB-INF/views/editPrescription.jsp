@@ -36,6 +36,8 @@
                         </div>
                         <div class="form-group">
                             <label for="type-kind">Procedure/Medicament</label>
+                            <form:errors path="prescription.type.kind" cssClass="text-danger"/>
+
                             <form:select path="prescription.type.kind" class="form-control" id="type-kind">
                                 <option value="Procedure"
                                         onclick="hideDose()"
@@ -66,13 +68,6 @@
                         </div>
                         <div class="form-group">
                             <label>Period</label>
-                            <div class="input-group">
-                                <form:errors path="prescription.startDate" cssClass="text-danger"/>
-                                <form:input path="prescription.startDate" type="date" class="form-control"
-                                            value="${prescriptionInfo.prescription.startDate}"/>
-                                <form:errors path="prescription.endDate" cssClass="text-danger"/>
-                                <form:input path="prescription.endDate" type="date" class="form-control"
-                            </div>
                             <br/>
                             <form:errors path="prescription.startDate" cssClass="text-danger"/>
                             <div class="input-group">
