@@ -1,1 +1,18 @@
-HTTP Status 403 - Access is denied
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Error</title>
+</head>
+<t:loading/>
+<t:pageTemplate>
+    <jsp:body>
+        <div class="card-body">
+            <h2 class="text-center">Sorry, but there is something wrong with the data. Please, try to set another
+                values.</h2>
+            <a class="btn btn-primary" href="${pageContext.request.getHeader("referer")}">Back</a>
+        </div>
+    </jsp:body>
+</t:pageTemplate>
+

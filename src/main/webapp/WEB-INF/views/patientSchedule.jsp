@@ -9,30 +9,31 @@
     <title>Patient schedule</title>
 </head>
 <body>
+<t:loading/>
 <t:page>
     <jsp:body>
-                <table class="table table-hover">
-                    <thead class="card-header">
+        <table class="table table-hover">
+            <thead class="card-header">
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>Kind of treatment</b></td>
+                <td><b>Name of treatment</b></td>
+                <td><b>Status</b></td>
+            </tr>
+            </thead>
+            <tbody>
+            <c:if test="${not empty events}">
+                <c:forEach var="event" items="${events}">
                     <tr>
-                        <td><b>Date</b></td>
-                        <td><b>Kind of treatment</b></td>
-                        <td><b>Name of treatment</b></td>
-                        <td><b>Status</b></td>
+                        <td><javatime:format value="${event.date}" style="MS"/></td>
+                        <td>${event.type.kind}</td>
+                        <td>${event.type.name}</td>
+                        <td>${event.status}</td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <c:if test="${not empty events}">
-                        <c:forEach var="event" items="${events}">
-                            <tr>
-                                <td><javatime:format value="${event.date}" style="MS"/></td>
-                                <td>${event.type.kind}</td>
-                                <td>${event.type.name}</td>
-                                <td>${event.status}</td>
-                            </tr>
-                        </c:forEach>
-                    </c:if>
-                    </tbody>
-                </table>
+                </c:forEach>
+            </c:if>
+            </tbody>
+        </table>
     </jsp:body>
 </t:page>
 </body>
