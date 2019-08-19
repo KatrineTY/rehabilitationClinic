@@ -16,8 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,7 +35,9 @@ class EventServiceImplTest {
     private static final int PAGE = 1;
     private static final int DB_PAGE = PAGE - 1;
     private static final LocalDate DATE = LocalDate.of(1990, 2, 5);
+    private static final LocalTime TIME = LocalTime.of(10, 29);
     private static final String NAME = "PATIENT";
+    private static final TimePeriodInfo TIME_PERIOD_DEFAULT;
     private static final TimePeriodInfo TIME_PERIOD;
 
     static {
@@ -44,9 +46,9 @@ class EventServiceImplTest {
                 .build();
         Prescription prescription = Prescription.builder()
                 .patient(patient)
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now().plusDays(3))
-                .prescriptionDays(Arrays.asList("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"))
+                .startDate(LocalDate.of(2019, 8, 19))
+                .endDate(LocalDate.of(2019, 8, 19).plusDays(3))
+                .prescriptionDays(Collections.singletonList("TUESDAY"))
 
                 .build();
         List<PrescriptionTime> prescriptionTimes = Arrays.asList(
@@ -64,22 +66,16 @@ class EventServiceImplTest {
                 .prescriptionTimes(prescriptionTimes)
                 .build();
 
-        EVENTS = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            EVENTS.add(Event.builder()
-                    .patient(patient)
-                    .date(LocalDateTime.of(LocalDate.now().plusDays(i), LocalTime.of(10, 30)))
-                    .status("Planned")
-                    .build());
-        }
-        for (int i = 0; i < 3; i++) {
-            EVENTS.add(Event.builder()
-                    .patient(patient)
-                    .date(LocalDateTime.of(LocalDate.now().plusDays(i), LocalTime.of(15, 30)))
-                    .status("Planned")
-                    .build());
-        }
-
+        EVENTS = Arrays.asList(Event.builder()
+                        .patient(patient)
+                        .date(LocalDateTime.of(LocalDate.of(2019, 8, 20), LocalTime.of(10, 30)))
+                        .status("Planned")
+                        .build(),
+                Event.builder()
+                        .patient(patient)
+                        .date(LocalDateTime.of(LocalDate.of(2019, 8, 20), LocalTime.of(15, 30)))
+                        .status("Planned")
+                        .build());
         NURSE = Employee.builder()
                 .name("Claret")
                 .build();
@@ -96,7 +92,10 @@ class EventServiceImplTest {
                 ).date(LocalDateTime.of(1990, 2, 7, 10, 20)).build()
         );
 
+        TIME_PERIOD_DEFAULT = new TimePeriodInfo();
         TIME_PERIOD = new TimePeriodInfo();
+        TIME_PERIOD.setEndTime(TIME);
+
     }
 
     @Mock
@@ -107,10 +106,10 @@ class EventServiceImplTest {
     private EventService eventService = new EventServiceImpl();
 
     @Test
-    void should_addSixEvents_forPrescriptionWithThreeDaysAndTwoTimes() {
+    void should_addTwoEvent_forPrescriptionWithThreeDaysAndTwoTimes() {
         eventService.addEvents(PRESCRIPTION_INFO);
         ArgumentCaptor<Event> eventCaptor = ArgumentCaptor.forClass(Event.class);
-        verify(eventDao, times(6)).addEvent(eventCaptor.capture());
+        verify(eventDao, times(2)).addEvent(eventCaptor.capture());
         assertEquals(EVENTS, eventCaptor.getAllValues());
     }
 
@@ -129,29 +128,36 @@ class EventServiceImplTest {
     @Test
     void should_getAllEvents_whenFilteringParamsAreEmpty() {
         when(eventDao.getEvents()).thenReturn(EVENTS_LIST);
-        eventService.getFilteredEventsPage(PAGE, null, null, TIME_PERIOD);
+        eventService.getFilteredEventsPage(PAGE, null, null, TIME_PERIOD_DEFAULT);
         verify(eventDao).getEventsPage(DB_PAGE);
     }
 
     @Test
     void should_getFilteredEvents_whenFilteringByPatientName() {
         when(eventDao.getEvents()).thenReturn(EVENTS_LIST);
-        eventService.getFilteredEventsPage(PAGE, NAME, null, TIME_PERIOD);
-        verify(eventDao).getFilteredEventsPage(DB_PAGE, NAME, TIME_PERIOD);
+        eventService.getFilteredEventsPage(PAGE, NAME, null, TIME_PERIOD_DEFAULT);
+        verify(eventDao).getFilteredEventsPage(DB_PAGE, NAME, TIME_PERIOD_DEFAULT);
     }
 
     @Test
     void should_getFilteredEvents_whenFilteringByDate() {
         when(eventDao.getEvents()).thenReturn(EVENTS_LIST);
-        eventService.getFilteredEventsPage(PAGE, null, DATE, TIME_PERIOD);
-        verify(eventDao).getFilteredEventsPage(DB_PAGE, DATE, TIME_PERIOD);
+        eventService.getFilteredEventsPage(PAGE, null, DATE, TIME_PERIOD_DEFAULT);
+        verify(eventDao).getFilteredEventsPage(DB_PAGE, DATE, TIME_PERIOD_DEFAULT);
     }
 
     @Test
     void should_getFilteredEvents_whenFilteringByPatientNameAndDate() {
         when(eventDao.getEvents()).thenReturn(EVENTS_LIST);
-        eventService.getFilteredEventsPage(PAGE, NAME, DATE, TIME_PERIOD);
-        verify(eventDao).getFilteredEventsPage(DB_PAGE, NAME, DATE, TIME_PERIOD);
+        eventService.getFilteredEventsPage(PAGE, NAME, DATE, TIME_PERIOD_DEFAULT);
+        verify(eventDao).getFilteredEventsPage(DB_PAGE, NAME, DATE, TIME_PERIOD_DEFAULT);
+    }
+
+    @Test
+    void should_getFilteredEvents_whenFilteringByTime() {
+        when(eventDao.getEvents()).thenReturn(EVENTS_LIST);
+        eventService.getFilteredEventsPage(PAGE, null, null, TIME_PERIOD);
+        verify(eventDao).getFilteredEventsPage(DB_PAGE, TIME_PERIOD);
     }
 
 }
