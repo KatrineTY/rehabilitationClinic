@@ -29,4 +29,11 @@ public interface PrescriptionTimeService {
      */
     void updatePrescriptionTimes(List<PrescriptionTime> prescriptionTimes);
 
+    /**
+     * Delete prescription time
+     *
+     * @param prescriptionTime - prescription time that will be deleted
+     */
+    void deletePrescriptionTime(PrescriptionTime prescriptionTime);
+
 }

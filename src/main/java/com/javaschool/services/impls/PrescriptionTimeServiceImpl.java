@@ -42,4 +42,12 @@ public class PrescriptionTimeServiceImpl implements PrescriptionTimeService {
         prescriptionTimes.forEach(prescriptionTimeDao::updatePrescriptionTime);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deletePrescriptionTime(PrescriptionTime prescriptionTime) {
+        prescriptionTimeDao.deletePrescriptionTime(prescriptionTime);
+    }
+
 }

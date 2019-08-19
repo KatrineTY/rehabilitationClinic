@@ -22,7 +22,8 @@ public class UniquePatientsPromedValidator implements ConstraintValidator<Unique
             Prescription lastPrescriptionWithCurrentPromed = prescriptionService
                     .getLastPrescription(prescription.getPatient().getName(), prescription.getType());
             isValid = lastPrescriptionWithCurrentPromed == null ||
-                    lastPrescriptionWithCurrentPromed.getEndDate().isBefore(prescription.getStartDate());
+                    lastPrescriptionWithCurrentPromed.getEndDate().isBefore(prescription.getStartDate())
+                    || lastPrescriptionWithCurrentPromed.getId() == prescription.getId();
             if (!isValid) {
                 constraintValidatorContext.disableDefaultConstraintViolation();
                 constraintValidatorContext
