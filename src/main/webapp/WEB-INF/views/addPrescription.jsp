@@ -25,6 +25,7 @@
                         <div class="form-group">
                             <label for="name">Patient name</label>
                             <form:errors path="prescription.patient.name" cssClass="text-danger"/>
+                            <form:errors path="prescription" cssClass="text-danger"/>
                             <form:input path="prescription.patient.name" type="text" class="form-control"
                                         id="name"
                                         placeholder="name"/>
