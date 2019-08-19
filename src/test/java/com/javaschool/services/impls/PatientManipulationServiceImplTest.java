@@ -92,7 +92,7 @@ class PatientManipulationServiceImplTest {
         verify(patientService).updatePatient(PATIENT);
         verify(patientCardService).updatePatientCard(PATIENT_CARD);
         ArgumentCaptor<Diagnosis> diagnosisCaptor = ArgumentCaptor.forClass(Diagnosis.class);
-        verify(diagnosisService, times(2)).saveOrUpdateDiagnosis(diagnosisCaptor.capture());
+        verify(diagnosisService, times(2)).saveDiagnosis(diagnosisCaptor.capture());
         assertEquals(DIAGNOSES, diagnosisCaptor.getAllValues());
     }
 

@@ -43,9 +43,20 @@ public class DiagnosisDaoImpl implements DiagnosisDao {
      * {@inheritDoc}
      */
     @Override
-    public void saveOrUpdateDiagnosis(Diagnosis diagnosis) {
+    public void saveDiagnosis(Diagnosis diagnosis) {
         Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(diagnosis);
+        session.save(diagnosis);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteDiagnoses(PatientCard patientCard) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("delete from Diagnosis where patientCard = :patientCard");
+        query.setParameter("patientCard", patientCard);
+        query.executeUpdate();
     }
 
 }

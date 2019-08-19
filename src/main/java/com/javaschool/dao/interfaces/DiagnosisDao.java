@@ -22,10 +22,17 @@ public interface DiagnosisDao {
     List<Diagnosis> getDiagnoses(PatientCard patientCard);
 
     /**
-     * Save new of update existed diagnosis
+     * Add diagnosis
      *
-     * @param diagnosis - the diagnosis to be updated/added
+     * @param diagnosis - the diagnosis to be added
      */
-    void saveOrUpdateDiagnosis(Diagnosis diagnosis);
+    void saveDiagnosis(Diagnosis diagnosis);
+
+    /**
+     * Delete diagnoses with specific patient card
+     *
+     * @param patientCard - the specified patient card
+     */
+    void deleteDiagnoses(PatientCard patientCard);
 
 }

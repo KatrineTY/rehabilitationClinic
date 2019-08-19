@@ -108,7 +108,7 @@
                                                     </c:if>
                                                 </div>
                                                 <textarea name="diagnoses[${loop.index}].comment" class="form-control"
-                                                          rows="0.5" placeholder="${diagnosis.comment}"></textarea>
+                                                          rows="0.5">${diagnosis.comment}</textarea>
                                             </div>
                                         </div>
                                     </c:forEach>

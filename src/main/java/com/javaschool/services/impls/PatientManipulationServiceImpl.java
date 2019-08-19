@@ -51,8 +51,9 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
                 employeeService.getEmployeeByName(patientInfo.getPatientCard().getAttendingDoctor().getName()));
         patientInfo.getPatientCard().setPatient(patientInfo.getPatient());
         patientCardService.updatePatientCard(patientInfo.getPatientCard());
+        diagnosisService.deleteDiagnoses(patientInfo.getPatientCard());
         patientInfo.getDiagnoses().forEach(diag -> diag.setPatientCard(patientInfo.getPatientCard()));
-        patientInfo.getDiagnoses().forEach(diag -> diagnosisService.saveOrUpdateDiagnosis(diag));
+        patientInfo.getDiagnoses().forEach(diag -> diagnosisService.saveDiagnosis(diag));
         log.debug("updated patient info: {}", patientInfo);
     }
 

@@ -38,8 +38,16 @@ public class DiagnosisServiceImpl implements DiagnosisService {
      * {@inheritDoc}
      */
     @Override
-    public void saveOrUpdateDiagnosis(Diagnosis diagnosis) {
-        diagnosisDao.saveOrUpdateDiagnosis(diagnosis);
+    public void saveDiagnosis(Diagnosis diagnosis) {
+        diagnosisDao.saveDiagnosis(diagnosis);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteDiagnoses(PatientCard patientCard) {
+        diagnosisDao.deleteDiagnoses(patientCard);
     }
 
 }
