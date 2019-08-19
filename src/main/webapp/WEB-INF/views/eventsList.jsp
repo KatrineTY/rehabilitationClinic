@@ -43,7 +43,7 @@
                 <td><b>Status</b></td>
                 <td><b>Comment</b></td>
                 <td><b>Dose</b></td>
-                <security:authorize access="hasRole('ROLE_NURCE')">
+                <security:authorize access="hasRole('ROLE_NURSE')">
                     <td>Get task</td>
                     <td>Reject task</td>
                 </security:authorize>
@@ -60,7 +60,7 @@
                         <td>${event.status}</td>
                         <td>${event.comment}</td>
                         <td>${event.dose}</td>
-                        <security:authorize access="hasRole('ROLE_NURCE')">
+                        <security:authorize access="hasRole('ROLE_NURSE')">
                             <td>
                                 <form action="take-task" method="post">
                                     <input style="display:none" name="event.id" type="number" value="${event.id}">
