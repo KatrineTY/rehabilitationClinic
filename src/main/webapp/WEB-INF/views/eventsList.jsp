@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<t:page width="10">
+<t:page width="14">
     <jsp:body>
         <form action="1">
             <div class="input-group">
@@ -40,6 +40,8 @@
                 <td><b>Patient name</b></td>
                 <td><b>Kind of treatment</b></td>
                 <td><b>Name of treatment</b></td>
+                <td><b>Building</b></td>
+                <td><b>Ward</b></td>
                 <td><b>Status</b></td>
                 <td><b>Comment</b></td>
                 <td><b>Dose</b></td>
@@ -57,6 +59,8 @@
                         <td>${event.patient.name}</td>
                         <td>${event.type.kind}</td>
                         <td>${event.type.name}</td>
+                        <td>${event.building}</td>
+                        <td>${event.ward}</td>
                         <td>${event.status}</td>
                         <td>${event.comment}</td>
                         <td>${event.dose}</td>
@@ -190,7 +194,9 @@
 
                         <div class="modal-body">
                             <input style="display:none" name="event.id" type="number">
-                            <input name="comment" placeholder="Please, enter your reason" type="text">
+                            <input name="comment" placeholder="Please, enter your reason" type="text"
+                                   required="required" title="This field is required"
+                                   pattern="[a-zA-Z0-1][a-zA-Z0-1 ]+">
                         </div>
                     </form>
 

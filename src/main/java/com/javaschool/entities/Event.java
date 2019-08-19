@@ -41,5 +41,9 @@ public class Event {
     private String comment;
     @Column
     private String dose;
+    @Column
+    private String building;
+    @Column
+    private int ward;
 
 }

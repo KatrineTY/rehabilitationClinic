@@ -89,6 +89,8 @@ CREATE TABLE events
 (
     event_id SERIAL PRIMARY KEY,
     patient  INTEGER REFERENCES patients (patient_id),
+    building VARCHAR(2)                    NOT NULL CHECK ( building = 'A' OR building = 'B' OR building = 'C'),
+    ward     INTEGER                       NOT NULL CHECK ( ward > 0 AND ward < 10 ),
     date     TIMESTAMP                     NOT NULL,
     status   VARCHAR(12) DEFAULT 'Planned' NOT NULL CHECK (status = 'Planned' OR status = 'In progress' OR status = 'Rejected'),
     type     INTEGER                       NOT NULL REFERENCES proceds_and_medics (type_id),

@@ -5,9 +5,11 @@ import com.javaschool.dao.interfaces.EventDao;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.Event;
+import com.javaschool.entities.PatientCard;
 import com.javaschool.entities.PrescriptionTime;
 import com.javaschool.services.interfaces.EmployeeService;
 import com.javaschool.services.interfaces.EventService;
+import com.javaschool.services.interfaces.PatientCardService;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -32,6 +34,8 @@ public class EventServiceImpl implements EventService {
     private EventDao eventDao;
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private PatientCardService patientCardService;
 
     /**
      * {@inheritDoc}
@@ -171,6 +175,7 @@ public class EventServiceImpl implements EventService {
         List<LocalTime> times = getPrescriptionTimes(prescriptionInfo);
         List<String> prescriptionDays = prescriptionInfo.getPrescription().getPrescriptionDays();
         List<Event> events = new ArrayList<>();
+        PatientCard patientCard = patientCardService.getPatientCard(prescriptionInfo.getPrescription().getPatient());
         for (LocalTime time : times) {
             for (LocalDate date = prescriptionInfo.getPrescription().getStartDate();
                  date.isBefore(prescriptionInfo.getPrescription().getEndDate());
@@ -181,6 +186,8 @@ public class EventServiceImpl implements EventService {
                     event.setType(prescriptionInfo.getPrescription().getType());
                     event.setDate(LocalDateTime.of(date, time));
                     event.setDose(prescriptionInfo.getPrescription().getDose());
+                    event.setBuilding(patientCard.getBuilding());
+                    event.setWard(patientCard.getWard());
                     events.add(event);
                 }
             }
