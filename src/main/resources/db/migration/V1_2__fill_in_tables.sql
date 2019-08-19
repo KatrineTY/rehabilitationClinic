@@ -133,7 +133,20 @@ VALUES (1, 'A', 5, 2),
 
 INSERT INTO proceds_and_medics (name, kind)
 VALUES ('Adrenalin', 'Medicament'),
-       ('Physiotherapy', 'Procedure');
+       ('Physiotherapy', 'Procedure'),
+       ('Massage', 'Procedure'),
+       ('Mechanotherapy', 'Procedure'),
+       ('Aromatherapy', 'Procedure'),
+       ('Music therapy', 'Procedure'),
+       ('Reflexology', 'Procedure'),
+       ('Diet therapy', 'Procedure'),
+       ('Occupational therapy', 'Procedure'),
+       ('Analgesic', 'Medicament'),
+       ('Muscle relaxant', 'Medicament'),
+       ('Corticosteroid', 'Medicament'),
+       ('Antidepressant', 'Medicament'),
+       ('Tranquilizer', 'Medicament'),
+       ('Vitamins', 'Medicament');
 
 -- INSERT INTO employees_roles (employee, role)
 -- VALUES (1, 1),
