@@ -6,6 +6,7 @@ import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.*;
 import com.javaschool.services.interfaces.EmployeeService;
 import com.javaschool.services.interfaces.EventService;
+import com.javaschool.services.interfaces.PatientCardService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -32,6 +33,7 @@ class EventServiceImplTest {
     private static final String REJECTED_STATUS = "Rejected";
     // for filters
     private static final List<Event> EVENTS_LIST;
+    private static final PatientCard PATIENT_CARD;
     private static final int PAGE = 1;
     private static final int DB_PAGE = PAGE - 1;
     private static final LocalDate DATE = LocalDate.of(1990, 2, 5);
@@ -40,7 +42,12 @@ class EventServiceImplTest {
     private static final TimePeriodInfo TIME_PERIOD_DEFAULT;
     private static final TimePeriodInfo TIME_PERIOD;
 
+
     static {
+        PATIENT_CARD = PatientCard.builder()
+                .building("C")
+                .ward(5)
+                .build();
         Patient patient = Patient.builder()
                 .name("patient")
                 .build();
@@ -70,26 +77,30 @@ class EventServiceImplTest {
                         .patient(patient)
                         .date(LocalDateTime.of(LocalDate.of(2019, 8, 20), LocalTime.of(10, 30)))
                         .status("Planned")
+                        .ward(PATIENT_CARD.getWard())
+                        .building(PATIENT_CARD.getBuilding())
                         .build(),
                 Event.builder()
                         .patient(patient)
                         .date(LocalDateTime.of(LocalDate.of(2019, 8, 20), LocalTime.of(15, 30)))
                         .status("Planned")
+                        .ward(PATIENT_CARD.getWard())
+                        .building(PATIENT_CARD.getBuilding())
                         .build());
         NURSE = Employee.builder()
                 .name("Claret")
                 .build();
 
         EVENTS_LIST = Arrays.asList(
-                Event.builder().patient(
-                        Patient.builder().name("test patient").build()
-                ).date(LocalDateTime.of(DATE, LocalTime.now())).build(),
-                Event.builder().patient(
-                        Patient.builder().name("patient").build()
-                ).date(LocalDateTime.of(1990, 2, 6, 10, 20)).build(),
-                Event.builder().patient(
-                        Patient.builder().name("test").build()
-                ).date(LocalDateTime.of(1990, 2, 7, 10, 20)).build()
+                Event.builder().patient(Patient.builder().name("test patient").build())
+                        .date(LocalDateTime.of(DATE, LocalTime.now()))
+                        .build(),
+                Event.builder().patient(Patient.builder().name("patient").build())
+                        .date(LocalDateTime.of(1990, 2, 6, 10, 20))
+                        .build(),
+                Event.builder().patient(Patient.builder().name("test").build())
+                        .date(LocalDateTime.of(1990, 2, 7, 10, 20))
+                        .build()
         );
 
         TIME_PERIOD_DEFAULT = new TimePeriodInfo();
@@ -102,11 +113,14 @@ class EventServiceImplTest {
     private EventDao eventDao;
     @Mock
     private EmployeeService employeeService;
+    @Mock
+    private PatientCardService patientCardService;
     @InjectMocks
     private EventService eventService = new EventServiceImpl();
 
     @Test
     void should_addTwoEvent_forPrescriptionWithThreeDaysAndTwoTimes() {
+        when(patientCardService.getPatientCard(PRESCRIPTION_INFO.getPrescription().getPatient())).thenReturn(PATIENT_CARD);
         eventService.addEvents(PRESCRIPTION_INFO);
         ArgumentCaptor<Event> eventCaptor = ArgumentCaptor.forClass(Event.class);
         verify(eventDao, times(2)).addEvent(eventCaptor.capture());
