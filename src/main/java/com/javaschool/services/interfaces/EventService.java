@@ -1,5 +1,6 @@
 package com.javaschool.services.interfaces;
 
+import com.javaschool.dto.EventDto;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.Event;
@@ -87,5 +88,12 @@ public interface EventService {
      * @return filtered events for the specified page
      */
     List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date, TimePeriodInfo timePeriodInfo);
+
+    /**
+     * Retrieve events one day ahead
+     *
+     * @return specified events
+     */
+    List<EventDto> getEventDtosPerDay();
 
 }

@@ -103,4 +103,11 @@ public interface EventDao {
      */
     List<Event> getFilteredEventsPage(int dbPage, TimePeriodInfo timePeriodInfo);
 
+    /**
+     * Retrieve events one day ahead
+     *
+     * @return specified events
+     */
+    List<Event> getEventsPerDay();
+
 }

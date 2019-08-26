@@ -1,7 +1,9 @@
 package com.javaschool.services.impls;
 
+import com.javaschool.activemq.MessageSender;
 import com.javaschool.dao.impls.EventDaoImpl;
 import com.javaschool.dao.interfaces.EventDao;
+import com.javaschool.dto.EventDto;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.Event;
@@ -36,6 +38,8 @@ public class EventServiceImpl implements EventService {
     private EmployeeService employeeService;
     @Autowired
     private PatientCardService patientCardService;
+    @Autowired
+    private MessageSender messageSender;
 
     /**
      * {@inheritDoc}
@@ -44,6 +48,7 @@ public class EventServiceImpl implements EventService {
     public void addEvents(PrescriptionInfo prescriptionInfo) {
         List<Event> events = collectEvents(prescriptionInfo);
         events.forEach(event -> eventDao.addEvent(event));
+        messageSender.send("add events");
     }
 
     /**
@@ -52,6 +57,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void deleteEvents(PrescriptionInfo prescriptionInfo) {
         eventDao.deleteEvents(prescriptionInfo);
+        messageSender.send("delete events by prescription info");
     }
 
     /**
@@ -60,6 +66,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void deleteEvents(int patientId) {
         eventDao.deleteEvents(patientId);
+        messageSender.send("delete events by id");
     }
 
     /**
@@ -84,6 +91,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void takeTask(int id, String nurseName) {
         eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "In progress");
+        messageSender.send("take task");
     }
 
     /**
@@ -92,6 +100,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void rejectTask(int id, String nurseName, String comment) {
         eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), comment, "Rejected");
+        messageSender.send("reject task");
     }
 
     /**
@@ -149,6 +158,29 @@ public class EventServiceImpl implements EventService {
             countOfEvents = getEvents().size();
         }
         return events;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return
+     */
+    @Override
+    public List<EventDto> getEventDtosPerDay() {
+        return eventDao.getEventsPerDay().stream()
+                .map(event -> EventDto.builder()
+                        .building(event.getBuilding())
+                        .comment(event.getComment())
+                        .date(event.getDate().toString())
+                        .dose(event.getDose())
+                        .nurseName(event.getNurse() == null ? "" : event.getNurse().getName())
+                        .patientName(event.getPatient().getName())
+                        .promedKind(event.getType().getKind())
+                        .promedName(event.getType().getName())
+                        .status(event.getStatus())
+                        .ward(event.getWard())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     /**

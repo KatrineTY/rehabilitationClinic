@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -174,6 +175,23 @@ public class EventDaoImpl implements EventDao {
         setPeriodTime(timePeriodInfo, query);
         query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
                 .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
+        return query.list();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getEventsPerDay() {
+        Session session = sessionFactory.getCurrentSession();
+        LocalDateTime startDate = LocalDateTime.now();
+        LocalDateTime endDate = startDate.plusDays(1);
+        Query query = session.createQuery("from Event " +
+                "where date between :startDate and :endDate");
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+
         return query.list();
     }
 

@@ -7,6 +7,7 @@
     <http use-expressions="true">
         <intercept-url pattern="/login" access="permitAll()"/>
         <intercept-url pattern="/" access="permitAll()"/>
+        <intercept-url pattern="/events-for-tabloid" access="permitAll()"/>
         <intercept-url pattern="/add-prescription" access="hasRole('ROLE_DOCTOR')"/>
         <intercept-url pattern="/edit-prescription/*" access="hasRole('ROLE_DOCTOR')"/>
         <intercept-url pattern="/delete-prescription" access="hasRole('ROLE_DOCTOR')"/>

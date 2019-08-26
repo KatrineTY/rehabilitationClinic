@@ -21,7 +21,7 @@
                    cache-period="31556926"/>
 
     <import resource="../hibernate.cfg.xml"/>
-
+    <import resource="../apache-activemq-context.xml"/>
 
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
