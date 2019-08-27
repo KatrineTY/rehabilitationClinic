@@ -4,8 +4,8 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="./resources/static/css/bootstrap.min.css">
-    <script src="resources/static/js/validation.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
+    <script src="${pageContext.request.contextPath}/resources/static/js/validation.js" type="javascript"></script>
     <title>Login</title>
 </head>
 <body>

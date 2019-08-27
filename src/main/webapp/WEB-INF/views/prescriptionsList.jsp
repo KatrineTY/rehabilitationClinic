@@ -4,8 +4,8 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
-    <link rel="stylesheet" href="./resources/static/css/bootstrap.min.css">
-    <script src="./resources/static/js/searchPatient.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
+    <script src="${pageContext.request.contextPath}/resources/static/js/searchPatient.js"></script>
 
     <title>Prescriptions</title>
 </head>

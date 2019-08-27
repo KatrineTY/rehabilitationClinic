@@ -5,11 +5,11 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="./resources/static/css/bootstrap.min.css">
-    <script src="./resources/static/js/diagnoses.js"></script>
-    <script src="./resources/static/js/jquery-1.11.2.min.js"></script>
-    <script src="./resources/static/js/jquery.easy-autocomplete.min.js"></script>
-    <link rel="stylesheet" href="./resources/static/js/easy-autocomplete.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
+    <script src="${pageContext.request.contextPath}/resources/static/js/diagnoses.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/static/js/jquery-1.11.2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/static/js/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/js/easy-autocomplete.min.css">
     <title>Add patient</title>
 
 </head>

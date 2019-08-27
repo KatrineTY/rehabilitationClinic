@@ -7,10 +7,10 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="../resources/static/css/bootstrap.min.css">
-    <script src="../resources/static/js/jquery-1.11.2.min.js"></script>
-    <script src="../resources/static/js/popper.min.js"></script>
-    <script src="../resources/static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css" type="text/css">
+    <script src="${pageContext.request.contextPath}/resources/static/js/jquery-1.11.2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/static/js/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/static/js/bootstrap.min.js"></script>
 
     <title>Events</title>
 </head>

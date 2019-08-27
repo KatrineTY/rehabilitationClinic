@@ -17,8 +17,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <mvc:resources mapping="/resources/**" location="/resources/"
-                   cache-period="31556926"/>
+    <mvc:resources mapping="/resources/**" location="/resources/" order="-1"/>
 
     <import resource="../hibernate.cfg.xml"/>
     <import resource="../apache-activemq-context.xml"/>
