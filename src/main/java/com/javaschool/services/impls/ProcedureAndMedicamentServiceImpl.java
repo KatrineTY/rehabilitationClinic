@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @Component
 @NoArgsConstructor
-@Transactional
 public class ProcedureAndMedicamentServiceImpl implements ProcedureAndMedicamentService {
     @Autowired
     private ProcedureAndMedicamentDao procedureAndMedicamentDao;
@@ -22,6 +21,7 @@ public class ProcedureAndMedicamentServiceImpl implements ProcedureAndMedicament
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public ProcedureAndMedicament getPromedWithId(ProcedureAndMedicament procedureAndMedicament) {
         return procedureAndMedicamentDao.getElementWithId(procedureAndMedicament);
     }
@@ -30,6 +30,7 @@ public class ProcedureAndMedicamentServiceImpl implements ProcedureAndMedicament
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<ProcedureAndMedicament> getProceduresAndMedicines() {
         return procedureAndMedicamentDao.getProceduresAndMedicines();
     }
@@ -38,6 +39,7 @@ public class ProcedureAndMedicamentServiceImpl implements ProcedureAndMedicament
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<String> getMedicines() {
         return getProceduresAndMedicines()
                 .stream()
@@ -50,6 +52,7 @@ public class ProcedureAndMedicamentServiceImpl implements ProcedureAndMedicament
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<String> getProcedures() {
         return getProceduresAndMedicines()
                 .stream()

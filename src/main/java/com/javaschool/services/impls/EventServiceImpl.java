@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 
 @Component
 @NoArgsConstructor
-@Transactional
 @Slf4j
 public class EventServiceImpl implements EventService {
     private int countOfEvents;
@@ -45,6 +44,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void addEvents(PrescriptionInfo prescriptionInfo) {
         List<Event> events = collectEvents(prescriptionInfo);
         events.forEach(event -> eventDao.addEvent(event));
@@ -55,6 +55,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void deleteEvents(PrescriptionInfo prescriptionInfo) {
         eventDao.deleteEvents(prescriptionInfo);
         messageSender.send("delete events by prescription info");
@@ -64,6 +65,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void deleteEvents(int patientId) {
         eventDao.deleteEvents(patientId);
         messageSender.send("delete events by id");
@@ -73,6 +75,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Event> getEvents() {
         return eventDao.getEvents();
     }
@@ -81,6 +84,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Event> getEvents(int patientId) {
         return eventDao.getEvents(patientId);
     }
@@ -89,6 +93,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void takeTask(int id, String nurseName) {
         eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "In progress");
         messageSender.send("take task");
@@ -98,6 +103,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void rejectTask(int id, String nurseName, String comment) {
         eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), comment, "Rejected");
         messageSender.send("reject task");
@@ -107,6 +113,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Event> getEventsPage(int page) {
         return eventDao.getEventsPage(page);
     }
@@ -115,6 +122,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public int getCountOfPages() {
         return (int) Math.ceil(((float) countOfEvents / EventDaoImpl.COUNT_OF_EVENTS_PER_PAGE));
     }
@@ -123,6 +131,7 @@ public class EventServiceImpl implements EventService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Event> getFilteredEventsPage(int page, String patientName, LocalDate date, TimePeriodInfo timePeriodInfo) {
         log.debug("filters of filtering events for {} page: patient name - {}, date - {}, time period - {}"
                 , page, patientName, date, timePeriodInfo);
@@ -166,6 +175,7 @@ public class EventServiceImpl implements EventService {
      * @return
      */
     @Override
+    @Transactional(readOnly = true)
     public List<EventDto> getEventDtosPerDay() {
         return eventDao.getEventsPerDay().stream()
                 .map(event -> EventDto.builder()

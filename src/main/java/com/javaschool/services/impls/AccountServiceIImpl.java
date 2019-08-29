@@ -13,7 +13,6 @@ import java.util.List;
 
 @Component
 @NoArgsConstructor
-@Transactional
 public class AccountServiceIImpl implements AccountService {
     @Autowired
     private PatientCardService patientCardService;
@@ -28,6 +27,7 @@ public class AccountServiceIImpl implements AccountService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<PatientCard> getPatientCards() {
         return patientCardService.getPatientCards();
     }
@@ -36,6 +36,7 @@ public class AccountServiceIImpl implements AccountService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public String getEmployeeNameByLogin(String login) {
         return employeeService.getEmployeeByLogin(login).getName();
     }
@@ -44,6 +45,7 @@ public class AccountServiceIImpl implements AccountService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<PrescriptionInfo> getPrescriptions() {
         return prescriptionService.getPrescriptions();
     }
@@ -52,6 +54,7 @@ public class AccountServiceIImpl implements AccountService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Event> getEvents() {
         return eventService.getEvents();
     }

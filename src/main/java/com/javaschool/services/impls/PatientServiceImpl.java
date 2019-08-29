@@ -17,7 +17,6 @@ import java.util.List;
 
 @Component
 @NoArgsConstructor
-@Transactional
 @Slf4j
 public class PatientServiceImpl implements PatientService {
     @Autowired
@@ -33,6 +32,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void addPatient(PatientInfo patientInfo) {
         patientDao.addPatient(patientInfo.getPatient());
         patientInfo.getPatientCard().setPatient(patientInfo.getPatient());
@@ -48,6 +48,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public Patient getPatient(String name) {
         return patientDao.getPatient(name);
     }
@@ -56,6 +57,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public Patient getPatient(int id) {
         return patientDao.getPatient(id);
     }
@@ -64,6 +66,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void updatePatient(Patient patient) {
         patientDao.updatePatient(patient);
     }
@@ -72,6 +75,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Patient> getPatients() {
         return patientDao.getPatients();
     }
@@ -80,6 +84,7 @@ public class PatientServiceImpl implements PatientService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public boolean isInsuranceContains(String insurance) {
         return patientDao.isInsuranceContains(insurance);
     }

@@ -13,7 +13,6 @@ import java.util.List;
 
 @Component
 @NoArgsConstructor
-@Transactional
 public class DiagnosisServiceImpl implements DiagnosisService {
     @Autowired
     private DiagnosisDao diagnosisDao;
@@ -22,6 +21,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void addDiagnosis(Diagnosis diagnosis) {
         diagnosisDao.addDiagnosis(diagnosis);
     }
@@ -30,6 +30,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<Diagnosis> getDiagnoses(PatientCard patientCard) {
         return diagnosisDao.getDiagnoses(patientCard);
     }
@@ -38,6 +39,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void saveDiagnosis(Diagnosis diagnosis) {
         diagnosisDao.saveDiagnosis(diagnosis);
     }
@@ -46,6 +48,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void deleteDiagnoses(PatientCard patientCard) {
         diagnosisDao.deleteDiagnoses(patientCard);
     }

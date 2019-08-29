@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Component
 @NoArgsConstructor
-@Transactional
 public class AutocompleteServiceImpl implements AutocompleteService {
     @Autowired
     private PatientService patientService;
@@ -26,6 +25,7 @@ public class AutocompleteServiceImpl implements AutocompleteService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<String> getPatientNames() {
         return patientService.getPatients().stream().map(Patient::getName).collect(Collectors.toList());
     }
@@ -34,6 +34,7 @@ public class AutocompleteServiceImpl implements AutocompleteService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<ProcedureAndMedicament> getProcedureAndMedicamentNames() {
         return procedureAndMedicamentService.getProceduresAndMedicines();
     }

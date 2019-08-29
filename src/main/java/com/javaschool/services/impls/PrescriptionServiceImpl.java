@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @Component
 @NoArgsConstructor
-@Transactional
 @Slf4j
 public class PrescriptionServiceImpl implements PrescriptionService {
     @Autowired
@@ -36,6 +35,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<PrescriptionInfo> getPrescriptions() {
         return prescriptionDao.getPrescriptions()
                 .stream()
@@ -53,6 +53,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public PrescriptionInfo getPrescription(int id) {
         log.debug("get prescription info with prescription id: {}", id);
         PrescriptionInfo prescriptionInfo = new PrescriptionInfo();
@@ -66,6 +67,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void updatePrescriptionInfo(PrescriptionInfo prescriptionInfo, String empName) {
         PrescriptionInfo oldPrescriptionInfo = getPrescription(prescriptionInfo.getPrescription().getId());
         eventService.deleteEvents(oldPrescriptionInfo);
@@ -92,6 +94,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void addPrescription(PrescriptionInfo prescriptionInfo, String empName) {
         fillPrescription(prescriptionInfo, empName);
         fillPrescriptionTimes(prescriptionInfo);
@@ -129,6 +132,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void deletePrescriptionWithEvents(int id) {
         eventService.deleteEvents(getPrescription(id));
         prescriptionDao.deletePrescription(id);
@@ -138,6 +142,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void deletePrescriptions(int patientId) {
         prescriptionDao.deletePrescriptions(patientId);
     }
@@ -146,6 +151,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public Prescription getLastPrescription(String patientName, ProcedureAndMedicament promed) {
         return prescriptionDao.getLastPrescription(patientName, promed);
     }

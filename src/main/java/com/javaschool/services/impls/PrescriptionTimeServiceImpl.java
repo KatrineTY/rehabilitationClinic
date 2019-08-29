@@ -13,7 +13,6 @@ import java.util.List;
 
 @Component
 @NoArgsConstructor
-@Transactional
 public class PrescriptionTimeServiceImpl implements PrescriptionTimeService {
     @Autowired
     private PrescriptionTimeDao prescriptionTimeDao;
@@ -22,6 +21,7 @@ public class PrescriptionTimeServiceImpl implements PrescriptionTimeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void addPrescriptionTime(PrescriptionTime prescriptionTime) {
         prescriptionTimeDao.addPrescriptionTime(prescriptionTime);
     }
@@ -30,6 +30,7 @@ public class PrescriptionTimeServiceImpl implements PrescriptionTimeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<PrescriptionTime> getPrescriptionTimes(Prescription prescription) {
         return prescriptionTimeDao.getPrescriptionTimes(prescription);
     }
@@ -38,6 +39,7 @@ public class PrescriptionTimeServiceImpl implements PrescriptionTimeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void updatePrescriptionTimes(List<PrescriptionTime> prescriptionTimes) {
         prescriptionTimes.forEach(prescriptionTimeDao::updatePrescriptionTime);
     }
@@ -46,6 +48,7 @@ public class PrescriptionTimeServiceImpl implements PrescriptionTimeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void deletePrescriptionTime(PrescriptionTime prescriptionTime) {
         prescriptionTimeDao.deletePrescriptionTime(prescriptionTime);
     }

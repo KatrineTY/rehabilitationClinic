@@ -12,7 +12,6 @@ import java.util.List;
 
 @Component
 @NoArgsConstructor
-@Transactional
 @Slf4j
 public class PatientManipulationServiceImpl implements PatientManipulationService {
     @Autowired
@@ -32,6 +31,7 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public PatientInfo getPatientInfo(int patientId) {
         log.debug("get patient info with patient id: {}", patientId);
         PatientInfo patientInfo = new PatientInfo();
@@ -45,6 +45,7 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void updatePatientInfo(PatientInfo patientInfo) {
         patientService.updatePatient(patientInfo.getPatient());
         patientInfo.getPatientCard().setAttendingDoctor(
@@ -61,6 +62,7 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<String> getAttendingDoctorNames() {
         return employeeService.getAttendingDoctorNames();
     }
@@ -69,6 +71,7 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<String> getResponsibleDoctorNames() {
         return employeeService.getResponsibleDoctorNames();
     }
@@ -77,6 +80,7 @@ public class PatientManipulationServiceImpl implements PatientManipulationServic
      * {@inheritDoc}
      */
     @Override
+    @Transactional
     public void dischargePatient(int id) {
         patientCardService.changeStatus(id, "Discharged");
         eventService.deleteEvents(id);

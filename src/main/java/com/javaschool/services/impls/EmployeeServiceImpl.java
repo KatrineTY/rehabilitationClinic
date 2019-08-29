@@ -12,7 +12,6 @@ import java.util.List;
 
 @Component
 @NoArgsConstructor
-@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
@@ -21,6 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public Employee getEmployeeByLogin(String login) {
         return employeeDao.getEmployeeByLogin(login);
     }
@@ -29,6 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public Employee getEmployeeByName(String name) {
         return employeeDao.getEmployeeByName(name);
     }
@@ -37,6 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<String> getAttendingDoctorNames() {
         return employeeDao.getEmployeeWithRoleNames("ROLE_MAIN_DOCTOR");
     }
@@ -45,6 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      * {@inheritDoc}
      */
     @Override
+    @Transactional(readOnly = true)
     public List<String> getResponsibleDoctorNames() {
         return employeeDao.getEmployeeWithRoleNames("ROLE_DOCTOR");
     }
