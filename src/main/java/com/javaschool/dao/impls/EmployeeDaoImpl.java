@@ -51,4 +51,48 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return query.list();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addEmployee(Employee employee) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(employee);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateEmployee(Employee employee) {
+        Session session = sessionFactory.getCurrentSession();
+        session.merge(employee);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Employee> getEmployees() {
+        Session session = sessionFactory.getCurrentSession();
+        return (List<Employee>) session.createQuery("from Employee").list();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void changeAccountStatusOfEmployee(int id, boolean enabled) {
+        Session session = sessionFactory.getCurrentSession();
+        Employee employee = session.get(Employee.class, id);
+        employee.setEnabled(enabled);
+    }
+
+    @Override
+    public Employee getEmployee(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Employee.class, id);
+    }
+
 }

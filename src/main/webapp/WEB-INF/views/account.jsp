@@ -24,6 +24,10 @@
                     list</a>
                     <%--                </security:authorize>--%>
                 <a href="get-events-list/1" class="list-group-item list-group-item-action">Events list</a>
+                <security:authorize access="hasRole('ROLE_ADMINISTRATOR')">
+                    <a href="add-employee" class="list-group-item list-group-item-action">Add employee</a>
+                    <a href="get-employees-list" class="list-group-item list-group-item-action">Employees list</a>
+                </security:authorize>
             </div>
         </div>
     </jsp:body>

@@ -5,7 +5,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
-    <script src="${pageContext.request.contextPath}/resources/static/js/searchPatient.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/static/js/search.js"></script>
 
     <title>Prescriptions</title>
 </head>
@@ -13,7 +13,7 @@
 <t:page width="10">
     <jsp:body>
         <input class=" form-control" type="text" placeholder="Search"
-               aria-label="Search" onkeyup="searchPatient()" id="searchPatient">
+               aria-label="Search" onkeyup="search()" id="searchByName">
         <table id="patientTable" class="table table-hover">
             <thead class="card-header">
             <tr>

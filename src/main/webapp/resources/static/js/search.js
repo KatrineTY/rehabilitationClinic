@@ -1,6 +1,6 @@
-function searchPatient() {
+function search() {
     var input, filter, table, tr, td, i;
-    input = document.getElementById("searchPatient");
+    input = document.getElementById("searchByName");
     filter = input.value.toUpperCase();
     table = document.getElementsByTagName("table")[0];
     tr = table.getElementsByTagName("tr");

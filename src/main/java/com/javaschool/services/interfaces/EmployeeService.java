@@ -36,4 +36,48 @@ public interface EmployeeService {
      */
     List<String> getResponsibleDoctorNames();
 
+    /**
+     * Add an employee into DB
+     *
+     * @param employee - the specified employee
+     */
+    void addEmployee(Employee employee);
+
+    /**
+     * Update an employee
+     *
+     * @param employee - the specified employee
+     */
+    void updateEmployee(Employee employee);
+
+    /**
+     * Retrieve employees
+     *
+     * @return list of employees
+     */
+    List<Employee> getEmployees();
+
+    /**
+     * Disable employee account
+     *
+     * @param id - id of the specified employee
+     */
+    void disableEmployee(int id);
+
+    /**
+     * Change account status of an employee
+     *
+     * @param id      - id of the specified employee
+     * @param enabled - new status
+     */
+    void changeAccountStatusOfEmployee(int id, boolean enabled);
+
+    /**
+     * Retrieve employee by id
+     *
+     * @param id - the specified id
+     * @return the specified employee
+     */
+    Employee getEmployee(int id);
+
 }

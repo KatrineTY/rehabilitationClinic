@@ -52,4 +52,58 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDao.getEmployeeWithRoleNames("ROLE_DOCTOR");
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void addEmployee(Employee employee) {
+        employeeDao.addEmployee(employee);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void updateEmployee(Employee employee) {
+        employeeDao.updateEmployee(employee);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Employee> getEmployees() {
+        return employeeDao.getEmployees();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void disableEmployee(int id) {
+        employeeDao.changeAccountStatusOfEmployee(id, false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void changeAccountStatusOfEmployee(int id, boolean enabled) {
+        employeeDao.changeAccountStatusOfEmployee(id, enabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Employee getEmployee(int id) {
+        return employeeDao.getEmployee(id);
+    }
+
 }
