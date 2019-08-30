@@ -8,6 +8,9 @@
         <intercept-url pattern="/login" access="permitAll()"/>
         <intercept-url pattern="/" access="permitAll()"/>
         <intercept-url pattern="/events-for-tabloid" access="permitAll()"/>
+        <intercept-url pattern="/add-employee" access="hasRole('ROLE_ADMINISTRATOR')"/>
+        <intercept-url pattern="/get-employees-list" access="hasRole('ROLE_ADMINISTRATOR')"/>
+        <intercept-url pattern="/edit-employee/*" access="hasRole('ROLE_ADMINISTRATOR')"/>
         <intercept-url pattern="/add-prescription" access="hasRole('ROLE_DOCTOR')"/>
         <intercept-url pattern="/edit-prescription/*" access="hasRole('ROLE_DOCTOR')"/>
         <intercept-url pattern="/delete-prescription" access="hasRole('ROLE_DOCTOR')"/>
@@ -16,6 +19,9 @@
         <intercept-url pattern="/discharge-patient/*" access="hasRole('ROLE_MAIN_DOCTOR')"/>
         <intercept-url pattern="/get-events-list/reject-task" access="hasRole('ROLE_NURSE')"/>
         <intercept-url pattern="/get-events-list/take-task" access="hasRole('ROLE_NURSE')"/>
+        <intercept-url pattern="/taken-events/reject-task" access="hasRole('ROLE_NURSE')"/>
+        <intercept-url pattern="/taken-events/finish-task" access="hasRole('ROLE_NURSE')"/>
+        <intercept-url pattern="/taken-events" access="hasRole('ROLE_NURSE')"/>
         <intercept-url pattern="/*" access="isAuthenticated()"/>
         <form-login login-page='/login'
                     default-target-url="/account"

@@ -30,15 +30,19 @@
             <li class="nav-item ${pageContext.request.requestURI.endsWith('eventsList.jsp')?'active':''}">
                 <a class="nav-link" href="<c:url value="/get-events-list/1"/>">Events list</a>
             </li>
-            <security:authorize access="hasRole('ROLE_ADMINISTRATOR')">
 
+            <security:authorize access="hasRole('ROLE_ADMINISTRATOR')">
                 <li class="nav-item ${pageContext.request.requestURI.endsWith('addEmployee.jsp')?'active':''}">
                     <a class="nav-link" href="<c:url value="/add-employee"/>">Add employee</a>
                 </li>
                 <li class="nav-item ${pageContext.request.requestURI.endsWith('employeesList.jsp')?'active':''}">
                     <a class="nav-link" href="<c:url value="/get-employees-list"/>">Employees list</a>
                 </li>
-
+            </security:authorize>
+            <security:authorize access="hasRole('ROLE_NURSE')">
+                <li class="nav-item ${pageContext.request.requestURI.endsWith('takenEvents.jsp')?'active':''}">
+                    <a class="nav-link" href="<c:url value="/taken-events"/>">Taken events</a>
+                </li>
             </security:authorize>
         </ul>
         <ul class="navbar-nav navbar-right">

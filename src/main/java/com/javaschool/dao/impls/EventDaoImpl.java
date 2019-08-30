@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Component
@@ -83,7 +84,7 @@ public class EventDaoImpl implements EventDao {
      * {@inheritDoc}
      */
     @Override
-    public void updateEventStatus(int id, Employee nurse, String comment, String status) {
+    public void updateEventStatus(int id, Employee nurse, String comment, String status, LocalTime startTaskTime, LocalTime endTaskTime) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Event where id = :id");
         query.setParameter("id", id);
@@ -91,6 +92,10 @@ public class EventDaoImpl implements EventDao {
         event.setNurse(nurse);
         event.setStatus(status);
         event.setComment(comment);
+        if (event.getStartTaskTime() == null) {
+            event.setStartTaskTime(startTaskTime);
+        }
+        event.setEndTaskTime(endTaskTime);
     }
 
     /**
@@ -192,6 +197,18 @@ public class EventDaoImpl implements EventDao {
         query.setParameter("startDate", startDate);
         query.setParameter("endDate", endDate);
 
+        return query.list();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getEvents(String nurseName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event where nurse.name = :nurseName and status='In progress'");
+        query.setParameter("nurseName", nurseName);
         return query.list();
     }
 

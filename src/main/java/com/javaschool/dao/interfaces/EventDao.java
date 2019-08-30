@@ -6,6 +6,7 @@ import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public interface EventDao {
@@ -48,13 +49,14 @@ public interface EventDao {
 
     /**
      * Update event specific fields
-     *
-     * @param id      - id of the specified event
+     *  @param id      - id of the specified event
      * @param nurse   - the employee who updates event
      * @param comment - reason of rejecting event, can be empty
      * @param status  - the new status
+     * @param startTaskTime
+     * @param endTaskTime
      */
-    void updateEventStatus(int id, Employee nurse, String comment, String status);
+    void updateEventStatus(int id, Employee nurse, String comment, String status, LocalTime startTaskTime, LocalTime endTaskTime);
 
     /**
      * Retrieve events for a specific page of events
@@ -110,4 +112,11 @@ public interface EventDao {
      */
     List<Event> getEventsPerDay();
 
+    /**
+     * Retrieve events for a nurse
+     *
+     * @param nurseName - name of the specified nurse
+     * @return specified events
+     */
+    List<Event> getEvents(String nurseName);
 }

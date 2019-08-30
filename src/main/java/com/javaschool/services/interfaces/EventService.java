@@ -40,6 +40,14 @@ public interface EventService {
     void takeTask(int id, String nurseName);
 
     /**
+     * Change status of an event to 'Done'
+     *
+     * @param id        -  the id of the specified event
+     * @param nurseName - the name of an employee who changes event status
+     */
+    void finishTask(int id, String nurseName);
+
+    /**
      * Change status of an event to 'Rejected'
      *
      * @param id        - the id of the specified event
@@ -95,5 +103,13 @@ public interface EventService {
      * @return specified events
      */
     List<EventDto> getEventDtosPerDay();
+
+    /**
+     * Retrieve events for a nurse
+     *
+     * @param nurseName - name of the specified nurse
+     * @return specified events
+     */
+    List<Event> getEvents(String nurseName);
 
 }

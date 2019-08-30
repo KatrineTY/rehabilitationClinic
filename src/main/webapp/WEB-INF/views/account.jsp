@@ -28,6 +28,9 @@
                     <a href="add-employee" class="list-group-item list-group-item-action">Add employee</a>
                     <a href="get-employees-list" class="list-group-item list-group-item-action">Employees list</a>
                 </security:authorize>
+                <security:authorize access="hasRole('ROLE_NURSE')">
+                    <a href="taken-events" class="list-group-item list-group-item-action">Taken events</a>
+                </security:authorize>
             </div>
         </div>
     </jsp:body>

@@ -95,7 +95,7 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional
     public void takeTask(int id, String nurseName) {
-        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "In progress");
+        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "In progress", LocalTime.now(), null);
         messageSender.send("take task");
     }
 
@@ -104,8 +104,18 @@ public class EventServiceImpl implements EventService {
      */
     @Override
     @Transactional
+    public void finishTask(int id, String nurseName) {
+        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "Finished", null, LocalTime.now());
+        messageSender.send("finish task");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
     public void rejectTask(int id, String nurseName, String comment) {
-        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), comment, "Rejected");
+        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), comment, "Rejected", null, LocalTime.now());
         messageSender.send("reject task");
     }
 
@@ -171,8 +181,6 @@ public class EventServiceImpl implements EventService {
 
     /**
      * {@inheritDoc}
-     *
-     * @return
      */
     @Override
     @Transactional(readOnly = true)
@@ -191,6 +199,15 @@ public class EventServiceImpl implements EventService {
                         .ward(event.getWard())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Event> getEvents(String nurseName) {
+        return eventDao.getEvents(nurseName);
     }
 
     /**

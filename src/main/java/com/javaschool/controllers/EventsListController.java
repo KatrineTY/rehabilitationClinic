@@ -31,7 +31,7 @@ public class EventsListController {
         return model;
     }
 
-    @RequestMapping(value = "get-events-list/reject-task", method = RequestMethod.POST)
+    @RequestMapping(value = {"get-events-list/reject-task", "taken-events/reject-task"}, method = RequestMethod.POST)
     public ModelAndView rejectTask(@RequestParam(name = "event.id") int id,
                                    @RequestParam(name = "comment") String comment,
                                    @SessionAttribute(name = "empName") String empName) {
@@ -39,7 +39,7 @@ public class EventsListController {
         ModelAndView model = new ModelAndView();
         eventService.rejectTask(id, empName, comment);
         log.info("rejected event with id: {}", id);
-        model.setViewName("redirect:../get-events-list/1");
+        model.setViewName("redirect:../account");
         return model;
     }
 
@@ -69,6 +69,24 @@ public class EventsListController {
         model.addObject("searchStartTime", startTime);
         model.addObject("searchEndTime", endTime);
         return model;
+    }
+
+
+    @RequestMapping(value = "taken-events/finish-task", method = RequestMethod.POST)
+    public ModelAndView finishTask(@RequestParam(name = "event.id") int id,
+                                   @SessionAttribute(name = "empName") String empName) {
+        log.info("attempted to finish event with id: {}", id);
+        ModelAndView model = new ModelAndView();
+        eventService.finishTask(id, empName);
+        log.info("finished event with id: {}", id);
+        model.setViewName("redirect:../taken-events");
+        return model;
+    }
+
+    @RequestMapping(value = "taken-events", method = RequestMethod.GET)
+    public ModelAndView takenEvents(@SessionAttribute(name = "empName") String empName) {
+        log.info("requested taken events");
+        return new ModelAndView("takenEvents", "events", eventService.getEvents(empName));
     }
 
 }

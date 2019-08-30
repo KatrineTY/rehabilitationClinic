@@ -2,6 +2,7 @@ package com.javaschool.entities;
 
 
 import com.javaschool.converters.LocalDateTimeAttributeConverter;
+import com.javaschool.converters.LocalTimeAttributeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @Entity
@@ -45,5 +47,13 @@ public class Event {
     private String building;
     @Column
     private int ward;
+    @Column(name = "start_time")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @Convert(converter = LocalTimeAttributeConverter.class)
+    private LocalTime startTaskTime;
+    @Column(name = "end_time")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @Convert(converter = LocalTimeAttributeConverter.class)
+    private LocalTime endTaskTime;
 
 }

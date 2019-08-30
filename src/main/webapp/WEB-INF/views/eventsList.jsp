@@ -7,7 +7,8 @@
 
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css"
+          type="text/css">
     <script src="${pageContext.request.contextPath}/resources/static/js/jquery-1.11.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/static/js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/static/js/bootstrap.min.js"></script>
@@ -76,7 +77,7 @@
                             <td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#rejectModal" data-event-id="${event.id}"
-                                        <c:if test="${event.status!='Planned' && event.status!='In progress'}">disabled</c:if>>
+                                        <c:if test="${event.status!='In progress'}">disabled</c:if>>
                                     Reject
                                 </button>
                             </td>

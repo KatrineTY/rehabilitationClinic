@@ -130,17 +130,6 @@ class EventServiceImplTest {
         assertEquals(EVENTS, eventCaptor.getAllValues());
     }
 
-    @Test
-    void should_updateEventStatusWithSpecifiedNurse_whenRejectTask() {
-        tuneEmployeeService();
-        eventService.rejectTask(1, NURSE.getName(), COMMENT);
-        verify(eventDao).updateEventStatus(1, NURSE, COMMENT, REJECTED_STATUS);
-    }
-
-    private void tuneEmployeeService() {
-        when(employeeService.getEmployeeByName(NURSE.getName())).thenReturn(NURSE);
-    }
-
     // filters
     @Test
     void should_getAllEvents_whenFilteringParamsAreEmpty() {
