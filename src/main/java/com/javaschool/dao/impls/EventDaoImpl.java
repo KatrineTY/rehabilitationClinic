@@ -213,6 +213,36 @@ public class EventDaoImpl implements EventDao {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getNearestMedicinesEvents() {
+        Session session = sessionFactory.getCurrentSession();
+        LocalTime endTime = LocalTime.now();
+        Query query = session.createQuery("from Event " +
+                "where startTaskTime between :startTime and :endTime and type.kind='Medicament'");
+        query.setParameter("startTime", endTime.minusMinutes(10));
+        query.setParameter("endTime", endTime.minusMinutes(5));
+        return query.list();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getNearestProceduresEvents() {
+        Session session = sessionFactory.getCurrentSession();
+        LocalTime endTime = LocalTime.now();
+        Query query = session.createQuery("from Event " +
+                "where startTaskTime between :startTime and :endTime and type.kind='Procedure'");
+        query.setParameter("startTime", endTime.minusMinutes(60));
+        query.setParameter("endTime", endTime.minusMinutes(30));
+        return query.list();
+    }
+
+    /**
      * Set query start and end times
      *
      * @param timePeriodInfo - time period that contains start and end times

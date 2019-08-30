@@ -112,4 +112,18 @@ public interface EventService {
      */
     List<Event> getEvents(String nurseName);
 
+    /**
+     * Retrieve medicines events for nearest events
+     *
+     * @return specified events
+     */
+    List<Event> getNearestMedicinesEvents();
+
+    /**
+     * Retrieve procedures events for nearest events
+     *
+     * @return specified events
+     */
+    List<Event> getNearestProceduresEvents();
+
 }

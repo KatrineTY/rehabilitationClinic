@@ -49,10 +49,11 @@ public interface EventDao {
 
     /**
      * Update event specific fields
-     *  @param id      - id of the specified event
-     * @param nurse   - the employee who updates event
-     * @param comment - reason of rejecting event, can be empty
-     * @param status  - the new status
+     *
+     * @param id            - id of the specified event
+     * @param nurse         - the employee who updates event
+     * @param comment       - reason of rejecting event, can be empty
+     * @param status        - the new status
      * @param startTaskTime
      * @param endTaskTime
      */
@@ -119,4 +120,19 @@ public interface EventDao {
      * @return specified events
      */
     List<Event> getEvents(String nurseName);
+
+    /**
+     * Retrieve medicines events for nearest events
+     *
+     * @return specified events
+     */
+    List<Event> getNearestMedicinesEvents();
+
+    /**
+     * Retrieve procedures events for nearest events
+     *
+     * @return specified events
+     */
+    List<Event> getNearestProceduresEvents();
+
 }

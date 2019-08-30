@@ -211,6 +211,26 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Event> getNearestMedicinesEvents() {
+        List<Event> nearestMedicinesEvents = eventDao.getNearestMedicinesEvents();
+        return nearestMedicinesEvents == null ? new ArrayList<>() : nearestMedicinesEvents;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Event> getNearestProceduresEvents() {
+        List<Event> nearestProceduresEvents = eventDao.getNearestProceduresEvents();
+        return nearestProceduresEvents == null ? new ArrayList<>() : nearestProceduresEvents;
+    }
+
+    /**
      * Check if an event time is in a time period
      *
      * @param timePeriodInfo - the specified time period
