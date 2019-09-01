@@ -231,6 +231,16 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Event> getEvents(String patientName, LocalDate startDate, LocalDate endDate) {
+        List<Event> events = eventDao.getEvents(patientName, startDate, endDate);
+        return events == null ? new ArrayList<>() : events;
+    }
+
+    /**
      * Check if an event time is in a time period
      *
      * @param timePeriodInfo - the specified time period

@@ -126,4 +126,14 @@ public interface EventService {
      */
     List<Event> getNearestProceduresEvents();
 
+    /**
+     * Retrieve events with specified params
+     *
+     * @param patientName - name of the patient
+     * @param startDate   - date from which to retrieve events
+     * @param endDate     - date before which to retrieve events
+     * @return specified events
+     */
+    List<Event> getEvents(String patientName, LocalDate startDate, LocalDate endDate);
+
 }

@@ -243,6 +243,23 @@ public class EventDaoImpl implements EventDao {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Event> getEvents(String patientName, LocalDate startDate, LocalDate endDate) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Event where " +
+                "status!='Planned' and status!='In progress' " +
+                "and patient.name = :patientName " +
+                "and date(date) between :startDate and :endDate");
+        query.setParameter("patientName", patientName);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        return query.list();
+    }
+
+    /**
      * Set query start and end times
      *
      * @param timePeriodInfo - time period that contains start and end times

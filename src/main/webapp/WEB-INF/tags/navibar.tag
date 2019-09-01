@@ -10,6 +10,9 @@
                 <a class="nav-link" href="<c:url value="/account"/>">Account </a>
             </li>
             <security:authorize access="hasRole('ROLE_MAIN_DOCTOR')">
+                <li class="nav-item ${pageContext.request.requestURI.endsWith('commonReport.jsp')?'active':''}">
+                    <a class="nav-link" href="<c:url value="/generate-report"/>">Generate report</a>
+                </li>
                 <li class="nav-item ${pageContext.request.requestURI.endsWith('addPatient.jsp')?'active':''}">
                     <a class="nav-link" href="<c:url value="/add-patient"/>">Add patient</a>
                 </li>

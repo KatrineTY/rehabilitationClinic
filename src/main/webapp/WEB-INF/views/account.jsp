@@ -13,6 +13,7 @@
         <div class="card-body">
             <div class="list-group">
                 <security:authorize access="hasRole('ROLE_MAIN_DOCTOR')">
+                    <a href="generate-report" class="list-group-item list-group-item-action">Generate report</a>
                     <a href="add-patient" class="list-group-item list-group-item-action">Add patient</a>
                 </security:authorize>
                 <security:authorize access="hasRole('ROLE_DOCTOR')">
