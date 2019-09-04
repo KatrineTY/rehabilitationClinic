@@ -26,5 +26,7 @@ public class ProcedureAndMedicament {
     private String name;
     @Column
     private String kind;
+    @Column
+    private int count;
 
 }

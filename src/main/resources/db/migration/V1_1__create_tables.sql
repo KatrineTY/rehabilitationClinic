@@ -64,6 +64,7 @@ CREATE TABLE proceds_and_medics
     type_id SERIAL PRIMARY KEY,
     name    VARCHAR(50) NOT NULL,
     kind    VARCHAR(12) CHECK ( kind = 'Medicament' OR kind = 'Procedure' ),
+    count   INTEGER,
     UNIQUE (name, kind)
 );
 

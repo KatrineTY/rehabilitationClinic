@@ -22,7 +22,7 @@ public class PatientCard {
     @Column(name = "patient_card_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "patient", referencedColumnName = "patient_id")
     private Patient patient;
     @Column
