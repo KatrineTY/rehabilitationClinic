@@ -156,4 +156,13 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         return prescriptionDao.getLastPrescription(patientName, promed);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Prescription> getPrescriptions(String patientName) {
+        return prescriptionDao.getPrescriptions(patientName);
+    }
+
 }

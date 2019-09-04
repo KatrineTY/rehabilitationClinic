@@ -62,4 +62,11 @@ public interface PrescriptionService {
      */
     Prescription getLastPrescription(String patientName, ProcedureAndMedicament promed);
 
+    /**
+     * Retrieve prescriptions for a specific patient
+     *
+     * @param patientName - the specified patient name
+     * @return list of prescriptions for the specified patient
+     */
+    List<Prescription> getPrescriptions(String patientName);
 }

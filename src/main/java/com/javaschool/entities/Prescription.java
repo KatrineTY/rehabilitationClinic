@@ -2,6 +2,7 @@ package com.javaschool.entities;
 
 import com.javaschool.converters.LocalDateAttributeConverter;
 import com.javaschool.validation.constraints.DoseConstraint;
+import com.javaschool.validation.constraints.IncompatiblePromedConstraint;
 import com.javaschool.validation.constraints.PrescriptionForDischargedPatientConstraint;
 import com.javaschool.validation.constraints.UniquePatientsPromedConstraint;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ import java.util.List;
 @DoseConstraint
 @UniquePatientsPromedConstraint
 @PrescriptionForDischargedPatientConstraint
+@IncompatiblePromedConstraint
 public class Prescription {
     @Id
     @Column(name = "prescription_id")

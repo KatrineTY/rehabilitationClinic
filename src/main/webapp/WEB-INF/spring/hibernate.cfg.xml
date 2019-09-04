@@ -25,6 +25,7 @@
                 <value>com.javaschool.entities.ProcedureAndMedicament</value>
                 <value>com.javaschool.entities.Role</value>
                 <value>com.javaschool.entities.WorkingTime</value>
+                <value>com.javaschool.entities.IncompatibleProcedureAndMedicament</value>
             </array>
         </property>
         <property name="hibernateProperties">

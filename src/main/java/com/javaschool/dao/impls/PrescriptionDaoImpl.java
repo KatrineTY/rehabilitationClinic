@@ -98,4 +98,16 @@ public class PrescriptionDaoImpl implements PrescriptionDao {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Prescription> getPrescriptions(String patientName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Prescription where patient.name =: patientName");
+        query.setParameter("patientName", patientName);
+        return query.list();
+    }
+
 }

@@ -27,6 +27,6 @@ public class ProcedureAndMedicament {
     @Column
     private String kind;
     @Column
-    private int count;
+    private Integer count;
 
 }
