@@ -259,6 +259,12 @@ public class EventDaoImpl implements EventDao {
         return query.list();
     }
 
+    @Override
+    public Event getEvent(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Event.class, id);
+    }
+
     /**
      * Set query start and end times
      *

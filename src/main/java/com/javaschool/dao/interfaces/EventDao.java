@@ -145,4 +145,12 @@ public interface EventDao {
      */
     List<Event> getEvents(String patientName, LocalDate startDate, LocalDate endDate);
 
+    /**
+     * Retrieve event by id
+     *
+     * @param id - the specified id
+     * @return the specified event
+     */
+    Event getEvent(int id);
+
 }

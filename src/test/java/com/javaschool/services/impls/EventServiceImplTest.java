@@ -1,6 +1,6 @@
 package com.javaschool.services.impls;
 
-import com.javaschool.activemq.MessageSender;
+import com.javaschool.activemq.MessageSenderTabloid;
 import com.javaschool.dao.interfaces.EventDao;
 import com.javaschool.dto.PrescriptionInfo;
 import com.javaschool.dto.TimePeriodInfo;
@@ -117,7 +117,7 @@ class EventServiceImplTest {
     @Mock
     private PatientCardService patientCardService;
     @Mock
-    private MessageSender messageSender;
+    private MessageSenderTabloid messageSender;
     @InjectMocks
     private EventService eventService = new EventServiceImpl();
 

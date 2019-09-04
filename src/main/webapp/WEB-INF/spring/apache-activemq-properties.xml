@@ -14,7 +14,8 @@
             <value>
                 <!-- JMS -->
                 JMS.BROKER.URL=tcp://localhost:61616
-                JMS.QUEUE.NAME=queue/rehaQueue
+                JMS.QUEUE.NAME.TABLOID=queue/rehaQueueTabloid
+                JMS.QUEUE.NAME.PROMED=queue/rehaQueuePromed
             </value>
         </property>
     </bean>

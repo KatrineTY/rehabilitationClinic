@@ -13,13 +13,22 @@
         <constructor-arg ref="amqConnectionFactory"/>
     </bean>
 
-    <bean id="destinationQueue" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg index="0" value="${JMS.QUEUE.NAME}"/>
+    <bean id="destinationQueueTabloid" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="${JMS.QUEUE.NAME.TABLOID}"/>
     </bean>
 
-    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <bean id="jmsTemplateTabloid" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
-        <property name="defaultDestination" ref="destinationQueue"/>
+        <property name="defaultDestination" ref="destinationQueueTabloid"/>
+    </bean>
+
+    <bean id="destinationQueuePromed" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="${JMS.QUEUE.NAME.PROMED}"/>
+    </bean>
+
+    <bean id="jmsTemplatePromed" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination" ref="destinationQueuePromed"/>
     </bean>
 
 </beans>

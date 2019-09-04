@@ -1,6 +1,7 @@
 package com.javaschool.services.impls;
 
-import com.javaschool.activemq.MessageSender;
+import com.javaschool.activemq.MessageSenderPromed;
+import com.javaschool.activemq.MessageSenderTabloid;
 import com.javaschool.dao.impls.EventDaoImpl;
 import com.javaschool.dao.interfaces.EventDao;
 import com.javaschool.dto.EventDto;
@@ -38,7 +39,9 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private PatientCardService patientCardService;
     @Autowired
-    private MessageSender messageSender;
+    private MessageSenderTabloid messageSenderTabloid;
+    @Autowired
+    private MessageSenderPromed messageSenderPromed;
 
     /**
      * {@inheritDoc}
@@ -48,7 +51,7 @@ public class EventServiceImpl implements EventService {
     public void addEvents(PrescriptionInfo prescriptionInfo) {
         List<Event> events = collectEvents(prescriptionInfo);
         events.forEach(event -> eventDao.addEvent(event));
-        messageSender.send("add events");
+        messageSenderTabloid.send("add events");
     }
 
     /**
@@ -58,7 +61,7 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void deleteEvents(PrescriptionInfo prescriptionInfo) {
         eventDao.deleteEvents(prescriptionInfo);
-        messageSender.send("delete events by prescription info");
+        messageSenderTabloid.send("delete events by prescription info");
     }
 
     /**
@@ -68,7 +71,7 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void deleteEvents(int patientId) {
         eventDao.deleteEvents(patientId);
-        messageSender.send("delete events by id");
+        messageSenderTabloid.send("delete events by id");
     }
 
     /**
@@ -96,7 +99,7 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void takeTask(int id, String nurseName) {
         eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "In progress", LocalTime.now(), null);
-        messageSender.send("take task");
+        messageSenderTabloid.send("take task");
     }
 
     /**
@@ -106,7 +109,11 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void finishTask(int id, String nurseName) {
         eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "Finished", null, LocalTime.now());
-        messageSender.send("finish task");
+        messageSenderTabloid.send("finish task");
+        Event event = eventDao.getEvent(id);
+        if (event.getType().getKind().equals("Medicament")) {
+            messageSenderPromed.send(event.getType().getName(), event.getDose().replaceAll("\\D+", ""));
+        }
     }
 
     /**
@@ -116,7 +123,7 @@ public class EventServiceImpl implements EventService {
     @Transactional
     public void rejectTask(int id, String nurseName, String comment) {
         eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), comment, "Rejected", null, LocalTime.now());
-        messageSender.send("reject task");
+        messageSenderTabloid.send("reject task");
     }
 
     /**
