@@ -34,7 +34,7 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public List<Event> getEvents(int patientId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event where patient.id = :id");
+        Query query = session.createQuery("from Event where patient.id = :id and date > now()");
         query.setParameter("id", patientId);
         return (List<Event>) query.list();
     }
@@ -79,7 +79,7 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public List<Event> getEvents() {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event");
+        Query query = session.createQuery("from Event where date > now()");
         return query.list();
     }
 
@@ -108,7 +108,7 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public List<Event> getEventsPage(int page) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Event order by patient.name");
+        Query query = session.createQuery("from Event where date > now() order by patient.name");
         query.setFirstResult(page * COUNT_OF_EVENTS_PER_PAGE)
                 .setMaxResults(COUNT_OF_EVENTS_PER_PAGE);
         return query.list();
