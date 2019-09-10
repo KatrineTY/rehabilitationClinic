@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface DoseConstraint {
-    String message() default "Wrong dose format";
+    String message() default "Wrong dose format, should be : 'number'mg or 'number'ml";
 
     Class<?>[] groups() default {};
 

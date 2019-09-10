@@ -63,10 +63,10 @@
                         </div>
                         <div class="form-group" id="dose-group"
                             ${prescriptionInfo.prescription.type.kind=='Procedure'?'style="display: none;"':''} >
-                            <label for="dose">Dose</label>
+                            <label for="dose" title="'number'mg or 'number'ml">Dose (ml/mg)</label>
                             <form:errors path="prescription.dose" cssClass="text-danger"/>
                             <form:input path="prescription.dose" type="text" class="form-control" id="dose"
-                                        value="${prescriptionInfo.prescription.dose}"/>
+                                        value="${prescriptionInfo.prescription.dose}" pattern="^[0-9]+mg|[0-9]+ml|$"/>
                         </div>
                         <div class="form-group">
                             <label>Period</label>

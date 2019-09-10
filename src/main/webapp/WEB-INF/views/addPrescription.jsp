@@ -48,10 +48,10 @@
                                         placeholder="name"/>
                         </div>
                         <div class="form-group" id="dose-group">
-                            <label for="dose">Dose</label>
+                            <label for="dose" title="'number'mg or 'number'ml">Dose</label>
                             <form:errors path="prescription.dose" cssClass="text-danger"/>
                             <form:input path="prescription.dose" type="text" class="form-control" id="dose"
-                                        placeholder="dose"/>
+                                        placeholder="dose" pattern="^[0-9]+mg|[0-9]+ml$"/>
                         </div>
                         <div class="form-group">
                             <label>Period</label>
