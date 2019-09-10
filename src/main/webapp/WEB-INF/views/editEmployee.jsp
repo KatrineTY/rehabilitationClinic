@@ -26,31 +26,33 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <form:errors path="name" cssClass="text-danger"/>
-                                <form:input path="name" type="text" class="form-control" id="name"
+                                <form:input required="required" path="name" type="text" class="form-control" id="name"
                                             placeholder="name"/>
                             </div>
                             <div class="form-group">
                                 <label for="position">Position</label>
                                 <form:errors path="position" cssClass="text-danger"/>
-                                <form:input path="position" type="text" class="form-control" id="position"
+                                <form:input required="required" path="position" type="text" class="form-control"
+                                            id="position"
                                             placeholder="position"/>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <form:errors path="password" cssClass="text-danger"/>
-                                <input name="password" type="password" class="form-control" id="password"
+                                <input required="required" name="password" type="password" class="form-control"
+                                       id="password"
                                        placeholder="password" value=""/>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
                                 <form:errors path="phone" cssClass="text-danger"/>
-                                <form:input path="phone" type="text" class="form-control" id="phone"
+                                <form:input required="required" path="phone" type="text" class="form-control" id="phone"
                                             placeholder="phone"/>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <form:errors path="email" cssClass="text-danger"/>
-                                <form:input path="email" type="text" class="form-control" id="email"
+                                <form:input required="required" path="email" type="text" class="form-control" id="email"
                                             placeholder="email"/>
                             </div>
                             <div class="form-group">

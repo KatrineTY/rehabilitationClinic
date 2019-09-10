@@ -9,6 +9,9 @@
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css"
           type="text/css">
+    <script src="${pageContext.request.contextPath}/resources/static/js/jquery-1.11.2.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/static/js/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/js/easy-autocomplete.min.css">
     <title>Events</title>
 </head>
 <body>
@@ -18,11 +21,12 @@
         <form method="post">
             <div class="form-group">
                 <div class="input-group">
-                    <input class=" form-control" type="text" placeholder="search by patient's name"
-                           name="searchPatientName" value="${searchPatientName}"/>
-                    <input class=" form-control" type="date" placeholder="search by date" name="searchStartDate"
+                    <input required class=" form-control" type="text" placeholder="search by patient's name"
+                           name="searchPatientName" value="${searchPatientName}" id="name"/>
+                    <input required class=" form-control" type="date" placeholder="search by date"
+                           name="searchStartDate"
                            value="${searchStartDate}"/>
-                    <input class=" form-control" type="date" placeholder="search by date" name="searchEndDate"
+                    <input required class=" form-control" type="date" placeholder="search by date" name="searchEndDate"
                            value="${searchEndDate}"/>
                     <button type="submit" class="btn btn-primary" formaction="generate-report">Search</button>
                 </div>
@@ -70,5 +74,22 @@
     </jsp:body>
 </t:page>
 
+<script>
+
+    var patientNameOptions = {
+        url: "/RehabilitationClinic/getPatients",
+        list: {
+            maxNumberOfElements: 8,
+            match: {
+                enabled: true
+            },
+            sort: {
+                enabled: true
+            }
+        },
+        requestDelay: 300
+    };
+    $("#name").easyAutocomplete(patientNameOptions);
+</script>
 </body>
 </html>

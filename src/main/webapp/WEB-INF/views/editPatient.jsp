@@ -28,7 +28,8 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <form:errors path="patient.name" cssClass="text-danger"/>
-                                <form:input path="patient.name" type="text" class="form-control" id="name"
+                                <form:input required="required" path="patient.name" type="text" class="form-control"
+                                            id="name"
                                             value="${patientInfo.patient.name}"/>
                             </div>
                             <div class="form-group">
@@ -90,7 +91,8 @@
                                                        value="${patientInfo.diagnoses[loop.index].endDate}"
                                                        type="datetime-local">
                                                 <div class="input-group">
-                                                    <input name="diagnoses[${loop.index}].name" type="text"
+                                                    <input required="required" name="diagnoses[${loop.index}].name"
+                                                           type="text"
                                                            class="form-control"
                                                            id="diagnosis${loop.index}"
                                                            value="${diagnosis.name}"/>
@@ -116,7 +118,8 @@
 
                                 <c:if test="${empty patientInfo.diagnoses}">
                                     <div class="input-group">
-                                        <input name="diagnoses[0].name" type="text" class="form-control"
+                                        <input required="required" name="diagnoses[0].name" type="text"
+                                               class="form-control"
                                                id="diagnosis0"
                                                placeholder="diagnosis"/>
                                         <div class="input-group-append">

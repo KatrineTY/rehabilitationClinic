@@ -26,7 +26,8 @@
                             <label for="name">Patient name</label>
                             <form:errors path="prescription.patient.name" cssClass="text-danger"/>
                             <form:errors path="prescription" cssClass="text-danger"/>
-                            <form:input path="prescription.patient.name" type="text" class="form-control"
+                            <form:input required="required" path="prescription.patient.name" type="text"
+                                        class="form-control"
                                         id="name"
                                         placeholder="name"/>
                         </div>
@@ -41,7 +42,8 @@
                         <div class="form-group">
                             <label for="type-name">Name</label>
                             <form:errors path="prescription.type" cssClass="text-danger"/>
-                            <form:input path="prescription.type.name" type="text" class="form-control"
+                            <form:input required="required" path="prescription.type.name" type="text"
+                                        class="form-control"
                                         id="type-name"
                                         placeholder="name"/>
                         </div>
@@ -56,11 +58,13 @@
                             <br/>
                             <form:errors path="prescription.startDate" cssClass="text-danger"/>
                             <div class="input-group">
-                                <form:input path="prescription.startDate" type="date" class="form-control"/>
+                                <form:input required="required" path="prescription.startDate" type="date"
+                                            class="form-control"/>
                             </div>
                             <form:errors path="prescription.endDate" cssClass="text-danger"/>
                             <div class="input-group">
-                                <form:input path="prescription.endDate" type="date" class="form-control"/>
+                                <form:input required="required" path="prescription.endDate" type="date"
+                                            class="form-control"/>
                             </div>
                         </div>
                         <div class="form-group">

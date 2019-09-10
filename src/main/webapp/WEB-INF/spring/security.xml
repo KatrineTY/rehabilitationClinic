@@ -24,7 +24,7 @@
         <intercept-url pattern="/taken-events/reject-task" access="hasRole('ROLE_NURSE')"/>
         <intercept-url pattern="/taken-events/finish-task" access="hasRole('ROLE_NURSE')"/>
         <intercept-url pattern="/taken-events" access="hasRole('ROLE_NURSE')"/>
-        <intercept-url pattern="/*" access="isAuthenticated()"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
         <form-login login-page='/login'
                     default-target-url="/account"
                     authentication-failure-url="/login?error=true"

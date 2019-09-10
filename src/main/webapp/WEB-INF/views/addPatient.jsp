@@ -29,7 +29,8 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <form:errors path="patient.name" cssClass="text-danger"/>
-                                <form:input path="patient.name" type="text" class="form-control" id="name"
+                                <form:input required="required" path="patient.name" type="text" class="form-control"
+                                            id="name"
                                             placeholder="name"/>
                             </div>
                             <div class="form-group">

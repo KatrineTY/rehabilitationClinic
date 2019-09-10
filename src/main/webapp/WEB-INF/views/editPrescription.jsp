@@ -30,7 +30,8 @@
                         <div class="form-group">
                             <label for="name">Patient name</label>
                             <form:errors path="prescription.patient.name" cssClass="text-danger"/>
-                            <form:input path="prescription.patient.name" type="text" class="form-control"
+                            <form:input required="required" path="prescription.patient.name" type="text"
+                                        class="form-control"
                                         id="name"
                                         value="${prescriptionInfo.prescription.patient.name}"/>
                         </div>
@@ -55,7 +56,8 @@
                         <div class="form-group">
                             <label for="type-name">Name</label>
                             <form:errors path="prescription.type" cssClass="text-danger"/>
-                            <form:input path="prescription.type.name" type="text" class="form-control"
+                            <form:input required="required" path="prescription.type.name" type="text"
+                                        class="form-control"
                                         id="type-name"
                                         value="${prescriptionInfo.prescription.type.name}"/>
                         </div>
@@ -71,12 +73,14 @@
                             <br/>
                             <form:errors path="prescription.startDate" cssClass="text-danger"/>
                             <div class="input-group">
-                                <form:input path="prescription.startDate" type="date" class="form-control"
+                                <form:input required="required" path="prescription.startDate" type="date"
+                                            class="form-control"
                                             value="${prescriptionInfo.prescription.startDate}"/>
                             </div>
                             <form:errors path="prescription.endDate" cssClass="text-danger"/>
                             <div class="input-group">
-                                <form:input path="prescription.endDate" type="date" class="form-control"
+                                <form:input required="required" path="prescription.endDate" type="date"
+                                            class="form-control"
                                             value="${prescriptionInfo.prescription.endDate}"/>
                             </div>
                         </div>
@@ -125,7 +129,8 @@
                                             <input style="display:none"
                                                    name="prescriptionTimes[${loop.index}].id"
                                                    value="${prescriptionInfo.prescriptionTimes[loop.index].id}">
-                                            <input name="prescriptionTimes[${loop.index}].time" type="time"
+                                            <input required="required" name="prescriptionTimes[${loop.index}].time"
+                                                   type="time"
                                                    class="form-control"
                                                    id="time${loop.index}"
                                                    value="${time.time}"
