@@ -15,9 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -94,7 +92,7 @@ class EventServiceImplTest {
 
         EVENTS_LIST = Arrays.asList(
                 Event.builder().patient(Patient.builder().name("test patient").build())
-                        .date(LocalDateTime.of(DATE, LocalTime.now()))
+                        .date(LocalDateTime.of(DATE, ZonedDateTime.now(ZoneId.of("Europe/Moscow")).toLocalTime()))
                         .build(),
                 Event.builder().patient(Patient.builder().name("patient").build())
                         .date(LocalDateTime.of(1990, 2, 6, 10, 20))

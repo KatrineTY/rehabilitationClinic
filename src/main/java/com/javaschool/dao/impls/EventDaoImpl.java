@@ -6,6 +6,7 @@ import com.javaschool.dto.TimePeriodInfo;
 import com.javaschool.entities.Employee;
 import com.javaschool.entities.Event;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -13,12 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Component
 @NoArgsConstructor
+@Slf4j
 public class EventDaoImpl implements EventDao {
     public static final int COUNT_OF_EVENTS_PER_PAGE = 5;
     @Autowired
@@ -190,12 +193,13 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public List<Event> getEventsPerDay() {
         Session session = sessionFactory.getCurrentSession();
-        LocalDateTime startDate = LocalDateTime.now();
-        LocalDateTime endDate = startDate.plusDays(1);
+        ZonedDateTime startDate = ZonedDateTime.now(ZoneId.of("Europe/Moscow"));
+        ZonedDateTime endDate = startDate.plusDays(1);
+        log.info("Get events between Start: {} end: {}", startDate, endDate);
         Query query = session.createQuery("from Event " +
                 "where date between :startDate and :endDate");
-        query.setParameter("startDate", startDate);
-        query.setParameter("endDate", endDate);
+        query.setParameter("startDate", startDate.toLocalDateTime());
+        query.setParameter("endDate", endDate.toLocalDateTime());
 
         return query.list();
     }
@@ -219,7 +223,7 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public List<Event> getNearestMedicinesEvents() {
         Session session = sessionFactory.getCurrentSession();
-        LocalTime endTime = LocalTime.now();
+        LocalTime endTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow")).toLocalTime();
         Query query = session.createQuery("from Event " +
                 "where startTaskTime between :startTime and :endTime and type.kind='Medicament'");
         query.setParameter("startTime", endTime.minusMinutes(10));
@@ -234,7 +238,7 @@ public class EventDaoImpl implements EventDao {
     @SuppressWarnings("unchecked")
     public List<Event> getNearestProceduresEvents() {
         Session session = sessionFactory.getCurrentSession();
-        LocalTime endTime = LocalTime.now();
+        LocalTime endTime = ZonedDateTime.now(ZoneId.of("Europe/Moscow")).toLocalTime();
         Query query = session.createQuery("from Event " +
                 "where startTaskTime between :startTime and :endTime and type.kind='Procedure'");
         query.setParameter("startTime", endTime.minusMinutes(60));

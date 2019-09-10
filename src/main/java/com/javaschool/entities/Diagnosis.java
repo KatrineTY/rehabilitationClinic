@@ -10,6 +10,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Data
 @Entity
@@ -31,7 +33,7 @@ public class Diagnosis {
     @Column(name = "start_date")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime startDate = LocalDateTime.now();
+    private LocalDateTime startDate = ZonedDateTime.now(ZoneId.of("Europe/Moscow")).toLocalDateTime();
     @Column(name = "end_date")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Convert(converter = LocalDateTimeAttributeConverter.class)

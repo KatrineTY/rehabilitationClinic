@@ -20,9 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -98,7 +96,7 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional
     public void takeTask(int id, String nurseName) {
-        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "In progress", LocalTime.now(), null);
+        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "In progress", ZonedDateTime.now(ZoneId.of("Europe/Moscow")).toLocalTime(), null);
         messageSenderTabloid.send("take task");
     }
 
@@ -108,7 +106,7 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional
     public void finishTask(int id, String nurseName) {
-        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "Finished", null, LocalTime.now());
+        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), null, "Finished", null, ZonedDateTime.now(ZoneId.of("Europe/Moscow")).toLocalTime());
         messageSenderTabloid.send("finish task");
         Event event = eventDao.getEvent(id);
         if (event.getType().getKind().equals("Medicament")) {
@@ -122,7 +120,7 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional
     public void rejectTask(int id, String nurseName, String comment) {
-        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), comment, "Rejected", null, LocalTime.now());
+        eventDao.updateEventStatus(id, employeeService.getEmployeeByName(nurseName), comment, "Rejected", null, ZonedDateTime.now(ZoneId.of("Europe/Moscow")).toLocalTime());
         messageSenderTabloid.send("reject task");
     }
 
