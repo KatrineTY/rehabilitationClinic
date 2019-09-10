@@ -210,7 +210,7 @@
                 <configuration>
                     <baseDir>db/migration</baseDir>
                     <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5432/rehabilitationclinic</url>
+                    <url>jdbc:postgresql://postgres:5432/rehabilitationclinic</url>
                     <user>postgres</user>
                     <password>postgres</password>
                 </configuration>

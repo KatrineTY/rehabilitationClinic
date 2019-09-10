@@ -5,15 +5,14 @@
                         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="jmsProperties"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          name="jmsProperties">
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="order" value="99999"/>
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="properties">
             <value>
                 <!-- JMS -->
-                JMS.BROKER.URL=tcp://localhost:61616
+                JMS.BROKER.URL=tcp://192.168.99.100:61616
                 JMS.QUEUE.NAME.TABLOID=queue/rehaQueueTabloid
                 JMS.QUEUE.NAME.PROMED=queue/rehaQueuePromed
             </value>
