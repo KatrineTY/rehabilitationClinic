@@ -5,7 +5,7 @@ commmands to start project:
 
 docker network create myntw 
 docker run -d -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=rehabilitationclinic -d -p 5432:5432 --net=myntw --name postgres postgres
-docker run -d -p 61616:61616 -p 8161:8161 --net=myntw rmohr/activemq 
+docker run -d -p 61616:61616 -p 8161:8161 --net=myntw --name=activemq rmohr/activemq 
 
 
 docker build --rm -t mywebapp .
